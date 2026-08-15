@@ -1,0 +1,1483 @@
+/* ============================================================
+   ROMANTIC.CSS — versión mejorada (revisión 3 + modo oscuro por defecto)
+   Cambios respecto a la revisión anterior:
+   - El modo oscuro ahora es el tema por defecto: los valores que
+     antes vivían solo en [data-theme="dark"] se movieron a :root.
+   - Se agregó un bloque [data-theme="light"] con los valores
+     claros originales, por si más adelante quieres agregar un
+     botón/toggle para volver al modo claro.
+   - Se mantiene TODO lo demás igual: variables de texto/superficie
+     que faltaban, el blindaje de .cancion-btn, y .galeria-container
+     con ancho explícito para que no se recorte en móvil.
+   La estructura y los nombres de clase originales se mantienen
+   intactos.
+
+   REVISIÓN 4 (esta versión):
+   - Se completó la fusión del bloque "SECCIÓN CANCIONES — ÁLBUM
+     CON REPRODUCTOR DE YOUTUBE": la última vez quedó pegado sin
+     el fix del cuadro blanco (.reproductor-placeholder) ni el
+     blindaje !important de .playlist-btn / .btn.playlist-btn.
+     Ambos ya están integrados abajo, sin duplicar reglas.
+   ============================================================ */
+
+/* ----- Reset base ----- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* ----- Variables: MODO OSCURO por defecto ----- */
+:root {
+    --romantic-bg: #1a0e12;
+    --romantic-text: #fce4ec;
+    --romantic-accent: #ff6b8a;
+    --romantic-accent-hover: #ff8fa3;
+    --romantic-accent-light: #3d1a2a;
+    --romantic-accent-gradient: linear-gradient(135deg, #ff6b8a, #e8436e);
+    --romantic-gold: #d4af37;
+    --romantic-pink: #6b3a4a;
+    --romantic-soft-pink: #2d1a22;
+    --romantic-shadow: rgba(255, 107, 138, 0.3);
+    --glass-bg: rgba(30, 20, 25, 0.35);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --card-shadow: 0 8px 32px rgba(255, 107, 138, 0.15);
+
+    /* Variables de texto y superficies (modo oscuro) */
+    --text-primary: #fce4ec;
+    --text-secondary: #e0bfc8;
+    --text-muted: #ab8b93;
+    --bg-card: #241419;
+    --border-color: #3d232a;
+    --shadow-color: rgba(0, 0, 0, 0.4);
+
+    /* Duraciones reutilizables para mantener consistencia */
+    --ease-fast: 0.3s ease;
+    --ease-med: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Modo claro disponible como opción (por si agregas un toggle) */
+[data-theme="light"] {
+    --romantic-bg: #fef6f7;
+    --romantic-text: #2d1b1b;
+    --romantic-accent: #e8436e;
+    --romantic-accent-hover: #b81f5e;
+    --romantic-accent-light: #ffe0e8;
+    --romantic-accent-gradient: linear-gradient(135deg, #e8436e, #ff6b8a);
+    --romantic-gold: #e8b86d;
+    --romantic-pink: #ffb3c6;
+    --romantic-soft-pink: #ffe4ec;
+    --romantic-shadow: rgba(232, 67, 110, 0.25);
+    --glass-bg: rgba(255, 255, 255, 0.25);
+    --glass-border: rgba(255, 255, 255, 0.4);
+    --card-shadow: 0 8px 32px rgba(232, 67, 110, 0.15);
+
+    --text-primary: #2d1b1b;
+    --text-secondary: #5a4444;
+    --text-muted: #8a7373;
+    --bg-card: #ffffff;
+    --border-color: #f0d9de;
+    --shadow-color: rgba(45, 27, 27, 0.12);
+}
+
+/* ----- Global ----- */
+body {
+    background: var(--romantic-bg);
+    color: var(--romantic-text);
+    font-family: 'Inter', sans-serif;
+    transition: background 0.6s ease, color 0.6s ease;
+    padding-top: 70px;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Foco visible accesible para todo elemento interactivo */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible,
+.momento-card:focus-visible,
+.carta-sobre:focus-visible {
+    outline: 3px solid var(--romantic-accent);
+    outline-offset: 3px;
+    border-radius: 8px;
+}
+
+/* Títulos con más estilo */
+.romantic-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    text-align: center;
+    background: var(--romantic-accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+    letter-spacing: 1.5px;
+    position: relative;
+    display: inline-block;
+}
+.romantic-title::after {
+    content: '💕';
+    font-size: 2rem;
+    -webkit-text-fill-color: initial;
+    margin-left: 0.5rem;
+    display: inline-block;
+    animation: heartPulse 1.5s ease-in-out infinite;
+}
+.romantic-title::before {
+    content: '💕';
+    font-size: 2rem;
+    -webkit-text-fill-color: initial;
+    margin-right: 0.5rem;
+    display: inline-block;
+    animation: heartPulse 1.5s ease-in-out infinite 0.3s;
+}
+
+.romantic-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    font-style: italic;
+    letter-spacing: 0.5px;
+}
+
+.romantic-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px;
+    position: relative;
+    overflow: hidden;
+    background: var(--romantic-bg);
+    transition: background 0.6s ease;
+}
+
+/* Glassmorphism mejorado */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px var(--romantic-shadow);
+    transition: all var(--ease-fast);
+}
+.glass-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 48px var(--romantic-shadow);
+}
+
+/* ===== INTRO ===== */
+.intro-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, #1a0a0a, #2d1515, #1a0a0a);
+    background-size: 400% 400%;
+    animation: gradientShift 6s ease infinite;
+    color: #f5e6e6;
+}
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.intro-text {
+    max-width: 700px;
+    padding: 2rem;
+}
+.intro-line {
+    font-size: 2.2rem;
+    font-family: 'Playfair Display', serif;
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards;
+    margin: 0.8rem 0;
+    text-shadow: 0 0 30px rgba(232, 67, 110, 0.3);
+}
+.intro-line:nth-child(4) {
+    color: var(--romantic-accent);
+    font-size: 2.8rem;
+    font-weight: 700;
+}
+.intro-btn {
+    margin-top: 2rem;
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards;
+    background: var(--romantic-accent-gradient);
+    color: #fff;
+    border: none;
+    padding: 1rem 3.5rem;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--ease-fast);
+    box-shadow: 0 0 30px var(--romantic-shadow);
+}
+.intro-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 50px var(--romantic-shadow);
+}
+
+/* ===== HERO ROMÁNTICO ===== */
+.hero-romantic {
+    background: var(--romantic-bg);
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+.hero-romantic::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 40%, rgba(232, 67, 110, 0.08), transparent 60%);
+    pointer-events: none;
+}
+.hero-romantic-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.8rem;
+    font-weight: 700;
+    background: var(--romantic-accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.3;
+    animation: fadeInUp 1.2s ease;
+    position: relative;
+    z-index: 1;
+}
+.hero-romantic-sub {
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    margin-top: 1rem;
+    animation: fadeInUp 1.2s ease 0.3s both;
+    position: relative;
+    z-index: 1;
+}
+.hero-romantic-hearts {
+    margin-top: 2rem;
+    font-size: 3.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+.heart-float {
+    display: inline-block;
+    animation: floatHeart 2.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba(232, 67, 110, 0.4));
+}
+.heart-float:nth-child(1) { animation-delay: 0s; }
+.heart-float:nth-child(2) { animation-delay: 0.5s; }
+.heart-float:nth-child(3) { animation-delay: 1s; }
+.heart-float:nth-child(4) { animation-delay: 1.5s; }
+
+/* ===== TIMELINE ===== */
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-left: 40px;
+}
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--romantic-accent-gradient);
+    opacity: 0.4;
+    border-radius: 4px;
+}
+.timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+    padding-left: 1.5rem;
+}
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -33px;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--romantic-accent-gradient);
+    border: 3px solid var(--romantic-bg);
+    box-shadow: 0 0 0 4px var(--romantic-accent);
+    animation: heartPulse 2s ease-in-out infinite;
+}
+.timeline-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.3rem;
+    display: inline-block;
+}
+.timeline-content {
+    background: var(--bg-card);
+    padding: 1.5rem 2rem;
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    border-left: 5px solid var(--romantic-accent);
+    transition: var(--ease-fast);
+}
+.timeline-content:hover {
+    transform: translateX(6px);
+    box-shadow: 0 12px 40px var(--romantic-shadow);
+}
+.timeline-content h3 {
+    margin: 0 0 0.3rem;
+    color: var(--romantic-accent);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+}
+.timeline-date {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0 0 0.5rem;
+    font-style: italic;
+}
+.timeline-content p {
+    margin: 0;
+    color: var(--text-secondary);
+}
+
+/* ===== MOMENTOS ===== */
+.momentos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    width: 100%;
+}
+.momento-card {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--ease-med);
+    border: 2px solid transparent;
+    box-shadow: var(--card-shadow);
+    position: relative;
+    overflow: hidden;
+}
+.momento-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--romantic-accent-gradient);
+    opacity: 0;
+    transition: 0.4s;
+}
+.momento-card:hover,
+.momento-card:focus-visible {
+    transform: translateY(-10px) scale(1.02);
+    border-color: var(--romantic-accent);
+    box-shadow: 0 16px 48px var(--romantic-shadow);
+}
+.momento-card:hover::before,
+.momento-card:focus-visible::before {
+    opacity: 0.06;
+}
+.momento-icon {
+    font-size: 3.5rem;
+    margin-bottom: 0.8rem;
+    display: block;
+    position: relative;
+}
+.momento-card h3 {
+    font-size: 1.2rem;
+    margin: 0.3rem 0;
+    color: var(--text-primary);
+    position: relative;
+    font-family: 'Playfair Display', serif;
+}
+.momento-preview {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    position: relative;
+}
+
+/* ----- MODAL MOMENTOS (mejorado) ----- */
+.momento-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(8px);
+    animation: fadeIn 0.4s ease;
+}
+.momento-modal[hidden] {
+    display: none !important;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+.momento-modal-content {
+    background: var(--bg-card);
+    border-radius: 28px;
+    padding: 3rem;
+    max-width: 520px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+    animation: scaleIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid var(--glass-border);
+}
+@keyframes scaleIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+.momento-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    font-size: 2.4rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: var(--ease-fast);
+    background: none;
+    border: none;
+    line-height: 1;
+}
+.momento-modal-close:hover,
+.momento-modal-close:focus-visible {
+    color: var(--romantic-accent);
+    transform: rotate(90deg) scale(1.2);
+}
+
+/* ===== RAZONES ===== */
+.razones-container {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.razon-btn {
+    background: var(--romantic-accent-gradient);
+    color: #fff;
+    border: none;
+    padding: 0.9rem 3rem;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--ease-fast);
+    box-shadow: 0 4px 20px var(--romantic-shadow);
+}
+.razon-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 40px var(--romantic-shadow);
+}
+.razon-display {
+    margin-top: 2rem;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 16px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(4px);
+}
+.razon-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--romantic-accent);
+    animation: fadeInUp 0.5s ease;
+}
+
+/* ===== DIVERTIDO ===== */
+.divertido-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    max-width: 900px;
+    width: 100%;
+}
+.divertido-card {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    border: 2px solid var(--border-color);
+    transition: var(--ease-med);
+    box-shadow: var(--card-shadow);
+}
+.divertido-card:hover {
+    border-color: var(--romantic-accent);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 12px 40px var(--romantic-shadow);
+}
+.divertido-icon {
+    font-size: 3rem;
+}
+.divertido-stat {
+    font-size: 2.8rem;
+    font-weight: 700;
+    background: var(--romantic-accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0.5rem 0;
+}
+.divertido-footer {
+    text-align: center;
+    margin-top: 2rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    padding: 1rem;
+    border-top: 1px dashed var(--border-color);
+}
+
+/* ===== CARTA ===== */
+.carta-container {
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+.carta-sobre {
+    background: var(--bg-card);
+    border-radius: 24px;
+    padding: 3rem 2rem;
+    cursor: pointer;
+    transition: 0.4s;
+    border: 2px solid var(--border-color);
+    box-shadow: var(--card-shadow);
+    position: relative;
+    overflow: hidden;
+}
+.carta-sobre::before {
+    content: '💌';
+    position: absolute;
+    font-size: 8rem;
+    opacity: 0.05;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.carta-sobre:hover,
+.carta-sobre:focus-visible {
+    border-color: var(--romantic-accent);
+    transform: scale(1.03);
+    box-shadow: 0 12px 48px var(--romantic-shadow);
+}
+.carta-sobre-icon {
+    font-size: 5rem;
+    display: block;
+    animation: floatHeart 2.5s ease-in-out infinite;
+}
+.carta-sobre-text {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+}
+.carta-abierta {
+    animation: fadeInUp 0.6s ease;
+}
+.carta-papel {
+    background: var(--bg-card);
+    border-radius: 24px;
+    padding: 3rem;
+    text-align: left;
+    border: 2px solid var(--border-color);
+    box-shadow: 0 8px 40px var(--shadow-color);
+    max-height: 500px;
+    overflow-y: auto;
+    position: relative;
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23e8436e' fill-opacity='0.03'%3E%3Cpath d='M20 0v40M0 20h40'/%3E%3C/g%3E%3C/svg%3E");
+}
+.carta-papel h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--romantic-accent);
+    font-size: 2rem;
+    margin-top: 0;
+}
+.carta-papel p {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--text-secondary);
+}
+
+/* ===== FUTURO ===== */
+.futuro-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 900px;
+    width: 100%;
+}
+.futuro-card {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: var(--ease-med);
+    border: 2px solid transparent;
+    box-shadow: var(--card-shadow);
+}
+.futuro-card:hover {
+    border-color: var(--romantic-gold);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 16px 48px rgba(232, 184, 109, 0.3);
+}
+.futuro-icon {
+    font-size: 3rem;
+}
+.futuro-card h3 {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+    color: var(--text-primary);
+    font-family: 'Playfair Display', serif;
+}
+.futuro-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* ===== FINAL DRAMÁTICO ===== */
+.final-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, #1a0a0a, #2d1515);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
+    color: #f5e6e6;
+}
+.final-text {
+    max-width: 700px;
+    padding: 2rem;
+}
+.final-line {
+    font-size: 2.2rem;
+    font-family: 'Playfair Display', serif;
+    opacity: 0;
+    animation: fadeInUp 1.2s ease forwards;
+    margin: 1rem 0;
+}
+.final-revelation {
+    font-size: 4rem;
+    background: var(--romantic-accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+}
+.final-sub {
+    font-size: 1.6rem;
+    color: var(--text-muted);
+}
+
+/* ============================================================
+   ANIMACIONES REUTILIZABLES
+   ============================================================ */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes floatHeart {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-20px) scale(1.1); }
+}
+@keyframes heartPulse {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.2); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.1); }
+    60% { transform: scale(1); }
+}
+
+/* ============================================================
+   SECCIÓN CANCIONES - MEJORADA (horizontal y espaciada)
+   ============================================================ */
+
+.canciones-section {
+    padding: 60px 20px;
+}
+
+.canciones-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem 1.8rem; /* Espacio vertical y horizontal */
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto 2rem;
+}
+
+.cancion-card {
+    padding: 1.8rem 1.5rem 1.8rem;
+    text-align: center;
+    transition: var(--ease-fast);
+    border-radius: 20px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px var(--romantic-shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 280px;
+}
+
+.cancion-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 16px 48px var(--romantic-shadow);
+    border-color: var(--romantic-accent);
+}
+
+.cancion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.cancion-icon {
+    font-size: 2.8rem;
+    line-height: 1;
+}
+
+.cancion-badge {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.15rem 0.8rem;
+    border-radius: 30px;
+    background: var(--romantic-accent);
+    color: #fff;
+    opacity: 0.8;
+}
+
+.cancion-card h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0.3rem 0 0.1rem;
+    color: var(--text-primary);
+}
+
+.cancion-artista {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0 0 0.3rem;
+}
+
+.cancion-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin: 0.3rem 0 1rem;
+    line-height: 1.5;
+    flex: 1;
+}
+
+/*
+   Botón "Escuchar en Spotify": blindado contra conflictos.
+*/
+.canciones-grid .cancion-card a.cancion-btn,
+.cancion-btn {
+    background: var(--romantic-accent) !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 0.5rem 1.5rem;
+    border-radius: 40px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: var(--ease-fast);
+    text-decoration: none !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.3rem;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.cancion-btn:link,
+.cancion-btn:visited {
+    color: #fff !important;
+}
+
+.cancion-btn:hover,
+.cancion-btn:focus-visible,
+.cancion-btn:active {
+    transform: scale(1.05);
+    background: var(--romantic-accent-hover) !important;
+    color: #fff !important;
+    box-shadow: 0 8px 24px var(--romantic-shadow);
+}
+
+.cancion-btn i {
+    font-size: 1.1rem;
+}
+
+.spotify-embed {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* ============================================================
+   RESPONSIVE PARA CANCIONES
+   ============================================================ */
+
+@media (max-width: 768px) {
+    .canciones-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+    .cancion-card {
+        min-height: 240px;
+        padding: 1.5rem 1.2rem;
+    }
+    .cancion-icon {
+        font-size: 2.2rem;
+    }
+    .cancion-card h3 {
+        font-size: 1.1rem;
+    }
+    .cancion-desc {
+        font-size: 0.8rem;
+    }
+    .cancion-btn {
+        font-size: 0.75rem;
+        padding: 0.3rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .canciones-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+    .cancion-card {
+        min-height: 200px;
+        padding: 1.2rem 1rem;
+    }
+}
+
+/* ============================================================
+   LIGHTBOX - Botón de cierre mejorado
+   ============================================================ */
+
+.lightbox-close-btn {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: var(--ease-fast);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'Inter', sans-serif;
+    padding: 0.2rem 0.6rem;
+    border-radius: 30px;
+    background: rgba(0,0,0,0.05);
+}
+.lightbox-close-btn:hover,
+.lightbox-close-btn:focus-visible {
+    color: var(--text-primary);
+    background: rgba(0,0,0,0.1);
+    transform: rotate(90deg);
+}
+.lightbox-close-icon {
+    font-size: 1.8rem;
+    line-height: 1;
+}
+.lightbox-close-text {
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+@media (max-width: 480px) {
+    .lightbox-close-text {
+        display: none;
+    }
+    .lightbox-close-btn {
+        font-size: 1.4rem;
+        padding: 0.1rem 0.4rem;
+    }
+}
+
+/* ============================================================
+   ACCESIBILIDAD — respeta la preferencia de movimiento reducido
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+/* ============================================================
+   CONTADOR DESTACADO
+   ============================================================ */
+.contador-destacado {
+    max-width: 550px;
+    margin: 0 auto 2.5rem;
+    padding: 2rem 2.5rem;
+    text-align: center;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px var(--romantic-shadow);
+    position: relative;
+    overflow: hidden;
+}
+.contador-destacado::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 24px;
+    padding: 2px;
+    background: linear-gradient(135deg, var(--romantic-accent), transparent);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+.contador-corazon {
+    font-size: 3rem;
+    animation: heartPulse 1.2s ease-in-out infinite;
+}
+.contador-label {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin: 0.3rem 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.contador-numero {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--romantic-accent);
+    margin: 0.5rem 0;
+    text-shadow: 0 0 30px var(--romantic-shadow);
+}
+.contador-barras {
+    height: 6px;
+    background: var(--border-color);
+    border-radius: 6px;
+    margin: 0.8rem 0;
+    overflow: hidden;
+}
+.contador-barra {
+    height: 100%;
+    width: var(--p, 0%);
+    background: linear-gradient(90deg, var(--romantic-accent), var(--romantic-accent-light));
+    border-radius: 6px;
+    animation: barraCarga 2s ease forwards;
+}
+@keyframes barraCarga {
+    from { width: 0; }
+    to { width: var(--p); }
+}
+.contador-sub {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* ============================================================
+   MENSAJE SORPRESA EN CARTA
+   ============================================================ */
+.mensaje-sorpresa {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(214, 51, 108, 0.1), rgba(255, 107, 157, 0.05));
+    border-radius: 16px;
+    border: 2px dashed var(--romantic-accent);
+    text-align: center;
+    animation: fadeInUp 0.6s ease forwards;
+}
+.sorpresa-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 0.3rem;
+}
+.sorpresa-texto {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--romantic-accent);
+    margin: 0.2rem 0;
+}
+.sorpresa-sub {
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+.sorpresa-btn {
+    background: var(--romantic-accent);
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 40px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.sorpresa-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px var(--romantic-shadow);
+}
+
+/* ============================================================
+   SLIDER DE GALERÍA
+   ============================================================ */
+.galeria-container {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.slider-container {
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px var(--shadow-color);
+    background: var(--bg-card);
+}
+.slider-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    touch-action: pan-y;
+}
+.slider-slide {
+    min-width: 100%;
+    aspect-ratio: 1.2 / 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+}
+.slider-thumb {
+    width: 100%;
+    height: 70%;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    transition: 0.3s;
+}
+.slider-emoji {
+    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.2));
+}
+.slider-info {
+    padding: 1rem 0.5rem 0.5rem;
+}
+.slider-info h3 {
+    font-size: 1.3rem;
+    margin: 0 0 0.2rem;
+    color: var(--text-primary);
+}
+.slider-info p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.15);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.8rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 10;
+    color: var(--text-primary);
+}
+.slider-btn:hover {
+    background: rgba(255,255,255,0.25);
+    transform: translateY(-50%) scale(1.1);
+}
+.slider-btn-prev {
+    left: 12px;
+}
+.slider-btn-next {
+    right: 12px;
+}
+
+.slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.8rem 0 1rem;
+}
+.slider-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--border-color);
+    cursor: pointer;
+    transition: 0.3s;
+}
+.slider-dot.active {
+    background: var(--romantic-accent);
+    transform: scale(1.2);
+}
+.slider-dot:hover {
+    background: var(--romantic-accent-light);
+}
+
+@media (max-width: 768px) {
+    .slider-thumb {
+        font-size: 3.5rem;
+    }
+    .slider-info h3 {
+        font-size: 1.1rem;
+    }
+    .slider-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 1.2rem;
+    }
+    .slider-btn-prev { left: 6px; }
+    .slider-btn-next { right: 6px; }
+}
+
+/* ============================================================
+   PLANES (calendario visual)
+   ============================================================ */
+.futuro-calendario {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.8rem;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+}
+.plan-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-radius: 20px;
+    transition: 0.3s;
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-border);
+}
+.plan-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--romantic-accent);
+    box-shadow: 0 12px 36px var(--romantic-shadow);
+}
+.plan-fecha {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+.plan-info {
+    flex: 1;
+}
+.plan-info h3 {
+    font-size: 1.1rem;
+    margin: 0 0 0.2rem;
+    color: var(--text-primary);
+}
+.plan-info p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0 0 0.3rem;
+}
+.plan-estado {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.1rem 0.8rem;
+    border-radius: 30px;
+    background: var(--romantic-accent-light);
+    color: var(--romantic-accent);
+}
+
+/* ============================================================
+   SECCIÓN CANCIONES — ÁLBUM CON REPRODUCTOR DE YOUTUBE
+   Reproductor principal + catálogo tipo álbum.
+
+   Nota de fusión: esta es la versión completa. La revisión
+   anterior tenía este bloque pegado dos veces y a medias (le
+   faltaba el fix del cuadro blanco y el blindaje !important del
+   botón de playlist); ahora queda en un solo lugar, sin
+   duplicados, con ambos fixes aplicados.
+   ============================================================ */
+
+/* ----- Reproductor principal ----- */
+.reproductor-container {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto 3rem;
+    padding: 1.5rem;
+}
+
+.reproductor-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+    padding: 0 0.3rem;
+}
+
+.reproductor-icon {
+    font-size: 1.6rem;
+}
+
+.reproductor-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    background: var(--romantic-accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.reproductor-iframe-wrapper {
+    position: relative;
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px var(--shadow-color);
+}
+
+.reproductor-iframe-wrapper iframe {
+    display: block;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    border: none;
+    background: var(--bg-card);
+}
+
+.reproductor-sub {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 1rem 0 0;
+}
+
+/* Mensaje "elige una canción" — evita el cuadro blanco mientras
+   no hay ningún video cargado en el iframe */
+.reproductor-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 2rem;
+    z-index: 2;
+}
+
+.reproductor-placeholder-icon {
+    font-size: 3rem;
+    opacity: 0.6;
+}
+
+.reproductor-placeholder-text {
+    font-size: 0.95rem;
+    max-width: 260px;
+}
+
+/* ----- Catálogo tipo álbum ----- */
+.catalogo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.cancion-album {
+    background: var(--bg-card);
+    border-radius: 18px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: var(--ease-med);
+    box-shadow: var(--card-shadow);
+}
+
+.cancion-album:hover,
+.cancion-album:focus-visible {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 16px 48px var(--romantic-shadow);
+}
+
+.cancion-album.active {
+    border-color: var(--romantic-accent);
+    box-shadow: 0 0 0 3px var(--romantic-shadow);
+}
+
+.cancion-album-cover {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cancion-album-emoji {
+    font-size: 3rem;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));
+}
+
+.cancion-album-play {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: var(--ease-fast);
+}
+
+.cancion-album:hover .cancion-album-play,
+.cancion-album.active .cancion-album-play {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.cancion-album-info {
+    padding: 0.9rem 1rem 1.1rem;
+    text-align: center;
+}
+
+.cancion-album-info h4 {
+    font-size: 1rem;
+    margin: 0 0 0.15rem;
+    color: var(--text-primary);
+    font-family: 'Playfair Display', serif;
+}
+
+.cancion-album-info p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0 0 0.5rem;
+}
+
+.cancion-album-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 0.15rem 0.7rem;
+    border-radius: 30px;
+    background: var(--romantic-accent-light);
+    color: var(--romantic-accent);
+}
+
+/* ----- Playlist extra (enlace a YouTube) ----- */
+.playlist-extra {
+    text-align: center;
+    margin-top: 2.5rem;
+}
+
+.playlist-btn,
+.btn.playlist-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--romantic-accent-gradient) !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    padding: 0.7rem 2rem;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: var(--ease-fast);
+    box-shadow: 0 4px 20px var(--romantic-shadow);
+}
+
+.playlist-btn i,
+.btn.playlist-btn i {
+    color: #fff !important;
+}
+
+.playlist-btn:hover,
+.playlist-btn:focus-visible {
+    transform: scale(1.05);
+    box-shadow: 0 8px 32px var(--romantic-shadow);
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 768px) {
+    .catalogo-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    .cancion-album-emoji {
+        font-size: 2.2rem;
+    }
+    .reproductor-iframe-wrapper iframe {
+        height: 220px;
+    }
+}
+
+@media (max-width: 480px) {
+    .catalogo-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}

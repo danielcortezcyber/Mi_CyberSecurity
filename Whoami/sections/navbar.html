@@ -1,0 +1,61 @@
+<nav class="navbar" id="navbar" role="navigation" aria-label="Menú principal">
+    <div class="container nav-container">
+        <!-- ===== LOGO ===== -->
+        <a href="#" class="logo" aria-label="CyberSec - Inicio">
+            <span class="logo-icon">🛡️</span>
+            <span class="logo-text">CyberSec</span>
+        </a>
+
+        <!-- ===== MENÚ PRINCIPAL ===== -->
+        <ul class="nav-menu" id="navMenu" role="menubar">
+            <li role="none"><a href="#hero" role="menuitem">Inicio</a></li>
+            <li role="none"><a href="#academia-pnp" role="menuitem">Academia</a></li>
+            <li role="none"><a href="#ruta-aprendizaje" role="menuitem">Ruta</a></li>
+            <li role="none"><a href="#tutoriales" role="menuitem">Tutoriales</a></li>
+            <li role="none"><a href="#casos" role="menuitem">Casos</a></li>
+            <li role="none"><a href="#gear" role="menuitem">Gear</a></li>
+            <li role="none"><a href="#descargas" role="menuitem">Descargas</a></li>
+
+            <!-- ===== DROPDOWN "MÁS" (hover + click) ===== -->
+            <li class="nav-dropdown" id="navDropdown" role="none">
+                <a href="#" class="nav-dropdown-toggle" id="navDropdownToggle" role="menuitem" aria-haspopup="true" aria-expanded="false">
+                    Más <span class="dropdown-arrow">▼</span>
+                </a>
+                <ul class="nav-dropdown-menu" id="navDropdownMenu" role="menu">
+                    <li role="none"><a href="#powershell" role="menuitem">PowerShell</a></li>
+                    <li role="none"><a href="#cmd" role="menuitem">CMD</a></li>
+                    <li role="none"><a href="#soporte" role="menuitem">Soporte</a></li>
+                    <li role="none"><a href="#cheatsheets" role="menuitem">Cheatsheets</a></li>
+                    <li role="none"><a href="#ip-consult" role="menuitem">IP Check</a></li>
+                    <li role="none"><a href="#trayectoria" role="menuitem">Trayectoria</a></li>
+                    <li role="none"><a href="#suscripcion" role="menuitem">Contacto</a></li>            
+                          <!-- ===== oculta en el navbar por el momento  ===== -->
+                 <!--   <li role="none"><a href="romantico.html" role="menuitem">❤️ Para ti</a></li> -->
+                </ul>
+            </li>
+        </ul>
+
+        <!-- ===== ACCIONES (buscador, reloj, tema, hamburguesa) ===== -->
+        <div class="nav-actions">
+            <!-- Buscador global (inyectado por global-search.js) -->
+            <div id="globalSearchContainer" class="search-container"></div>
+
+            <!-- Reloj en vivo + punto de estado -->
+            <div class="nav-status">
+                <span id="liveClock" class="nav-clock" aria-label="Reloj en vivo">00:00:00</span>
+                <span class="nav-status-dot" aria-hidden="true"></span>
+            </div>
+
+            <!-- Botón de tema (modo oscuro/claro) -->
+            <button id="themeToggle" class="theme-toggle" aria-label="Cambiar tema">
+                <span class="icon">🌙</span>
+                <span class="label">Oscuro</span>
+            </button>
+
+            <!-- Hamburguesa (visible solo en móvil) -->
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+</nav>

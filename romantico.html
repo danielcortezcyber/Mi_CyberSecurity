@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>❤️ Para ti · Daniel Cortez</title>
+
+    <!-- ===== OPEN GRAPH / REDES SOCIALES ===== -->
+    <meta property="og:title" content="❤️ Para ti · Daniel Cortez" />
+    <meta property="og:description" content="Una experiencia especial dedicada a ti. Una página hecha con amor, códigos y mucho corazón. ❤️" />
+    <meta property="og:image" content="https://tusuario.github.io/mi-web-personal/assets/img/preview-romantico.jpg" />
+    <meta property="og:url" content="https://tusuario.github.io/mi-web-personal/romantico.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Daniel Cortez · Para ti ❤️" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="❤️ Para ti · Daniel Cortez" />
+    <meta name="twitter:description" content="Una experiencia especial dedicada a ti. Hecha con amor, códigos y mucho corazón. ❤️" />
+    <meta name="twitter:image" content="https://tusuario.github.io/mi-web-personal/assets/img/preview-romantico.jpg" />
+
+    <!-- ===== PRECARGA DE FUENTES ===== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <!-- ===== CSS OPTIMIZADO ===== -->
+    <link rel="stylesheet" href="romantic/css/romantic.css" />
+    <link rel="stylesheet" href="romantic/css/animations.css" />
+    <link rel="stylesheet" href="romantic/css/responsive.css" />
+      <link rel="stylesheet" href="romantic/css/album-canciones.css" />
+
+    <!-- CSS global -->
+    <link rel="stylesheet" href="Whoami/css/base.css" />
+    <link rel="stylesheet" href="Whoami/css/navbar.css" />
+    <link rel="stylesheet" href="Whoami/css/footer.css" />
+
+    <!-- Estilos inline para el navbar romántico -->
+    <style>
+        .navbar-romantic .logo-icon { font-size: 1.8rem; color: #d6336c; }
+        .navbar-romantic .logo-text { background: linear-gradient(135deg, #d6336c, #ff6b9d) !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; background-clip: text !important; }
+        .navbar-romantic .nav-romantic { color: #d6336c !important; font-weight: 700 !important; display: inline-flex !important; align-items: center !important; gap: 6px !important; background: linear-gradient(135deg, #d6336c, #ff6b9d) !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; background-clip: text !important; text-shadow: 0 0 20px rgba(214,51,108,0.3) !important; transition: 0.3s !important; }
+        .navbar-romantic .nav-romantic:hover { transform: scale(1.05) !important; text-shadow: 0 0 30px rgba(214,51,108,0.5) !important; }
+        .navbar-romantic .heart-icon { display: inline-block !important; animation: heartBeat 1.2s ease-in-out infinite !important; -webkit-text-fill-color: initial !important; }
+        @keyframes heartBeat { 0%,100% { transform: scale(1); } 15% { transform: scale(1.3); } 30% { transform: scale(1); } 45% { transform: scale(1.2); } 60% { transform: scale(1); } }
+        .navbar-romantic .nav-clock { color: #d6336c !important; border-color: rgba(214,51,108,0.3) !important; }
+        .navbar-romantic .nav-status-dot { background: #d6336c !important; }
+        .navbar-romantic .theme-toggle { border-color: rgba(214,51,108,0.3) !important; color: #d6336c !important; }
+        .navbar-romantic .theme-toggle:hover { background: rgba(214,51,108,0.1) !important; }
+        .navbar-romantic .nav-toggle { color: #d6336c !important; border-color: rgba(214,51,108,0.3) !important; }
+        .navbar-romantic .nav-toggle:hover { background: rgba(214,51,108,0.1) !important; }
+        @media (max-width:768px) { .navbar-romantic .nav-romantic { font-size: 1.2rem !important; } .navbar-romantic .heart-icon { animation: heartBeatMobile 0.8s ease-in-out infinite !important; } @keyframes heartBeatMobile { 0%,100% { transform: scale(1); } 20% { transform: scale(1.4); } 40% { transform: scale(1); } 60% { transform: scale(1.3); } 80% { transform: scale(1); } } }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- ===== CONTENEDOR PRINCIPAL ROMÁNTICO ===== -->
+    <main id="romantic-app"></main>
+
+    <!-- ===== FOOTER ===== -->
+    <div id="footer-placeholder"></div>
+
+    <!-- ================================================================ -->
+    <!-- SCRIPTS (con lazy loading integrado)                             -->
+    <!-- ================================================================ -->
+
+    <!-- 1. Cargar navbar y footer -->
+    <script>
+        fetch('Whoami/sections/navbar.html')
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById('navbar-placeholder').innerHTML = html;
+                simplificarNavbar();
+                document.dispatchEvent(new Event('navbar-cargado'));
+            })
+            .catch(err => console.error('Error cargando navbar:', err));
+
+        fetch('Whoami/sections/footer.html')
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById('footer-placeholder').innerHTML = html;
+            })
+            .catch(err => console.error('Error cargando footer:', err));
+
+        function simplificarNavbar() {
+            const navMenu = document.getElementById('navMenu');
+            if (!navMenu) { setTimeout(simplificarNavbar, 200); return; }
+            const nuevoMenu = document.createElement('ul');
+            nuevoMenu.id = 'navMenu';
+            nuevoMenu.className = 'nav-menu';
+            nuevoMenu.setAttribute('role', 'menubar');
+            const li = document.createElement('li');
+            li.setAttribute('role', 'none');
+            const a = document.createElement('a');
+            a.setAttribute('href', 'index.html');
+            a.setAttribute('role', 'menuitem');
+            a.className = 'nav-romantic';
+            a.innerHTML = `<span class="heart-icon">❤️</span> Inicio`;
+            li.appendChild(a);
+            nuevoMenu.appendChild(li);
+            navMenu.parentNode.replaceChild(nuevoMenu, navMenu);
+            const navbar = document.querySelector('.navbar');
+            if (navbar) navbar.classList.add('navbar-romantic');
+            console.log('✅ Navbar romántico simplificado');
+        }
+        document.addEventListener('navbar-cargado', () => setTimeout(simplificarNavbar, 100));
+    </script>
+
+    <!-- 2. Scripts optimizados (orden correcto) -->
+    <script src="romantic/js/particles.js"></script>
+    <script src="romantic/js/hearts.js"></script>
+    <script src="romantic/js/confetti.js"></script>
+    <script src="romantic/js/interactions.js"></script>
+    <script src="romantic/js/romantic.js"></script>
+    <script src="romantic/js/music.js"></script>
+    <script src="romantic/js/album.js"></script>
+
+    <!-- 3. Navbar y estadísticas -->
+    <script src="Whoami/js/navbar.js"></script>
+    <script src="Whoami/js/site-stats.js"></script>
+    <script src="Whoami/js/main.js"></script>
+
+    <!-- ===== FEATURES ROMÁNTICOS ===== -->
+<script src="romantic/features/surprise-message.js"></script>
+<script src="romantic/features/contador-segundos.js"></script>
+<script src="romantic/features/heart-rain.js"></script>
+<script src="romantic/features/carta-desplegable.js"></script>
+<script src="romantic/features/galeria-zoom.js"></script>
+<script src="romantic/features/final-firma.js"></script>
+<script src="romantic/features/particles-color.js"></script>
+</body>
+</html>

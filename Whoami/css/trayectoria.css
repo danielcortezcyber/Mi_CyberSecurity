@@ -1,0 +1,97 @@
+/* ===== TRAYECTORIA ===== */
+.trayectoria-sub {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 2rem auto;
+    color: var(--text-secondary);
+}
+
+.timeline {
+    position: relative;
+    padding-left: 2.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    opacity: 0.3;
+}
+.timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+    padding-left: 1.5rem;
+}
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -1.8rem;
+    top: 0.5rem;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 3px solid var(--bg-card);
+    box-shadow: 0 0 0 3px var(--accent);
+}
+.timeline-year {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+}
+.timeline-content {
+    background: var(--bg-card);
+    padding: 1.2rem 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 12px var(--shadow-color);
+    border: 1px solid var(--border-color);
+}
+.timeline-content h3 {
+    margin: 0 0 0.2rem;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+.timeline-status {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.1rem 0.8rem;
+    border-radius: 20px;
+    margin-bottom: 0.5rem;
+}
+.timeline-status.completed {
+    background: #d4edda;
+    color: #155724;
+}
+.timeline-status.in-progress {
+    background: #fff3cd;
+    color: #856404;
+}
+.timeline-status.planned {
+    background: #cce5ff;
+    color: #004085;
+}
+.timeline-content p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+    .timeline {
+        padding-left: 1.5rem;
+    }
+    .timeline-item {
+        padding-left: 0.8rem;
+    }
+    .timeline-item::before {
+        left: -1.2rem;
+    }
+}

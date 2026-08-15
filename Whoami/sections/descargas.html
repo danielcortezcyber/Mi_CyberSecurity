@@ -1,0 +1,23 @@
+<section id="descargas" class="section descargas">
+    <div class="container">
+        <h2 class="section-title">Descargas</h2>
+        <p class="descargas-sub">Herramientas &amp; Cheatsheets. Checklists, plantillas, scripts y laboratorios listos para usar.</p>
+
+        <div class="descargas-filters">
+            <div class="filter-group">
+                <span>Tipo</span>
+                <label><input type="checkbox" value="pdf" checked /> 📄 PDF (2)</label>
+                <label><input type="checkbox" value="pkt" checked /> 🌐 Packet Tracer (1)</label>
+                <label><input type="checkbox" value="sh" checked /> 🐧 Scripts (1)</label>
+                <label><input type="checkbox" value="docx" checked /> 📋 Documentos (1)</label>
+                <label><input type="checkbox" value="xlsx" checked /> 📊 Hojas de cálculo (1)</label>
+            </div>
+        </div>
+
+        <div id="descargasGrid" class="descargas-grid"></div>
+        <div id="descargasEmpty" class="empty-state" hidden>
+            <p>No hay recursos de este tipo. Prueba con otro filtro.</p>
+            <button class="btn btn-small" id="descargasReset">Mostrar todos</button>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,239 @@
+/* ============================================================
+   SECCIÓN CANCIONES — ÁLBUM CON REPRODUCTOR DE YOUTUBE
+   Estilos que faltan para la nueva estructura (reproductor
+   principal + catálogo tipo álbum). Pega este bloque en
+   romantic.css, justo después del bloque existente
+   "SECCIÓN CANCIONES - MEJORADA".
+   ============================================================ */
+
+/* ----- Reproductor principal ----- */
+.reproductor-container {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto 3rem;
+    padding: 1.5rem;
+}
+
+.reproductor-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+    padding: 0 0.3rem;
+}
+
+.reproductor-icon {
+    font-size: 1.6rem;
+}
+
+.reproductor-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    background: var(--romantic-accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.reproductor-iframe-wrapper {
+    position: relative;
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px var(--shadow-color);
+}
+
+.reproductor-iframe-wrapper iframe {
+    display: block;
+    width: 100%;
+    border: none;
+}
+
+.reproductor-sub {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 1rem 0 0;
+}
+
+/* ----- Catálogo tipo álbum ----- */
+.catalogo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.cancion-album {
+    background: var(--bg-card);
+    border-radius: 18px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: var(--ease-med);
+    box-shadow: var(--card-shadow);
+}
+
+.cancion-album:hover,
+.cancion-album:focus-visible {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 16px 48px var(--romantic-shadow);
+}
+
+.cancion-album.active {
+    border-color: var(--romantic-accent);
+    box-shadow: 0 0 0 3px var(--romantic-shadow);
+}
+
+.cancion-album-cover {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cancion-album-emoji {
+    font-size: 3rem;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));
+}
+
+.cancion-album-play {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: var(--ease-fast);
+}
+
+.cancion-album:hover .cancion-album-play,
+.cancion-album.active .cancion-album-play {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.cancion-album-info {
+    padding: 0.9rem 1rem 1.1rem;
+    text-align: center;
+}
+
+.cancion-album-info h4 {
+    font-size: 1rem;
+    margin: 0 0 0.15rem;
+    color: var(--text-primary);
+    font-family: 'Playfair Display', serif;
+}
+
+.cancion-album-info p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0 0 0.5rem;
+}
+
+.cancion-album-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 0.15rem 0.7rem;
+    border-radius: 30px;
+    background: var(--romantic-accent-light);
+    color: var(--romantic-accent);
+}
+
+/* ----- Playlist extra (enlace a YouTube) ----- */
+.playlist-extra {
+    text-align: center;
+    margin-top: 2.5rem;
+}
+
+.playlist-btn,
+.btn.playlist-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--romantic-accent-gradient) !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    padding: 0.7rem 2rem;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: var(--ease-fast);
+    box-shadow: 0 4px 20px var(--romantic-shadow);
+}
+
+.playlist-btn i,
+.btn.playlist-btn i {
+    color: #fff !important;
+}
+
+.playlist-btn:hover,
+.playlist-btn:focus-visible {
+    transform: scale(1.05);
+    box-shadow: 0 8px 32px var(--romantic-shadow);
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 768px) {
+    .catalogo-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    .cancion-album-emoji {
+        font-size: 2.2rem;
+    }
+    .reproductor-iframe-wrapper iframe {
+        height: 220px;
+    }
+}
+
+@media (max-width: 480px) {
+    .catalogo-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* ----- Mensaje "elige una canción" (evita el cuadro blanco) ----- */
+.reproductor-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 2rem;
+    z-index: 2;
+}
+
+.reproductor-placeholder-icon {
+    font-size: 3rem;
+    opacity: 0.6;
+}
+
+.reproductor-placeholder-text {
+    font-size: 0.95rem;
+    max-width: 260px;
+}
+
+.reproductor-iframe-wrapper iframe {
+    position: relative;
+    z-index: 1;
+    background: var(--bg-card);
+}

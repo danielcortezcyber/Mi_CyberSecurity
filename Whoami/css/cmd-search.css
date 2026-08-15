@@ -1,0 +1,87 @@
+/* ===== BUSCADOR CMD ===== */
+.cmd-search-container {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 2.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 16px var(--shadow-color);
+    transition: box-shadow 0.3s ease;
+}
+.cmd-search-container:focus-within {
+    box-shadow: 0 4px 24px var(--shadow-color);
+}
+.cmd-search-wrapper {
+    display: flex;
+    align-items: center;
+    background: var(--bg-secondary);
+    border-radius: 40px;
+    padding: 0.2rem 0.2rem 0.2rem 1.2rem;
+    border: 2px solid var(--border-color);
+    transition: border-color 0.3s ease;
+}
+.cmd-search-wrapper:focus-within {
+    border-color: var(--accent);
+}
+.cmd-search-icon {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-right: 0.3rem;
+}
+.cmd-search-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    color: var(--text-primary);
+    outline: none;
+}
+.cmd-search-input::placeholder {
+    color: var(--text-muted);
+}
+.cmd-search-clear {
+    background: var(--bg-secondary);
+    border: none;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    font-size: 1rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.2rem;
+}
+.cmd-search-clear:hover {
+    background: var(--border-color);
+    color: var(--text-primary);
+}
+.cmd-search-stats {
+    margin-top: 0.6rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-align: center;
+}
+.cmd-search-stats span {
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 1.1rem;
+}
+.ps-empty-message {
+    text-align: center;
+    padding: 2rem;
+    background: var(--bg-card);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    margin: 1rem 0 2rem;
+}
+.ps-empty-message p {
+    margin: 0.3rem 0;
+    color: var(--text-secondary);
+}
+.ps-empty-message strong {
+    color: var(--text-primary);
+}

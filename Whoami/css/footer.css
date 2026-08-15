@@ -1,0 +1,73 @@
+/* ===== FOOTER ===== */
+.footer {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    padding: 2rem 0;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.footer p {
+    margin-bottom: 0.3rem;
+}
+
+.footer-logo {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.footer-tagline {
+    font-style: italic;
+    color: var(--text-muted);
+}
+
+.footer-links {
+    font-size: 0.9rem;
+}
+.footer-links a {
+    color: var(--accent);
+    transition: color var(--transition);
+}
+.footer-links a:hover {
+    color: var(--text-primary);
+}
+
+.footer-copy {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* ===== ESTADÍSTICAS DEL SITIO ===== */
+.footer-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0.5rem 0;
+}
+.footer-stats span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+#siteUptime {
+    font-family: 'Courier New', monospace;
+    font-weight: 600;
+    color: var(--accent);
+}
+#lastUpdate {
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+    .footer-stats {
+        flex-direction: column;
+        gap: 0.3rem;
+        font-size: 0.75rem;
+    }
+}

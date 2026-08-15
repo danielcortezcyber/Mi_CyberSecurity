@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Daniel Cortez · Cybersec &amp; Networks</title>
+    
+    <!-- ===== Google Fonts ===== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    
+    <!-- ===== Font Awesome ===== -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    
+    <!-- ===== CSS (todos los archivos) ===== -->
+    <link rel="stylesheet" href="Whoami/css/base.css" />          <!-- Variables globales, reset, estilos base -->
+    <link rel="stylesheet" href="Whoami/css/navbar.css" />        <!-- Navbar cyber green con soporte de tema -->
+    <link rel="stylesheet" href="Whoami/css/hero.css" />
+    <link rel="stylesheet" href="Whoami/css/academia-pnp.css" />
+    <link rel="stylesheet" href="Whoami/css/ruta-aprendizaje.css" />
+    <link rel="stylesheet" href="Whoami/css/tutoriales.css" />
+    <link rel="stylesheet" href="Whoami/css/casos.css" />
+    <link rel="stylesheet" href="Whoami/css/gear.css" />
+    <link rel="stylesheet" href="Whoami/css/descargas.css" />
+    <link rel="stylesheet" href="Whoami/css/trayectoria.css" />
+    <link rel="stylesheet" href="Whoami/css/suscripcion.css" />
+    <link rel="stylesheet" href="Whoami/css/footer.css" />
+    <link rel="stylesheet" href="Whoami/css/modal.css" />
+    <link rel="stylesheet" href="Whoami/css/responsive.css" />    <!-- Media queries globales -->
+    <link rel="stylesheet" href="Whoami/css/cheatsheets.css" />
+    <link rel="stylesheet" href="Whoami/css/ip-consult.css" />
+    <link rel="stylesheet" href="Whoami/css/cmd-search.css" />
+    <link rel="stylesheet" href="Whoami/css/powershell.css" />
+    <link rel="stylesheet" href="Whoami/css/cmd.css" />
+    <link rel="stylesheet" href="Whoami/css/soporte.css" />
+</head>
+<body>
+
+    <!-- ===== NAVBAR (se carga dinámicamente en este contenedor) ===== -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- ===== CONTENEDOR PRINCIPAL (donde se cargan todas las secciones) ===== -->
+    <div id="app"></div>
+
+    <!-- ===== MODAL (para tutoriales, comandos, etc.) ===== -->
+    <div id="projectModal" hidden role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal__backdrop" data-close></div>
+        <div class="modal__panel">
+            <button class="modal__close" data-close aria-label="Cerrar">✕</button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- ===== TOAST (notificaciones) ===== -->
+    <div id="toast" hidden role="status" aria-live="polite"></div>
+
+    <!-- ================================================================ -->
+    <!-- SCRIPTS (orden de carga es importante)                           -->
+    <!-- ================================================================ -->
+
+    <!-- 1. Carga de secciones (loader.js) -->
+    <script src="Whoami/js/loader.js"></script>
+
+    <!-- 2. Funcionalidades base del sitio -->
+    <script src="Whoami/js/navbar.js"></script>
+    <script src="Whoami/js/hero.js"></script>
+    <script src="Whoami/js/persistencia.js"></script>   <!-- localStorage (favoritos, progreso) -->
+    <script src="Whoami/js/modal.js"></script>
+
+    <!-- 3. Módulos de contenido (cada sección) -->
+    <script src="Whoami/js/ruta-aprendizaje.js"></script>
+    <script src="Whoami/js/tutoriales.js"></script>
+    <script src="Whoami/js/casos.js"></script>
+    <script src="Whoami/js/gear.js"></script>
+    <script src="Whoami/js/descargas.js"></script>
+    <script src="Whoami/js/trayectoria.js"></script>
+    <script src="Whoami/js/suscripcion.js"></script>
+    <script src="Whoami/js/soporte.js"></script>
+
+    <!-- 4. Buscadores (en tiempo real) -->
+    <script src="Whoami/js/cmd-search.js"></script>
+    <script src="Whoami/js/ip-consult.js"></script>
+    <script src="Whoami/js/global-search.js"></script>
+    <script src="Whoami/js/ps-search.js"></script>
+
+    <!-- 5. TEMA (MODO OSCURO/CLARO) - ¡IMPORTANTE! -->
+    <script src="Whoami/js/theme.js"></script>
+
+    <!-- 6. Estadísticas del sitio (reloj, uptime, última actualización) -->
+    <script src="Whoami/js/site-stats.js"></script>
+
+    <!-- 7. Inicialización general -->
+    <script src="Whoami/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!-- ============================================================
+     SECCIÓN: GALERÍA DE FOTOS CON SLIDER
+     ============================================================ -->
+<section id="romantic-galeria" class="romantic-section galeria-section">
+    <div class="galeria-container">
+        <h2 class="romantic-title">📸 Galería de momentos</h2>
+        <p class="romantic-subtitle">Imágenes que capturan nuestra historia. Desliza para ver más.</p>
+
+        <!-- ===== SLIDER ===== -->
+        <div class="slider-container" id="sliderContainer">
+            <div class="slider-track" id="sliderTrack">
+                <!-- ===== SLIDE 1 ===== -->
+                <div class="slider-slide">
+                    <div class="slider-thumb" style="background: linear-gradient(135deg, #ff6b6b, #ff9f43);">
+                        <span class="slider-emoji">🌅</span>
+                    </div>
+                    <div class="slider-info">
+                        <h3>Nuestro atardecer</h3>
+                        <p>Un momento de paz y conexión.</p>
+                    </div>
+                </div>
+
+                <!-- ===== SLIDE 2 ===== -->
+                <div class="slider-slide">
+                    <div class="slider-thumb" style="background: linear-gradient(135deg, #a29bfe, #6c5ce7);">
+                        <span class="slider-emoji">🌟</span>
+                    </div>
+                    <div class="slider-info">
+                        <h3>Bajo las estrellas</h3>
+                        <p>Hablando hasta que el sol salió.</p>
+                    </div>
+                </div>
+
+                <!-- ===== SLIDE 3 ===== -->
+                <div class="slider-slide">
+                    <div class="slider-thumb" style="background: linear-gradient(135deg, #fd79a8, #e84393);">
+                        <span class="slider-emoji">❤️</span>
+                    </div>
+                    <div class="slider-info">
+                        <h3>El día que todo cambió</h3>
+                        <p>Un antes y un después en nuestras vidas.</p>
+                    </div>
+                </div>
+
+                <!-- ===== SLIDE 4 ===== -->
+                <div class="slider-slide">
+                    <div class="slider-thumb" style="background: linear-gradient(135deg, #55efc4, #00b894);">
+                        <span class="slider-emoji">🌊</span>
+                    </div>
+                    <div class="slider-info">
+                        <h3>El mar nos vio felices</h3>
+                        <p>Olas, risas y promesas.</p>
+                    </div>
+                </div>
+
+                <!-- ===== SLIDE 5 ===== -->
+                <div class="slider-slide">
+                    <div class="slider-thumb" style="background: linear-gradient(135deg, #fdcb6e, #f39c12);">
+                        <span class="slider-emoji">☕</span>
+                    </div>
+                    <div class="slider-info">
+                        <h3>Café de madrugada</h3>
+                        <p>Silencios cómplices y conversaciones profundas.</p>
+                    </div>
+                </div>
+
+                <!-- ===== SLIDE 6 ===== -->
+                <div class="slider-slide">
+                    <div class="slider-thumb" style="background: linear-gradient(135deg, #74b9ff, #0984e3);">
+                        <span class="slider-emoji">🌙</span>
+                    </div>
+                    <div class="slider-info">
+                        <h3>Noche de luna llena</h3>
+                        <p>Un recuerdo que brilla siempre.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controles del slider -->
+            <button class="slider-btn slider-btn-prev" id="sliderPrev" aria-label="Anterior">‹</button>
+            <button class="slider-btn slider-btn-next" id="sliderNext" aria-label="Siguiente">›</button>
+
+            <!-- Indicadores -->
+            <div class="slider-dots" id="sliderDots"></div>
+        </div>
+    </div>
+
+    <!-- ===== LIGHTBOX (para ver en grande) ===== -->
+    <div id="lightboxModal" class="lightbox-modal" hidden>
+        <div class="lightbox-content">
+            <button class="lightbox-close-btn" id="lightboxCloseBtn" aria-label="Cerrar">
+                <span class="lightbox-close-icon">&times;</span>
+                <span class="lightbox-close-text">Cerrar</span>
+            </button>
+            <div id="lightboxBody">
+                <!-- Inyectado por JS -->
+            </div>
+        </div>
+    </div>
+</section>

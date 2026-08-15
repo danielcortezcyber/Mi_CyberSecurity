@@ -1,0 +1,351 @@
+/* ============================================================
+   SOPORTE TÉCNICO - DISEÑO CREATIVO E INTERACTIVO
+   ============================================================ */
+
+.soporte-sub {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+}
+.soporte-section-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 2.5rem 0 0.5rem;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+.soporte-section-title::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+}
+.soporte-section-desc {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.diagnostico-container {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px var(--shadow-color);
+    min-height: 250px;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+.diagnostico-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, var(--accent-light), transparent 70%);
+    opacity: 0.1;
+    pointer-events: none;
+}
+.diagnostico-step {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+.diagnostico-step.active {
+    display: flex;
+    animation: fadeInUp 0.4s ease forwards;
+}
+.diagnostico-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+.diagnostico-step h4 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+.diagnostico-step p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    max-width: 600px;
+}
+.diagnostico-step ul {
+    text-align: left;
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 1.5rem;
+    max-width: 500px;
+    width: 100%;
+}
+.diagnostico-step ul li {
+    padding: 0.4rem 0;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+.diagnostico-step ul li:last-child {
+    border-bottom: none;
+}
+.diagnostico-step ul li code {
+    background: var(--bg-secondary);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: var(--accent);
+}
+.diagnostico-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+.diagnostico-btn {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+    padding: 0.6rem 1.2rem;
+    border-radius: 40px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.diagnostico-btn:hover {
+    background: var(--accent);
+    color: var(--text-light);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px var(--shadow-color);
+}
+.diagnostico-restart {
+    margin-top: 0.5rem;
+}
+
+.checklist-container {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 1.8rem 2rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 16px var(--shadow-color);
+    margin-bottom: 2rem;
+}
+.checklist-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+.checklist-item:last-child {
+    border-bottom: none;
+}
+.checklist-checkbox {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--accent);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.checklist-item label {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.checklist-item input:checked + label {
+    color: var(--text-primary);
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+.checklist-progress {
+    margin-top: 1.2rem;
+    padding-top: 1.2rem;
+    border-top: 2px solid var(--border-color);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+}
+.checklist-progress span {
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+.checklist-progress .progress-bar {
+    flex: 1;
+    height: 8px;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    overflow: hidden;
+    min-width: 100px;
+    border: 1px solid var(--border-color);
+}
+.checklist-progress .progress-bar div {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 8px;
+    transition: width 0.5s ease;
+}
+#resetChecklist {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.2rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    transition: 0.2s;
+}
+#resetChecklist:hover {
+    background: var(--border-color);
+    color: var(--text-primary);
+}
+
+.post-codes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+}
+.post-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 1.2rem 1.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px var(--shadow-color);
+    transition: transform 0.2s;
+}
+.post-card:hover {
+    transform: translateY(-3px);
+}
+.post-card h4 {
+    font-size: 1rem;
+    margin: 0 0 0.3rem;
+    color: var(--text-primary);
+}
+.post-card p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0 0 0.5rem;
+}
+.post-status {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.1rem 0.6rem;
+    border-radius: 20px;
+}
+.post-status.ok {
+    background: #d4edda;
+    color: #155724;
+}
+.post-status.error {
+    background: #f8d7da;
+    color: #721c24;
+}
+[data-theme="dark"] .post-status.ok {
+    background: #1e3a2a;
+    color: #7ddb9c;
+}
+[data-theme="dark"] .post-status.error {
+    background: #3d1e1e;
+    color: #e88a8a;
+}
+
+.recursos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+.recurso-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px var(--shadow-color);
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.recurso-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px var(--shadow-hover);
+}
+.recurso-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+.recurso-card h4 {
+    margin: 0.3rem 0;
+    font-size: 1.05rem;
+    color: var(--text-primary);
+}
+.recurso-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0.3rem 0 0.8rem;
+}
+.recurso-card .btn {
+    font-size: 0.8rem;
+    padding: 0.2rem 1rem;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .diagnostico-container {
+        padding: 1.2rem;
+    }
+    .diagnostico-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    .diagnostico-btn {
+        width: 100%;
+        max-width: 280px;
+    }
+    .checklist-container {
+        padding: 1.2rem;
+    }
+    .checklist-progress {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+    .post-codes {
+        grid-template-columns: 1fr 1fr;
+    }
+    .recursos-grid {
+        grid-template-columns: 1fr;
+    }
+    .soporte-section-title {
+        font-size: 1.3rem;
+    }
+}
+@media (max-width: 480px) {
+    .post-codes {
+        grid-template-columns: 1fr;
+    }
+    .diagnostico-step ul {
+        font-size: 0.9rem;
+    }
+}

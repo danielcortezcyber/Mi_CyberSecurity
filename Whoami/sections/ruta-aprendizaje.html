@@ -1,0 +1,42 @@
+<section id="ruta-aprendizaje" class="section ruta">
+    <div class="container">
+        <h2 class="section-title">Ruta de aprendizaje</h2>
+        <p class="ruta-sub">Aprende Redes, Ciberseguridad, Windows y Linux. Sigue una ruta estructurada desde los fundamentos hasta temas avanzados.</p>
+
+        <!-- Barra de progreso total -->
+        <div class="progress-wrap" id="rutaProgressWrap" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="36">
+            <span class="progress-label">Progreso total <span id="rutaProgressDone">0</span> / <span id="rutaProgressTotal">36</span></span>
+            <div class="progress-bar"><div id="rutaProgressFill" style="width:0%;"></div></div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="ruta-filters">
+            <div class="filtro-busqueda">
+                <input type="text" id="rutaSearch" placeholder="Buscar lección…" />
+                <button id="rutaSearchClear" hidden>✕</button>
+            </div>
+            <div class="filter-group">
+                <span>Categoría</span>
+                <label><input type="checkbox" value="redes" checked /> 🌐 Redes</label>
+                <label><input type="checkbox" value="ciberseguridad" checked /> 🔐 Ciberseguridad</label>
+                <label><input type="checkbox" value="windows" checked /> 💻 Windows</label>
+                <label><input type="checkbox" value="linux" checked /> 🐧 Linux</label>
+            </div>
+            <div class="filter-group">
+                <span>Nivel</span>
+                <label><input type="checkbox" value="basico" checked /> 🌱 Básico</label>
+                <label><input type="checkbox" value="intermedio" checked /> 🌿 Intermedio</label>
+                <label><input type="checkbox" value="avanzado" checked /> 🌳 Avanzado</label>
+            </div>
+        </div>
+
+        <!-- Grid de lecciones agrupadas por nivel -->
+        <div id="rutaGrid" class="ruta-grid"></div>
+
+        <!-- Estado vacío -->
+        <div id="rutaEmpty" class="empty-state" hidden>
+            <p>No hay lecciones que coincidan con tu búsqueda o filtros.</p>
+            <button class="btn btn-small" id="rutaResetFilters">Limpiar filtros</button>
+        </div>
+    </div>
+</section>

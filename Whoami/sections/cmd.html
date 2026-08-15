@@ -1,0 +1,1226 @@
+<section id="cmd" class="section cmd">
+    <div class="container">
+        <!-- ===== ENCABEZADO ===== -->
+        <div class="cmd-header">
+            <h2 class="section-title">⚡ Símbolo del Sistema (CMD)</h2>
+            <p class="cmd-sub">
+                La guía definitiva para dominar el CMD. Administra, diagnostica, automatiza y soluciona problemas<br />
+                en Windows con más de <strong>70 comandos</strong> organizados por categorías.
+            </p>
+            <div class="cmd-stats">
+                <span class="stat"><span class="stat-num">70+</span> Comandos</span>
+                <span class="stat"><span class="stat-num">12</span> Categorías</span>
+                <span class="stat"><span class="stat-num">150+</span> Ejemplos</span>
+                <span class="stat"><span class="stat-num">8</span> Guías de troubleshooting</span>
+            </div>
+        </div>
+
+
+<!-- ===== BUSCADOR ===== -->
+<div class="cmd-search-container">
+    <div class="cmd-search-wrapper">
+        <i class="fas fa-search cmd-search-icon"></i>
+        <input type="text" id="cmdSearch" placeholder="🔍 Buscar comando por nombre, descripción o categoría..." class="cmd-search-input" />
+        <button id="cmdSearchClear" class="cmd-search-clear" hidden>✕</button>
+    </div>
+    <div class="cmd-search-stats">
+        <span id="cmdSearchCount">0</span> comandos encontrados
+    </div>
+</div>
+
+        <!-- ===== INTRODUCCIÓN ===== -->
+        <div class="cmd-intro">
+            <div class="cmd-intro-card">
+                <h3>🖥️ ¿Qué es CMD?</h3>
+                <p>El <strong>Símbolo del Sistema (CMD)</strong> es la interfaz de línea de comandos nativa de Windows. Es la herramienta más antigua y aún esencial para tareas rápidas, scripts heredados y diagnóstico de red.</p>
+                <div class="tip">
+                    <strong>💡 Ejecuta como Administrador:</strong> Haz clic derecho → "Ejecutar como administrador" para comandos que modifican el sistema.
+                </div>
+            </div>
+            <div class="cmd-intro-card">
+                <h3>⌨️ Atajos y Trucos Esenciales</h3>
+                <div class="shortcuts">
+                    <div><kbd>F1</kbd> Copia el último comando carácter por carácter</div>
+                    <div><kbd>F3</kbd> Pega el último comando completo</div>
+                    <div><kbd>F5</kbd> Recorre el historial hacia atrás</div>
+                    <div><kbd>F7</kbd> Muestra el historial en ventana emergente</div>
+                    <div><kbd>Tab</kbd> Autocompleta nombres de archivos/carpetas</div>
+                    <div><kbd>Ctrl + C</kbd> Detiene la ejecución de un comando</div>
+                    <div><kbd>Ctrl + V</kbd> Pega texto (Windows 10/11)</div>
+                    <div><code>comando /?</code> Muestra la ayuda integrada</div>
+                    <div><code>comando | clip</code> Copia la salida al portapapeles</div>
+                    <div><code>comando &amp;&amp; comando2</code> Ejecuta varios comandos en secuencia</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 1. COMANDOS DE NAVEGACIÓN Y ARCHIVOS (BÁSICOS)                -->
+        <!-- ============================================================ -->
+        <div class="cmd-section">
+            <h3 class="cmd-section-title">📂 Navegación y Archivos (Básicos)</h3>
+            <p class="cmd-section-desc">Comandos fundamentales para moverse y gestionar archivos.</p>
+            <div class="cmd-grid">
+                <!-- dir -->
+                <div class="cmd-card" data-level="basic">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">📋</span>
+                        <code class="cmd-name">dir</code>
+                        <span class="cmd-badge basic">Básico</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>dir [unidad:][ruta] [opciones]</code></p>
+                    <p>Lista archivos y subdirectorios del directorio actual.</p>
+                    <div class="cmd-examples">
+                        <h4>Ejemplos:</h4>
+                        <pre><code>dir                     # Lista el directorio actual
+dir /w                  # Vista compacta (varias columnas)
+dir /s C:\              # Lista recursivamente todo el disco C:
+dir *.txt               # Filtra archivos .txt
+dir /o:s                # Ordena por tamaño (ascendente)
+dir /b                  # Formato simple (solo nombres)</code></pre>
+                    </div>
+                    <div class="cmd-params">
+                        <h4>Parámetros clave:</h4>
+                        <ul>
+                            <li><code>/w</code> → Vista ancha, varias columnas</li>
+                            <li><code>/s</code> → Incluye subdirectorios (recursivo)</li>
+                            <li><code>/b</code> → Formato simple (solo nombres, sin encabezados)</li>
+                            <li><code>/o:orden</code> → Ordena por: <code>n</code> (nombre), <code>s</code> (tamaño), <code>d</code> (fecha), <code>e</code> (extensión)</li>
+                            <li><code>/p</code> → Muestra página por página</li>
+                        </ul>
+                    </div>
+                    <div class="cmd-note">💡 <strong>Tip:</strong> <code>dir /s *.log</code> busca todos los archivos .log en el disco.</div>
+                </div>
+
+                <!-- cd -->
+                <div class="cmd-card" data-level="basic">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">📁</span>
+                        <code class="cmd-name">cd</code>
+                        <span class="cmd-badge basic">Básico</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>cd [unidad:][ruta]</code></p>
+                    <p>Cambia el directorio actual (Change Directory).</p>
+                    <div class="cmd-examples">
+                        <pre><code>cd \                    # Va a la raíz del disco actual
+cd ..                   # Sube un nivel
+cd "C:\Program Files"   # Ruta con espacios, usa comillas
+cd /d D:\               # Cambia a la unidad D: y directorio raíz</code></pre>
+                    </div>
+                    <div class="cmd-tip">💡 <strong>Buenas prácticas:</strong> Usa <code>cd /d</code> para cambiar de unidad y directorio en un solo comando.</div>
+                </div>
+
+                <!-- md / mkdir -->
+                <div class="cmd-card" data-level="basic">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">📁</span>
+                        <code class="cmd-name">md / mkdir</code>
+                        <span class="cmd-badge basic">Básico</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>md [unidad:]ruta</code> o <code>mkdir [unidad:]ruta</code></p>
+                    <p>Crea un nuevo directorio (carpeta).</p>
+                    <div class="cmd-examples">
+                        <pre><code>md Nuevo                     # Crea carpeta "Nuevo"
+md C:\Backup\2025            # Crea ruta completa (crea subcarpetas)
+mkdir "Mis Documentos"       # Con espacios, usar comillas</code></pre>
+                    </div>
+                    <div class="cmd-note">📌 <strong>Nota:</strong> <code>md</code> puede crear rutas completas, a diferencia de <code>rmdir</code> que solo elimina directorios vacíos (a menos que uses <code>/s</code>).</div>
+                </div>
+
+                <!-- rmdir / rd -->
+                <div class="cmd-card" data-level="basic">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🗑️</span>
+                        <code class="cmd-name">rmdir / rd</code>
+                        <span class="cmd-badge basic">Básico</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>rmdir [unidad:]ruta [/s] [/q]</code></p>
+                    <p>Elimina un directorio (carpeta).</p>
+                    <div class="cmd-examples">
+                        <pre><code>rmdir Nuevo                  # Elimina solo si está vacío
+rmdir C:\Backup\2025 /s /q   # Elimina con todo su contenido (sin confirmar)</code></pre>
+                    </div>
+                    <div class="cmd-params">
+                        <ul>
+                            <li><code>/s</code> → Elimina el directorio y todo su contenido (subdirectorios y archivos)</li>
+                            <li><code>/q</code> → Modo silencioso, no pide confirmación (usar con precaución)</li>
+                        </ul>
+                    </div>
+                    <div class="cmd-warning">⚠️ <strong>Advertencia:</strong> <code>rmdir /s</code> elimina permanentemente sin enviar a la Papelera. Úsalo con cuidado.</div>
+                </div>
+
+                <!-- copy -->
+                <div class="cmd-card" data-level="basic">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">📄</span>
+                        <code class="cmd-name">copy</code>
+                        <span class="cmd-badge basic">Básico</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>copy origen destino</code></p>
+                    <p>Copia uno o más archivos de un lugar a otro.</p>
+                    <div class="cmd-examples">
+                        <pre><code>copy archivo.txt D:\backup\     # Copia a una carpeta
+copy *.pdf C:\PDF\              # Copia todos los .pdf
+copy /y archivo.txt D:\         # Sobrescribe sin preguntar
+copy /v archivo.txt D:\         # Verifica que se copió correctamente</code></pre>
+                    </div>
+                    <div class="cmd-params">
+                        <ul>
+                            <li><code>/y</code> → Sobrescribe archivos existentes sin confirmar</li>
+                            <li><code>/-y</code> → Pide confirmación antes de sobrescribir</li>
+                            <li><code>/v</code> → Verifica la integridad de la copia</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- move -->
+                <div class="cmd-card" data-level="basic">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🚚</span>
+                        <code class="cmd-name">move</code>
+                        <span class="cmd-badge basic">Básico</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>move origen destino</code></p>
+                    <p>Mueve o renombra archivos y directorios.</p>
+                    <div class="cmd-examples">
+                        <pre><code>move doc.txt D:\Documentos\      # Mueve archivo
+move antiguo.txt nuevo.txt       # Renombra archivo
+move "C:\Temp\*" D:\Temp\        # Mueve todo el contenido de Temp</code></pre>
+                    </div>
+                    <div class="cmd-tip">💡 <strong>Buenas prácticas:</strong> Usa <code>move</code> para renombrar archivos/carpetas de manera rápida sin copiar.</div>
+                </div>
+
+                <!-- del / erase -->
+                <div class="cmd-card" data-level="basic">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">❌</span>
+                        <code class="cmd-name">del / erase</code>
+                        <span class="cmd-badge basic">Básico</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>del [unidad:]ruta [opciones]</code></p>
+                    <p>Elimina uno o más archivos.</p>
+                    <div class="cmd-examples">
+                        <pre><code>del archivo.txt              # Elimina archivo
+del *.tmp /s                 # Elimina archivos temporales recursivamente
+erase datos.dat              # Mismo efecto que del
+del /f archivo.txt           # Fuerza la eliminación (archivos de solo lectura)</code></pre>
+                    </div>
+                    <div class="cmd-params">
+                        <ul>
+                            <li><code>/s</code> → Busca y elimina en subdirectorios</li>
+                            <li><code>/q</code> → Modo silencioso (no pide confirmación)</li>
+                            <li><code>/f</code> → Fuerza la eliminación de archivos de solo lectura</li>
+                        </ul>
+                    </div>
+                    <div class="cmd-warning">⚠️ <strong>Advertencia:</strong> <code>del</code> elimina permanentemente (no usa Papelera de reciclaje).</div>
+                </div>
+
+                <!-- ren -->
+                <div class="cmd-card" data-level="basic">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">✏️</span>
+                        <code class="cmd-name">ren</code>
+                        <span class="cmd-badge basic">Básico</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>ren [unidad:]ruta nombre_actual nombre_nuevo</code></p>
+                    <p>Renombra archivos o carpetas.</p>
+                    <div class="cmd-examples">
+                        <pre><code>ren archivo.txt nuevo.txt
+ren *.jpg *.jpeg     # Cambia extensión de todos los .jpg a .jpeg</code></pre>
+                    </div>
+                </div>
+
+                <!-- type -->
+                <div class="cmd-card" data-level="basic">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">📖</span>
+                        <code class="cmd-name">type</code>
+                        <span class="cmd-badge basic">Básico</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>type [unidad:]ruta</code></p>
+                    <p>Muestra el contenido de un archivo de texto en la pantalla.</p>
+                    <div class="cmd-examples">
+                        <pre><code>type readme.txt
+type *.log | more    # Muestra paginado</code></pre>
+                    </div>
+                    <div class="cmd-tip">💡 <strong>Tip:</strong> Combina con <code>more</code> para leer archivos largos: <code>type archivo.txt | more</code>.</div>
+                </div>
+
+                <!-- echo, cls, exit, help, ver, date, time, title, color, prompt -->
+                <div class="cmd-card" data-level="basic">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🔧</span>
+                        <code class="cmd-name">echo / cls / exit / help / ver / date / time / title / color / prompt</code>
+                        <span class="cmd-badge basic">Básico</span>
+                    </div>
+                    <div class="cmd-examples">
+                        <h4>Ejemplos:</h4>
+                        <pre><code>echo Hola Mundo
+cls                             # Limpia la pantalla
+exit                            # Cierra la ventana
+help dir                        # Muestra ayuda del comando dir
+ver                             # Versión del sistema operativo
+date                            # Muestra y permite cambiar la fecha
+time                            # Muestra y permite cambiar la hora
+title "Servidor"                # Cambia el título de la ventana
+color 0A                        # Fondo negro, texto verde
+prompt $p$g                     # Muestra la ruta actual en el prompt</code></pre>
+                    </div>
+                    <div class="cmd-params">
+                        <h4>Colores (color):</h4>
+                        <ul>
+                            <li><code>0</code> Negro, <code>1</code> Azul, <code>2</code> Verde, <code>3</code> Aguamarina, <code>4</code> Rojo, <code>5</code> Púrpura, <code>6</code> Amarillo, <code>7</code> Blanco</li>
+                            <li><code>8</code> Gris, <code>9</code> Azul claro, <code>A</code> Verde claro, <code>B</code> Aguamarina claro, <code>C</code> Rojo claro, <code>D</code> Púrpura claro, <code>E</code> Amarillo claro, <code>F</code> Blanco brillante</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 2. COMANDOS DE ARCHIVOS Y DIRECTORIOS (AVANZADOS)             -->
+        <!-- ============================================================ -->
+        <div class="cmd-section">
+            <h3 class="cmd-section-title">📦 Manipulación Avanzada de Archivos</h3>
+            <p class="cmd-section-desc">Herramientas para copias masivas, búsquedas avanzadas y manipulación de archivos.</p>
+            <div class="cmd-grid">
+                <!-- xcopy -->
+                <div class="cmd-card" data-level="intermediate">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">📋</span>
+                        <code class="cmd-name">xcopy</code>
+                        <span class="cmd-badge intermediate">Intermedio</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>xcopy origen destino [opciones]</code></p>
+                    <p>Copia archivos y directorios con más opciones que <code>copy</code>.</p>
+                    <div class="cmd-examples">
+                        <pre><code>xcopy C:\src D:\dest /E /I /H   # Copia todo (subdirectorios, ocultos, sistema)
+xcopy C:\src D:\dest /E /C       # Continúa incluso si hay errores
+xcopy C:\src D:\dest /U          # Copia solo archivos que ya existen en destino</code></pre>
+                    </div>
+                    <div class="cmd-params">
+                        <ul>
+                            <li><code>/E</code> → Copia subdirectorios, incluso vacíos</li>
+                            <li><code>/I</code> → Si destino no existe, crea como directorio</li>
+                            <li><code>/H</code> → Copia archivos ocultos y del sistema</li>
+                            <li><code>/C</code> → Continúa a pesar de errores</li>
+                            <li><code>/Y</code> → Sobrescribe sin preguntar</li>
+                            <li><code>/Z</code> → Modo de reinicio (útil para redes inestables)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- robocopy -->
+                <div class="cmd-card" data-level="advanced">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🔄</span>
+                        <code class="cmd-name">robocopy</code>
+                        <span class="cmd-badge advanced">Avanzado</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>robocopy origen destino [archivos] [opciones]</code></p>
+                    <p>Herramienta de copia robusta para sincronizar directorios (más potente que xcopy).</p>
+                    <div class="cmd-examples">
+                        <h4>Ejemplos:</h4>
+                        <pre><code>robocopy C:\src D:\dest /MIR      # Sincroniza espejo (borra lo que sobra en destino)
+robocopy C:\src D:\dest /E /ZB /R:3 /W:10  # Copia con reintentos
+robocopy C:\src D:\dest /MIR /XF *.tmp    # Excluye archivos .tmp</code></pre>
+                    </div>
+                    <div class="cmd-params">
+                        <ul>
+                            <li><code>/MIR</code> → Espeja la estructura (borra archivos extras en destino)</li>
+                            <li><code>/E</code> → Copia subdirectorios, incluso vacíos</li>
+                            <li><code>/ZB</code> → Usa modo de reinicio en archivos abiertos</li>
+                            <li><code>/R:n</code> → Número de reintentos</li>
+                            <li><code>/W:n</code> → Tiempo de espera entre reintentos (segundos)</li>
+                            <li><code>/XF</code> → Excluye archivos (por extensión o patrón)</li>
+                            <li><code>/XD</code> → Excluye directorios</li>
+                        </ul>
+                    </div>
+                    <div class="cmd-tip">💡 <strong>Buenas prácticas:</strong> Usa <code>robocopy</code> para backups y sincronización, ya que reanuda copias interrumpidas y maneja archivos abiertos.</div>
+                </div>
+
+                <!-- attrib -->
+                <div class="cmd-card" data-level="intermediate">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🔒</span>
+                        <code class="cmd-name">attrib</code>
+                        <span class="cmd-badge intermediate">Intermedio</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>attrib [+r | -r] [+a | -a] [+s | -s] [+h | -h] [unidad:]ruta [/s] [/d]</code></p>
+                    <p>Muestra o cambia los atributos de archivos.</p>
+                    <div class="cmd-examples">
+                        <pre><code>attrib +h secret.txt          # Oculta el archivo
+attrib -r -s boot.ini         # Quita solo lectura y sistema
+attrib +h +s carpeta /d       # Oculta carpeta con atributo de sistema</code></pre>
+                    </div>
+                    <div class="cmd-params">
+                        <ul>
+                            <li><code>+r</code>/<code>-r</code> → Agrega/Quita solo lectura</li>
+                            <li><code>+a</code>/<code>-a</code> → Agrega/Quita atributo de archivo</li>
+                            <li><code>+s</code>/<code>-s</code> → Agrega/Quita atributo de sistema</li>
+                            <li><code>+h</code>/<code>-h</code> → Agrega/Quita atributo oculto</li>
+                            <li><code>/s</code> → Recursivo en subdirectorios</li>
+                            <li><code>/d</code> → Aplica a directorios</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- find -->
+                <div class="cmd-card" data-level="intermediate">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🔍</span>
+                        <code class="cmd-name">find</code>
+                        <span class="cmd-badge intermediate">Intermedio</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>find "cadena" [unidad:]ruta [opciones]</code></p>
+                    <p>Busca una cadena de texto en archivos (versión simple).</p>
+                    <div class="cmd-examples">
+                        <pre><code>find "error" log.txt
+find /i "usuario" usuarios.txt   # Búsqueda insensible a mayúsculas
+find /n "2025" *.log             # Muestra el número de línea</code></pre>
+                    </div>
+                    <div class="cmd-params">
+                        <ul>
+                            <li><code>/i</code> → Insensible a mayúsculas/minúsculas</li>
+                            <li><code>/n</code> → Muestra el número de línea</li>
+                            <li><code>/v</code> → Muestra líneas que NO contienen la cadena</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- findstr -->
+                <div class="cmd-card" data-level="advanced">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🔎</span>
+                        <code class="cmd-name">findstr</code>
+                        <span class="cmd-badge advanced">Avanzado</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>findstr "patrón" [unidad:]ruta [opciones]</code></p>
+                    <p>Busca cadenas usando expresiones regulares (como grep).</p>
+                    <div class="cmd-examples">
+                        <pre><code>findstr "error" *.log
+findstr /s /i "usuario" C:\*.txt
+findstr /v "ok" archivo.log   # Líneas que NO contienen "ok"
+findstr /r "^\d{4}" *.log    # Líneas que empiezan con 4 dígitos</code></pre>
+                    </div>
+                    <div class="cmd-params">
+                        <ul>
+                            <li><code>/s</code> → Busca en subdirectorios</li>
+                            <li><code>/i</code> → Insensible a mayúsculas</li>
+                            <li><code>/v</code> → Muestra líneas que NO coinciden</li>
+                            <li><code>/r</code> → Usa expresiones regulares</li>
+                            <li><code>/l</code> → Busca literalmente (sin regex)</li>
+                            <li><code>/m</code> → Muestra solo el nombre del archivo si hay coincidencia</li>
+                        </ul>
+                    </div>
+                    <div class="cmd-tip">💡 <strong>Tip:</strong> <code>findstr</code> es ideal para auditoría de logs y búsquedas complejas en archivos de texto.</div>
+                </div>
+
+                <!-- fc / comp -->
+                <div class="cmd-card" data-level="intermediate">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🔀</span>
+                        <code class="cmd-name">fc / comp</code>
+                        <span class="cmd-badge intermediate">Intermedio</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>fc archivo1 archivo2 [opciones]</code> o <code>comp archivo1 archivo2</code></p>
+                    <p>Compara archivos y muestra diferencias.</p>
+                    <div class="cmd-examples">
+                        <pre><code>fc archivo1.txt archivo2.txt
+fc /b imagen1.bmp imagen2.bmp   # Comparación binaria
+comp archivo1 archivo2          # Comparación byte a byte</code></pre>
+                    </div>
+                </div>
+
+                <!-- more & sort & tree -->
+                <div class="cmd-card" data-level="intermediate">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">📊</span>
+                        <code class="cmd-name">more / sort / tree</code>
+                        <span class="cmd-badge intermediate">Intermedio</span>
+                    </div>
+                    <div class="cmd-examples">
+                        <pre><code>more archivo.txt                # Muestra página por página
+dir /s | more                   # Salida paginada
+sort nombres.txt /o ordenados.txt  # Ordena alfabéticamente
+tree C:\Proyectos               # Muestra estructura de directorios</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 3. COMANDOS DE RED                                             -->
+        <!-- ============================================================ -->
+        <div class="cmd-section">
+            <h3 class="cmd-section-title">🌐 Red y Conectividad</h3>
+            <p class="cmd-section-desc">Herramientas para diagnosticar, configurar y administrar redes.</p>
+            <div class="cmd-grid">
+                <!-- ipconfig -->
+                <div class="cmd-card" data-level="intermediate">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🌐</span>
+                        <code class="cmd-name">ipconfig</code>
+                        <span class="cmd-badge intermediate">Intermedio</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>ipconfig [opciones]</code></p>
+                    <p>Muestra la configuración de red (IP, máscara, puerta de enlace, DNS).</p>
+                    <div class="cmd-examples">
+                        <pre><code>ipconfig                 # Información básica
+ipconfig /all            # Detalles completos (MAC, DHCP, etc.)
+ipconfig /release        # Libera la IP DHCP
+ipconfig /renew          # Renueva la IP DHCP
+ipconfig /flushdns       # Limpia la caché DNS
+ipconfig /displaydns     # Muestra la caché DNS</code></pre>
+                    </div>
+                    <div class="cmd-tip">💡 <strong>Buenas prácticas:</strong> Después de cambiar la configuración de red, usa <code>ipconfig /flushdns</code> y <code>ipconfig /registerdns</code>.</div>
+                </div>
+
+                <!-- ping -->
+                <div class="cmd-card" data-level="basic">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">📡</span>
+                        <code class="cmd-name">ping</code>
+                        <span class="cmd-badge basic">Básico</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>ping [-t] [-n count] [-l size] [-w timeout] destino</code></p>
+                    <p>Prueba conectividad con un host mediante ICMP.</p>
+                    <div class="cmd-examples">
+                        <pre><code>ping google.com -n 10          # 10 pings
+ping -t 192.168.1.1            # Ping continuo (Ctrl+C para detener)
+ping -a 8.8.8.8                # Resuelve el nombre inverso
+ping -l 1500 -f google.com     # Paquetes de 1500 bytes sin fragmentar</code></pre>
+                    </div>
+                    <div class="cmd-params">
+                        <ul>
+                            <li><code>-t</code> → Ping continuo</li>
+                            <li><code>-n count</code> → Número de pings</li>
+                            <li><code>-l size</code> → Tamaño del paquete</li>
+                            <li><code>-w timeout</code> → Tiempo de espera (ms)</li>
+                            <li><code>-a</code> → Resuelve el nombre del host</li>
+                            <li><code>-f</code> → No fragmentar (detecta MTU)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- tracert / pathping -->
+                <div class="cmd-card" data-level="intermediate">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🗺️</span>
+                        <code class="cmd-name">tracert / pathping</code>
+                        <span class="cmd-badge intermediate">Intermedio</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>tracert [-d] [-h max_saltos] destino</code> y <code>pathping destino</code></p>
+                    <p>Rastrea la ruta hasta un destino. <code>pathping</code> añade estadísticas de pérdida.</p>
+                    <div class="cmd-examples">
+                        <pre><code>tracert google.com
+tracert -d google.com        # No resuelve nombres (más rápido)
+pathping google.com          # Combina traceroute y ping</code></pre>
+                    </div>
+                </div>
+
+                <!-- netstat -->
+                <div class="cmd-card" data-level="intermediate">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🔌</span>
+                        <code class="cmd-name">netstat</code>
+                        <span class="cmd-badge intermediate">Intermedio</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>netstat [-a] [-n] [-o] [-b] [-e] [-p protocolo]</code></p>
+                    <p>Muestra conexiones de red, puertos abiertos y estadísticas.</p>
+                    <div class="cmd-examples">
+                        <pre><code>netstat -an            # Todas las conexiones y puertos (sin resolver nombres)
+netstat -ano           # Incluye PID del proceso
+netstat -b             # Muestra el programa que usa cada puerto
+netstat -e             # Estadísticas Ethernet</code></pre>
+                    </div>
+                    <div class="cmd-tip">💡 <strong>Tip:</strong> <code>netstat -ano</code> es útil para identificar procesos que están usando puertos (útil en ciberseguridad).</div>
+                </div>
+
+                <!-- nslookup -->
+                <div class="cmd-card" data-level="intermediate">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">📇</span>
+                        <code class="cmd-name">nslookup</code>
+                        <span class="cmd-badge intermediate">Intermedio</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>nslookup [nombre] [servidor_dns]</code></p>
+                    <p>Consulta registros DNS.</p>
+                    <div class="cmd-examples">
+                        <pre><code>nslookup google.com
+nslookup 8.8.8.8              # Resolución inversa
+nslookup -type=MX google.com  # Registros MX
+nslookup -type=NS google.com  # Servidores de nombres</code></pre>
+                    </div>
+                </div>
+
+                <!-- arp -->
+                <div class="cmd-card" data-level="intermediate">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🔗</span>
+                        <code class="cmd-name">arp</code>
+                        <span class="cmd-badge intermediate">Intermedio</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>arp [-a] [-d] [-s]</code></p>
+                    <p>Muestra y modifica la tabla ARP (asociación IP-MAC).</p>
+                    <div class="cmd-examples">
+                        <pre><code>arp -a                 # Muestra tabla ARP
+arp -d                 # Borra toda la tabla
+arp -s 192.168.1.10 00-AA-00-62-C6-09  # Agrega entrada estática</code></pre>
+                    </div>
+                </div>
+
+                <!-- route -->
+                <div class="cmd-card" data-level="advanced">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🛣️</span>
+                        <code class="cmd-name">route</code>
+                        <span class="cmd-badge advanced">Avanzado</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>route [print] [add] [delete] [change]</code></p>
+                    <p>Muestra o modifica la tabla de enrutamiento IPv4.</p>
+                    <div class="cmd-examples">
+                        <pre><code>route print
+route add 192.168.0.0 mask 255.255.255.0 10.0.0.1
+route delete 192.168.0.0
+route change 192.168.0.0 mask 255.255.255.0 10.0.0.2</code></pre>
+                    </div>
+                </div>
+
+                <!-- netsh -->
+                <div class="cmd-card" data-level="advanced">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">⚙️</span>
+                        <code class="cmd-name">netsh</code>
+                        <span class="cmd-badge advanced">Avanzado</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>netsh [contexto] [comando]</code></p>
+                    <p>Herramienta de configuración de red (muy potente).</p>
+                    <div class="cmd-examples">
+                        <pre><code>netsh int ip reset           # Reinicia la pila TCP/IP
+netsh wlan show profiles
+netsh wlan show networks
+netsh advfirewall show allprofiles
+netsh interface ip set dns "Ethernet" static 8.8.8.8</code></pre>
+                    </div>
+                </div>
+
+                <!-- hostname / getmac / telnet / ssh / ftp -->
+                <div class="cmd-card" data-level="basic">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🖥️</span>
+                        <code class="cmd-name">hostname / getmac / telnet / ssh / ftp</code>
+                        <span class="cmd-badge basic">Básico</span>
+                    </div>
+                    <div class="cmd-examples">
+                        <pre><code>hostname                     # Nombre del equipo
+getmac /v                    # Dirección MAC de los adaptadores
+telnet 192.168.1.10 80       # Prueba puerto HTTP
+ssh usuario@192.168.1.10     # Conexión SSH segura
+ftp ftp.ejemplo.com          # Cliente FTP</code></pre>
+                    </div>
+                    <div class="cmd-warning">⚠️ <strong>Advertencia:</strong> Telnet transmite credenciales en texto plano. Usa SSH siempre que sea posible.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 4. COMANDOS DE PROCESOS Y SERVICIOS                            -->
+        <!-- ============================================================ -->
+        <div class="cmd-section">
+            <h3 class="cmd-section-title">⚙️ Procesos y Servicios</h3>
+            <p class="cmd-section-desc">Administra procesos en ejecución y servicios del sistema.</p>
+            <div class="cmd-grid">
+                <!-- tasklist -->
+                <div class="cmd-card" data-level="intermediate">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">📋</span>
+                        <code class="cmd-name">tasklist</code>
+                        <span class="cmd-badge intermediate">Intermedio</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>tasklist [opciones]</code></p>
+                    <p>Lista todos los procesos en ejecución.</p>
+                    <div class="cmd-examples">
+                        <pre><code>tasklist
+tasklist /fi "memusage gt 100000"   # Procesos con alta memoria
+tasklist /svc                        # Muestra servicios asociados
+tasklist /v                          # Vista detallada</code></pre>
+                    </div>
+                </div>
+
+                <!-- taskkill -->
+                <div class="cmd-card" data-level="intermediate">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🛑</span>
+                        <code class="cmd-name">taskkill</code>
+                        <span class="cmd-badge intermediate">Intermedio</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>taskkill [/pid PID] [/im IMAGENAME] [/f]</code></p>
+                    <p>Finaliza procesos por PID o nombre.</p>
+                    <div class="cmd-examples">
+                        <pre><code>taskkill /pid 1234 /f
+taskkill /im notepad.exe /f
+taskkill /fi "memusage gt 500000"</code></pre>
+                    </div>
+                    <div class="cmd-warning">⚠️ <strong>Advertencia:</strong> <code>/f</code> puede causar pérdida de datos si el proceso no guarda cambios.</div>
+                </div>
+
+                <!-- sc -->
+                <div class="cmd-card" data-level="advanced">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🔧</span>
+                        <code class="cmd-name">sc</code>
+                        <span class="cmd-badge advanced">Avanzado</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>sc [comando] [servicio]</code></p>
+                    <p>Administra servicios de Windows.</p>
+                    <div class="cmd-examples">
+                        <pre><code>sc query spooler
+sc stop spooler
+sc start spooler
+sc config spooler start= disabled
+sc create "MiServicio" binPath= "C:\app.exe" start= auto</code></pre>
+                    </div>
+                </div>
+
+                <!-- net start/stop -->
+                <div class="cmd-card" data-level="intermediate">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">▶️</span>
+                        <code class="cmd-name">net start / net stop</code>
+                        <span class="cmd-badge intermediate">Intermedio</span>
+                    </div>
+                    <p>Inicia o detiene un servicio (alternativa más simple a sc).</p>
+                    <div class="cmd-examples">
+                        <pre><code>net start spooler
+net stop spooler</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 5. COMANDOS DE USUARIOS Y PERMISOS                             -->
+        <!-- ============================================================ -->
+        <div class="cmd-section">
+            <h3 class="cmd-section-title">👥 Usuarios y Permisos</h3>
+            <p class="cmd-section-desc">Gestiona usuarios locales, grupos y permisos de archivos.</p>
+            <div class="cmd-grid">
+                <!-- net user -->
+                <div class="cmd-card" data-level="intermediate">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">👤</span>
+                        <code class="cmd-name">net user</code>
+                        <span class="cmd-badge intermediate">Intermedio</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>net user [usuario] [contraseña] [opciones]</code></p>
+                    <p>Administra usuarios locales.</p>
+                    <div class="cmd-examples">
+                        <pre><code>net user                # Lista usuarios locales
+net user admin *        # Cambia contraseña de admin
+net user jperez /add    # Crea usuario jperez
+net user jperez /delete # Elimina usuario
+net user jperez /active:no  # Desactiva usuario</code></pre>
+                    </div>
+                </div>
+
+                <!-- net localgroup -->
+                <div class="cmd-card" data-level="intermediate">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">👥</span>
+                        <code class="cmd-name">net localgroup</code>
+                        <span class="cmd-badge intermediate">Intermedio</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>net localgroup [grupo] [usuario] [opciones]</code></p>
+                    <p>Administra grupos locales y su membresía.</p>
+                    <div class="cmd-examples">
+                        <pre><code>net localgroup
+net localgroup Administradores /add jperez
+net localgroup Administradores /delete jperez</code></pre>
+                    </div>
+                </div>
+
+                <!-- icacls / takeown / cipher / runas -->
+                <div class="cmd-card" data-level="advanced">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🔐</span>
+                        <code class="cmd-name">icacls / takeown / cipher / runas</code>
+                        <span class="cmd-badge advanced">Avanzado</span>
+                    </div>
+                    <div class="cmd-examples">
+                        <h4>Ejemplos:</h4>
+                        <pre><code>icacls C:\carpeta /grant Administradores:F
+takeown /f C:\Sistema /r
+cipher /e C:\datos\*            # Cifra archivos
+runas /user:Administrador "cmd.exe"</code></pre>
+                    </div>
+                    <div class="cmd-warning">⚠️ <strong>Advertencia:</strong> Cambiar permisos de archivos del sistema puede causar problemas. Ten cuidado.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 6. COMANDOS DE DISCOS Y SISTEMA DE ARCHIVOS                    -->
+        <!-- ============================================================ -->
+        <div class="cmd-section">
+            <h3 class="cmd-section-title">💾 Discos y Sistema de Archivos</h3>
+            <p class="cmd-section-desc">Herramientas para administrar discos, particiones y sistema de archivos.</p>
+            <div class="cmd-grid">
+                <!-- chkdsk -->
+                <div class="cmd-card" data-level="intermediate">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🔧</span>
+                        <code class="cmd-name">chkdsk</code>
+                        <span class="cmd-badge intermediate">Intermedio</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>chkdsk [unidad:] [/f] [/r] [/x]</code></p>
+                    <p>Verifica y repara errores en el disco.</p>
+                    <div class="cmd-examples">
+                        <pre><code>chkdsk C: /f   # Repara errores (necesita reinicio si el disco está en uso)
+chkdsk D: /r   # Busca sectores defectuosos
+chkdsk /x      # Desmonta el volumen antes de escanear</code></pre>
+                    </div>
+                </div>
+
+                <!-- diskpart -->
+                <div class="cmd-card" data-level="advanced">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">💿</span>
+                        <code class="cmd-name">diskpart</code>
+                        <span class="cmd-badge advanced">Avanzado</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>diskpart</code> (interactivo)</p>
+                    <p>Herramienta de particionado de discos.</p>
+                    <div class="cmd-examples">
+                        <pre><code>diskpart
+list disk
+select disk 0
+list volume
+create partition primary size=50000
+assign letter=E:
+format fs=ntfs quick</code></pre>
+                    </div>
+                    <div class="cmd-warning">⚠️ <strong>Advertencia:</strong> <code>diskpart</code> puede eliminar particiones. Úsalo con extremo cuidado.</div>
+                </div>
+
+                <!-- format / convert / label / vol / fsutil -->
+                <div class="cmd-card" data-level="intermediate">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🗄️</span>
+                        <code class="cmd-name">format / convert / label / vol / fsutil</code>
+                        <span class="cmd-badge intermediate">Intermedio</span>
+                    </div>
+                    <div class="cmd-examples">
+                        <pre><code>format D: /fs:ntfs /q    # Formatea D: en NTFS rápidamente
+convert E: /fs:ntfs      # Convierte FAT32 a NTFS
+label F: BACKUP          # Asigna etiqueta a la unidad F:
+vol C:                   # Muestra la etiqueta del volumen
+fsutil volume diskfree C:  # Espacio libre en disco</code></pre>
+                    </div>
+                </div>
+
+                <!-- vssadmin -->
+                <div class="cmd-card" data-level="advanced">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">📸</span>
+                        <code class="cmd-name">vssadmin</code>
+                        <span class="cmd-badge advanced">Avanzado</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>vssadmin [comando]</code></p>
+                    <p>Administra el Servicio de Copias de Sombra de Volumen.</p>
+                    <div class="cmd-examples">
+                        <pre><code>vssadmin list shadows
+vssadmin list volumes
+vssadmin create shadow /for=C:\</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 7. COMANDOS DE DIAGNÓSTICO Y RENDIMIENTO                       -->
+        <!-- ============================================================ -->
+        <div class="cmd-section">
+            <h3 class="cmd-section-title">📊 Diagnóstico y Rendimiento</h3>
+            <p class="cmd-section-desc">Herramientas para obtener información detallada del sistema y diagnosticar problemas.</p>
+            <div class="cmd-grid">
+                <!-- systeminfo & driverquery -->
+                <div class="cmd-card" data-level="intermediate">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">📋</span>
+                        <code class="cmd-name">systeminfo / driverquery</code>
+                        <span class="cmd-badge intermediate">Intermedio</span>
+                    </div>
+                    <div class="cmd-examples">
+                        <pre><code>systeminfo
+systeminfo | findstr /i "memoria"
+driverquery
+driverquery /v</code></pre>
+                    </div>
+                </div>
+
+                <!-- wmic -->
+                <div class="cmd-card" data-level="advanced">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🛠️</span>
+                        <code class="cmd-name">wmic</code>
+                        <span class="cmd-badge advanced">Avanzado</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>wmic [clase] [comando]</code></p>
+                    <p>Interfaz para WMI (Windows Management Instrumentation).</p>
+                    <div class="cmd-examples">
+                        <pre><code>wmic bios get serialnumber
+wmic cpu get name, maxclockspeed
+wmic logicaldisk where drivetype=3 get deviceid, freespace
+wmic os get lastbootuptime</code></pre>
+                    </div>
+                    <div class="cmd-tip">💡 <strong>Tip:</strong> <code>wmic</code> es muy potente para automatizar tareas de administración.</div>
+                </div>
+
+                <!-- perfmon & resmon & msconfig -->
+                <div class="cmd-card" data-level="intermediate">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">📈</span>
+                        <code class="cmd-name">perfmon / resmon / msconfig</code>
+                        <span class="cmd-badge intermediate">Intermedio</span>
+                    </div>
+                    <div class="cmd-examples">
+                        <pre><code>perfmon /rel      # Informe de confiabilidad
+perfmon /res      # Administrador de recursos
+resmon            # Monitor de recursos (abre GUI)
+msconfig          # Configuración del sistema</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 8. COMANDOS DE MANTENIMIENTO Y RECUPERACIÓN                    -->
+        <!-- ============================================================ -->
+        <div class="cmd-section">
+            <h3 class="cmd-section-title">🛠️ Mantenimiento y Recuperación</h3>
+            <p class="cmd-section-desc">Herramientas para reparar el sistema, restaurar archivos y solucionar problemas de arranque.</p>
+            <div class="cmd-grid">
+                <!-- sfc -->
+                <div class="cmd-card" data-level="intermediate">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🔨</span>
+                        <code class="cmd-name">sfc</code>
+                        <span class="cmd-badge intermediate">Intermedio</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>sfc /scannow</code></p>
+                    <p>Escanea y repara archivos del sistema dañados.</p>
+                    <div class="cmd-examples">
+                        <pre><code>sfc /scannow
+sfc /scannow /offbootdir=C:\ /offwindir=C:\Windows</code></pre>
+                    </div>
+                    <div class="cmd-tip">💡 <strong>Tip:</strong> Si <code>sfc</code> no puede reparar todos los archivos, ejecuta <code>dism</code> primero.</div>
+                </div>
+
+                <!-- dism -->
+                <div class="cmd-card" data-level="advanced">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🔧</span>
+                        <code class="cmd-name">dism</code>
+                        <span class="cmd-badge advanced">Avanzado</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>dism /Online /Cleanup-Image /RestoreHealth</code></p>
+                    <p>Repara la imagen del sistema (Component Store).</p>
+                    <div class="cmd-examples">
+                        <pre><code>dism /Online /Cleanup-Image /RestoreHealth
+dism /Online /Cleanup-Image /CheckHealth
+dism /Online /Cleanup-Image /ScanHealth</code></pre>
+                    </div>
+                    <div class="cmd-tip">💡 <strong>Buenas prácticas:</strong> Ejecuta <code>dism</code> antes de <code>sfc</code> si hay problemas de integridad.</div>
+                </div>
+
+                <!-- bootrec & bcdedit -->
+                <div class="cmd-card" data-level="advanced">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🚀</span>
+                        <code class="cmd-name">bootrec / bcdedit</code>
+                        <span class="cmd-badge advanced">Avanzado</span>
+                    </div>
+                    <div class="cmd-examples">
+                        <pre><code>bootrec /fixmbr
+bootrec /fixboot
+bootrec /rebuildbcd
+bcdedit /enum
+bcdedit /set {default} safeboot minimal   # Activa modo seguro</code></pre>
+                    </div>
+                    <div class="cmd-warning">⚠️ <strong>Advertencia:</strong> Úsalo solo si tienes problemas de arranque.</div>
+                </div>
+
+                <!-- reg & regedit -->
+                <div class="cmd-card" data-level="advanced">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">📝</span>
+                        <code class="cmd-name">reg / regedit</code>
+                        <span class="cmd-badge advanced">Avanzado</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>reg [operación] [ruta] [opciones]</code></p>
+                    <p>Manipula el registro de Windows.</p>
+                    <div class="cmd-examples">
+                        <pre><code>reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion
+reg add HKCU\Software\MyApp /v Version /t REG_DWORD /d 1 /f
+reg delete HKCU\Software\MyApp /f
+regedit                         # Abre el Editor del Registro (GUI)</code></pre>
+                    </div>
+                    <div class="cmd-warning">⚠️ <strong>Advertencia:</strong> Editar el registro puede causar inestabilidad. Haz una copia de seguridad antes de hacer cambios.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 9. COMANDOS DE SCRIPTING Y AUTOMATIZACIÓN                      -->
+        <!-- ============================================================ -->
+        <div class="cmd-section">
+            <h3 class="cmd-section-title">🤖 Scripting y Automatización</h3>
+            <p class="cmd-section-desc">Herramientas para crear scripts y automatizar tareas con CMD.</p>
+            <div class="cmd-grid">
+                <!-- for -->
+                <div class="cmd-card" data-level="advanced">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🔄</span>
+                        <code class="cmd-name">for</code>
+                        <span class="cmd-badge advanced">Avanzado</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>for %variable in (conjunto) do comando</code></p>
+                    <p>Bucle para procesar archivos o comandos.</p>
+                    <div class="cmd-examples">
+                        <pre><code>for %i in (*.txt) do echo %i
+for /L %i in (1,1,10) do echo %i
+for /F "delims=" %i in (archivo.txt) do echo %i</code></pre>
+                    </div>
+                    <div class="cmd-note">📌 <strong>Nota:</strong> En scripts .bat, usa <code>%%i</code> en lugar de <code>%i</code>.</div>
+                </div>
+
+                <!-- if / set / call / shift / goto -->
+                <div class="cmd-card" data-level="advanced">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">📋</span>
+                        <code class="cmd-name">if / set / call / shift / goto</code>
+                        <span class="cmd-badge advanced">Avanzado</span>
+                    </div>
+                    <div class="cmd-examples">
+                        <pre><code>if exist file.txt (echo Existe) else (echo No existe)
+set MYVAR=Hola
+call script2.bat
+shift                  # Desplaza argumentos
+goto fin
+:fin
+echo Fin del script</code></pre>
+                    </div>
+                </div>
+
+                <!-- schtasks -->
+                <div class="cmd-card" data-level="advanced">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">⏰</span>
+                        <code class="cmd-name">schtasks</code>
+                        <span class="cmd-badge advanced">Avanzado</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>schtasks [comandos]</code></p>
+                    <p>Administra tareas programadas.</p>
+                    <div class="cmd-examples">
+                        <pre><code>schtasks /create /tn "Backup" /tr "C:\backup.bat" /sc daily /st 02:00
+schtasks /query /fo list /v
+schtasks /delete /tn "Backup" /f</code></pre>
+                    </div>
+                </div>
+
+                <!-- powershell & cscript -->
+                <div class="cmd-card" data-level="advanced">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">💻</span>
+                        <code class="cmd-name">powershell / cscript</code>
+                        <span class="cmd-badge advanced">Avanzado</span>
+                    </div>
+                    <div class="cmd-examples">
+                        <pre><code>powershell -Command "Get-Process"
+powershell -File script.ps1
+cscript script.vbs</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 10. COMANDOS ADICIONALES                                       -->
+        <!-- ============================================================ -->
+        <div class="cmd-section">
+            <h3 class="cmd-section-title">➕ Comandos Adicionales</h3>
+            <p class="cmd-section-desc">Otros comandos útiles para administración y control del sistema.</p>
+            <div class="cmd-grid">
+                <!-- shutdown -->
+                <div class="cmd-card" data-level="intermediate">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">⏻</span>
+                        <code class="cmd-name">shutdown</code>
+                        <span class="cmd-badge intermediate">Intermedio</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>shutdown [/s] [/r] [/l] [/t xx] [/a]</code></p>
+                    <p>Apaga, reinicia, cierra sesión o cancela un apagado.</p>
+                    <div class="cmd-examples">
+                        <pre><code>shutdown /s /t 60   # Apaga en 60 segundos
+shutdown /r /t 0    # Reinicia inmediatamente
+shutdown /a         # Cancela un apagado
+shutdown /l         # Cierra sesión</code></pre>
+                    </div>
+                </div>
+
+                <!-- net commands (net accounts, net config, net group, net view, net use, net time) -->
+                <div class="cmd-card" data-level="intermediate">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🌐</span>
+                        <code class="cmd-name">net (accounts, config, group, view, use, time)</code>
+                        <span class="cmd-badge intermediate">Intermedio</span>
+                    </div>
+                    <div class="cmd-examples">
+                        <pre><code>net accounts                    # Políticas de cuenta
+net config workstation          # Configuración del equipo
+net view                        # Equipos en el dominio
+net use Z: \\servidor\carpeta   # Conecta unidad de red
+net time \\servidor             # Hora del servidor</code></pre>
+                    </div>
+                </div>
+
+                <!-- start -->
+                <div class="cmd-card" data-level="basic">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">🚀</span>
+                        <code class="cmd-name">start</code>
+                        <span class="cmd-badge basic">Básico</span>
+                    </div>
+                    <p><strong>Sintaxis:</strong> <code>start [opciones] [programa]</code></p>
+                    <p>Abre una nueva ventana o ejecuta un programa/archivo.</p>
+                    <div class="cmd-examples">
+                        <pre><code>start notepad.exe
+start /min notepad.exe          # Minimizado
+start /wait setup.exe           # Espera a que termine
+start www.google.com            # Abre el navegador</code></pre>
+                    </div>
+                </div>
+
+                <!-- gpupdate & gpresult -->
+                <div class="cmd-card" data-level="advanced">
+                    <div class="cmd-card-header">
+                        <span class="cmd-icon">📋</span>
+                        <code class="cmd-name">gpupdate / gpresult</code>
+                        <span class="cmd-badge advanced">Avanzado</span>
+                    </div>
+                    <div class="cmd-examples">
+                        <pre><code>gpupdate /force   # Actualiza políticas de grupo inmediatamente
+gpresult /r       # Muestra políticas aplicadas
+gpresult /h report.html   # Genera informe HTML</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 11. GUÍA DE RESOLUCIÓN DE PROBLEMAS (TROUBLESHOOTING)          -->
+        <!-- ============================================================ -->
+        <div class="cmd-section">
+            <h3 class="cmd-section-title">🔧 Guía de Resolución de Problemas</h3>
+            <p class="cmd-section-desc">Escenarios comunes y cómo solucionarlos con CMD.</p>
+            <div class="troubleshoot-grid">
+                <div class="trouble-card">
+                    <h4>🌐 Sin conexión a Internet</h4>
+                    <ol>
+                        <li><code>ipconfig /all</code> → Verifica IP, máscara y puerta de enlace.</li>
+                        <li><code>ping 8.8.8.8</code> → Si falla, problema de cable/router. Si funciona, problema DNS.</li>
+                        <li><code>nslookup google.com</code> → Si falla, cambia DNS: <code>netsh interface ip set dns "Ethernet" static 8.8.8.8</code>.</li>
+                        <li><code>ipconfig /flushdns</code> → Limpia caché DNS.</li>
+                        <li><code>netsh int ip reset</code> → Reinicia la pila TCP/IP.</li>
+                    </ol>
+                </div>
+                <div class="trouble-card">
+                    <h4>🔒 Puerto bloqueado</h4>
+                    <ol>
+                        <li><code>netstat -an | findstr :80</code> → Verifica si el puerto está en escucha.</li>
+                        <li><code>telnet 192.168.1.10 80</code> → Prueba conexión desde otro equipo.</li>
+                        <li><code>netsh advfirewall firewall add rule name="HTTP-In" dir=in action=allow protocol=TCP localport=80</code> → Crea regla de firewall.</li>
+                    </ol>
+                </div>
+                <div class="trouble-card">
+                    <h4>🐌 Equipo lento</h4>
+                    <ol>
+                        <li><code>tasklist /fi "memusage gt 100000"</code> → Identifica procesos con alta memoria.</li>
+                        <li><code>taskkill /im chrome.exe /f</code> → Finaliza procesos problemáticos.</li>
+                        <li><code>wmic logicaldisk where drivetype=3 get deviceid, freespace, size</code> → Verifica espacio en disco.</li>
+                        <li><code>chkdsk C: /f</code> → Programa reparación de disco.</li>
+                    </ol>
+                </div>
+                <div class="trouble-card">
+                    <h4>🔑 Olvidé contraseña de usuario local</h4>
+                    <ol>
+                        <li><code>net user</code> → Lista usuarios locales.</li>
+                        <li><code>net user usuario *</code> → Cambia contraseña (necesita Admin).</li>
+                        <li><code>net user usuario /logonpasswordchg:yes</code> → Forzar cambio en próximo inicio.</li>
+                    </ol>
+                </div>
+                <div class="trouble-card">
+                    <h4>📁 Error de acceso a carpeta compartida</h4>
+                    <ol>
+                        <li><code>net share</code> → Verifica si el recurso está compartido.</li>
+                        <li><code>icacls C:\carpeta</code> → Revisa permisos NTFS.</li>
+                        <li><code>net stop server /y</code> → Reinicia servicio de red.</li>
+                        <li><code>ping nombre-pc</code> → Verifica resolución de nombres.</li>
+                    </ol>
+                </div>
+                <div class="trouble-card">
+                    <h4>❌ "Acceso denegado" al ejecutar comando</h4>
+                    <ol>
+                        <li>Ejecuta CMD como Administrador.</li>
+                        <li><code>takeown /f C:\ruta\archivo</code> → Toma propiedad.</li>
+                        <li><code>icacls C:\ruta\archivo /grant Administradores:F</code> → Concede permisos.</li>
+                    </ol>
+                </div>
+                <div class="trouble-card">
+                    <h4>🕵️ Conexiones salientes inusuales</h4>
+                    <ol>
+                        <li><code>netstat -ano | findstr ESTABLISHED</code> → Lista conexiones establecidas.</li>
+                        <li><code>tasklist | findstr [PID]</code> → Identifica proceso.</li>
+                        <li><code>taskkill /pid [PID] /f</code> → Finaliza proceso sospechoso.</li>
+                    </ol>
+                </div>
+                <div class="trouble-card">
+                    <h4>🖥️ Windows no inicia</h4>
+                    <ol>
+                        <li>Arrancar en modo reparación y abrir CMD.</li>
+                        <li><code>sfc /scannow /offbootdir=C:\ /offwindir=C:\Windows</code></li>
+                        <li><code>dism /Image:C:\ /Cleanup-Image /RestoreHealth</code></li>
+                        <li><code>bootrec /fixmbr /fixboot /rebuildbcd</code></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 12. RECURSOS Y BUENAS PRÁCTICAS                               -->
+        <!-- ============================================================ -->
+        <div class="cmd-footer">
+            <div class="cmd-resources">
+                <h3>📚 Recursos Adicionales</h3>
+                <ul>
+                    <li><strong>Comando /?</strong> → Ayuda integrada para cualquier comando.</li>
+                    <li><strong>Microsoft Docs</strong> → Documentación oficial de comandos de Windows.</li>
+                    <li><strong>SS64.com</strong> → Referencia completa de comandos CMD.</li>
+                    <li><strong>Scripting en CMD</strong> → Aprende a crear archivos .bat para automatizar tareas.</li>
+                </ul>
+            </div>
+            <div class="cmd-best-practices">
+                <h3>✅ Buenas Prácticas</h3>
+                <ul>
+                    <li><strong>Siempre prueba en un entorno de desarrollo</strong> antes de ejecutar comandos destructivos en producción.</li>
+                    <li><strong>Usa <code>/?</code></strong> para recordar sintaxis y opciones.</li>
+                    <li><strong>Guarda la salida de los comandos</strong> para auditoría y diagnóstico: <code>comando &gt; log.txt</code></li>
+                    <li><strong>Ejecuta como Administrador</strong> solo cuando sea necesario.</li>
+                    <li><strong>Documenta tus scripts</strong> con comentarios (<code>REM</code>).</li>
+                    <li><strong>Usa <code>@echo off</code></strong> al inicio de scripts .bat para limpiar la salida.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

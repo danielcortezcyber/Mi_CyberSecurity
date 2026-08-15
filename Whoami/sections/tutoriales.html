@@ -1,0 +1,27 @@
+<section id="tutoriales" class="section tutoriales">
+    <div class="container">
+        <h2 class="section-title">Tutoriales &amp; Proyectos</h2>
+        <p class="tutoriales-sub">Cada video viene con documentación técnica escrita. Pasa el cursor sobre una tarjeta para ver la preview de comandos.</p>
+
+        <div class="filtros-container">
+            <div id="filters" class="filtro-grupo" role="tablist"></div>
+            <div class="filtro-busqueda">
+                <input type="text" id="tutorialSearch" placeholder="Buscar tutorial, comando o tecnología…" />
+                <button id="searchClear" hidden>✕</button>
+            </div>
+            <div id="levelFilters" class="filtro-grupo filtro-grupo--sec" role="tablist"></div>
+            <div id="catFilters" class="filtro-grupo filtro-grupo--sec" role="tablist"></div>
+        </div>
+
+        <div class="progress-wrap" id="progressWrap" role="progressbar">
+            <span class="progress-label">Progreso <span id="progressDone">0</span> / <span id="progressTotal">13</span></span>
+            <div class="progress-bar"><div id="progressFill" style="width:0%;"></div></div>
+        </div>
+
+        <div id="tutorialesGrid" class="tutoriales-grid"></div>
+        <div id="gridEmpty" class="empty-state" hidden>
+            <p>No hay tutoriales que coincidan con tu búsqueda o filtros.</p>
+            <button class="btn btn-small" id="resetFilters">Limpiar filtros</button>
+        </div>
+    </div>
+</section>

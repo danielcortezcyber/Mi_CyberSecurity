@@ -1,0 +1,309 @@
+<section id="soporte" class="section soporte">
+    <div class="container">
+        <!-- ===== ENCABEZADO ===== -->
+        <h2 class="section-title">🛠️ Laboratorio de Soporte Técnico</h2>
+        <p class="soporte-sub">
+            Diagnóstico interactivo, checklist de mantenimiento y herramientas rápidas para resolver problemas comunes.
+        </p>
+
+        <!-- ============================================================ -->
+        <!-- 1. ASISTENTE DE DIAGNÓSTICO INTERACTIVO                       -->
+        <!-- ============================================================ -->
+        <h3 class="soporte-section-title">🧠 Asistente de Diagnóstico</h3>
+        <p class="soporte-section-desc">Responde las preguntas para identificar la causa del problema.</p>
+
+        <div class="diagnostico-container" id="diagnosticoContainer">
+            <!-- Paso 0: Inicio -->
+            <div class="diagnostico-step active" data-step="0">
+                <div class="diagnostico-icon">🔍</div>
+                <h4>¿Qué problema tienes?</h4>
+                <div class="diagnostico-buttons">
+                    <button class="btn diagnostico-btn" data-next="1">💻 La PC no enciende</button>
+                    <button class="btn diagnostico-btn" data-next="2">🖥️ La PC enciende pero no da video</button>
+                    <button class="btn diagnostico-btn" data-next="3">🌐 Problemas de Internet / Red</button>
+                    <button class="btn diagnostico-btn" data-next="4">🐌 La PC está muy lenta</button>
+                    <button class="btn diagnostico-btn" data-next="5">🔊 No hay sonido</button>
+                </div>
+            </div>
+
+            <!-- Paso 1: PC no enciende -->
+            <div class="diagnostico-step" data-step="1">
+                <div class="diagnostico-icon">💡</div>
+                <h4>¿La PC no enciende?</h4>
+                <p><strong>Paso 1:</strong> ¿Está conectada a la corriente eléctrica?</p>
+                <div class="diagnostico-buttons">
+                    <button class="btn diagnostico-btn" data-next="1a">✅ Sí, está conectada</button>
+                    <button class="btn diagnostico-btn" data-next="1b">❌ No, no está conectada</button>
+                </div>
+            </div>
+            <div class="diagnostico-step" data-step="1a">
+                <div class="diagnostico-icon">🔌</div>
+                <h4>Revisa la fuente de poder</h4>
+                <ul>
+                    <li>✅ Verifica que el interruptor de la fuente (PSU) esté en <strong>ON</strong>.</li>
+                    <li>✅ Prueba con otro cable de alimentación.</li>
+                    <li>✅ Conecta el equipo directamente a la pared (no a un regulador defectuoso).</li>
+                    <li>✅ Si nada funciona, la fuente de poder podría estar dañada.</li>
+                </ul>
+                <button class="btn btn-primary diagnostico-restart">🔄 Reiniciar diagnóstico</button>
+            </div>
+            <div class="diagnostico-step" data-step="1b">
+                <div class="diagnostico-icon">🔌</div>
+                <h4>¡Conéctala!</h4>
+                <p>Asegúrate de que el cable de alimentación esté bien conectado tanto en la PC como en el tomacorriente.</p>
+                <button class="btn btn-primary diagnostico-restart">🔄 Reiniciar diagnóstico</button>
+            </div>
+
+            <!-- Paso 2: No da video -->
+            <div class="diagnostico-step" data-step="2">
+                <div class="diagnostico-icon">🖥️</div>
+                <h4>La PC enciende pero no da video</h4>
+                <p><strong>Paso 1:</strong> ¿El monitor está encendido y en la entrada correcta?</p>
+                <div class="diagnostico-buttons">
+                    <button class="btn diagnostico-btn" data-next="2a">✅ Sí, todo está bien</button>
+                    <button class="btn diagnostico-btn" data-next="2b">❌ No, el monitor está apagado o en otra entrada</button>
+                </div>
+            </div>
+            <div class="diagnostico-step" data-step="2a">
+                <div class="diagnostico-icon">🔧</div>
+                <h4>Revisa la tarjeta gráfica y la RAM</h4>
+                <ul>
+                    <li>✅ Apaga la PC, desconéctala y vuelve a conectar la tarjeta gráfica.</li>
+                    <li>✅ Limpia los pines de la RAM con un borrador y vuelve a colocarla.</li>
+                    <li>✅ Prueba con solo un módulo de RAM a la vez.</li>
+                    <li>✅ Si usas gráfica dedicada, prueba con la integrada (si tu CPU la tiene).</li>
+                </ul>
+                <button class="btn btn-primary diagnostico-restart">🔄 Reiniciar diagnóstico</button>
+            </div>
+            <div class="diagnostico-step" data-step="2b">
+                <div class="diagnostico-icon">🖥️</div>
+                <h4>Revisa el monitor</h4>
+                <p>Enciende el monitor, selecciona la entrada correcta (HDMI, VGA, DisplayPort) y verifica que el cable esté bien conectado.</p>
+                <button class="btn btn-primary diagnostico-restart">🔄 Reiniciar diagnóstico</button>
+            </div>
+
+            <!-- Paso 3: Problemas de Internet -->
+            <div class="diagnostico-step" data-step="3">
+                <div class="diagnostico-icon">🌐</div>
+                <h4>Problemas de Internet</h4>
+                <p><strong>Paso 1:</strong> ¿El router/modem tiene luz de Internet encendida?</p>
+                <div class="diagnostico-buttons">
+                    <button class="btn diagnostico-btn" data-next="3a">✅ Sí, está encendida</button>
+                    <button class="btn diagnostico-btn" data-next="3b">❌ No, está apagada o parpadea</button>
+                </div>
+            </div>
+            <div class="diagnostico-step" data-step="3a">
+                <div class="diagnostico-icon">📶</div>
+                <h4>Reinicia la red</h4>
+                <ul>
+                    <li>✅ Reinicia el router y el modem (desconecta 30 segundos y vuelve a conectar).</li>
+                    <li>✅ En tu PC: <code>ipconfig /release</code> y luego <code>ipconfig /renew</code> en CMD.</li>
+                    <li>✅ Limpia la caché DNS: <code>ipconfig /flushdns</code>.</li>
+                    <li>✅ Prueba con otro dispositivo (celular) para descartar que sea problema de la PC.</li>
+                </ul>
+                <button class="btn btn-primary diagnostico-restart">🔄 Reiniciar diagnóstico</button>
+            </div>
+            <div class="diagnostico-step" data-step="3b">
+                <div class="diagnostico-icon">📡</div>
+                <h4>Problema con el proveedor</h4>
+                <p>Si la luz de Internet está apagada, el problema es del proveedor de servicios. Contacta a tu ISP.</p>
+                <button class="btn btn-primary diagnostico-restart">🔄 Reiniciar diagnóstico</button>
+            </div>
+
+            <!-- Paso 4: PC lenta -->
+            <div class="diagnostico-step" data-step="4">
+                <div class="diagnostico-icon">🐌</div>
+                <h4>La PC está muy lenta</h4>
+                <p><strong>Paso 1:</strong> ¿Tienes muchos programas abiertos o se inicia lentamente?</p>
+                <div class="diagnostico-buttons">
+                    <button class="btn diagnostico-btn" data-next="4a">📂 Muchos programas abiertos</button>
+                    <button class="btn diagnostico-btn" data-next="4b">💾 Disco duro casi lleno</button>
+                    <button class="btn diagnostico-btn" data-next="4c">🔧 No sé, solo va lenta</button>
+                </div>
+            </div>
+            <div class="diagnostico-step" data-step="4a">
+                <div class="diagnostico-icon">📂</div>
+                <h4>Cierra programas innecesarios</h4>
+                <p>Abre el Administrador de Tareas (Ctrl + Shift + Esc) y cierra los programas que no estés usando. Revisa el inicio (pestaña Inicio) y deshabilita los que no necesites.</p>
+                <button class="btn btn-primary diagnostico-restart">🔄 Reiniciar diagnóstico</button>
+            </div>
+            <div class="diagnostico-step" data-step="4b">
+                <div class="diagnostico-icon">💾</div>
+                <h4>Libera espacio en disco</h4>
+                <ul>
+                    <li>✅ Usa el Liberador de espacio en disco (cleanmgr).</li>
+                    <li>✅ Elimina archivos temporales (<code>%temp%</code>).</li>
+                    <li>✅ Desinstala programas que ya no uses.</li>
+                    <li>✅ Si es posible, migra a un SSD para mejorar drásticamente el rendimiento.</li>
+                </ul>
+                <button class="btn btn-primary diagnostico-restart">🔄 Reiniciar diagnóstico</button>
+            </div>
+            <div class="diagnostico-step" data-step="4c">
+                <div class="diagnostico-icon">🔧</div>
+                <h4>Diagnóstico general</h4>
+                <ul>
+                    <li>✅ Escanea en busca de malware (Windows Defender o Malwarebytes).</li>
+                    <li>✅ Revisa el uso de CPU y RAM en el Administrador de Tareas.</li>
+                    <li>✅ Actualiza los drivers (especialmente el de la tarjeta gráfica).</li>
+                    <li>✅ Considera aumentar la RAM si tienes menos de 8GB.</li>
+                </ul>
+                <button class="btn btn-primary diagnostico-restart">🔄 Reiniciar diagnóstico</button>
+            </div>
+
+            <!-- Paso 5: No hay sonido -->
+            <div class="diagnostico-step" data-step="5">
+                <div class="diagnostico-icon">🔊</div>
+                <h4>Problemas de sonido</h4>
+                <p><strong>Paso 1:</strong> ¿Los altavoces/auriculares están conectados correctamente?</p>
+                <div class="diagnostico-buttons">
+                    <button class="btn diagnostico-btn" data-next="5a">✅ Sí, están conectados</button>
+                    <button class="btn diagnostico-btn" data-next="5b">❌ No, están desconectados</button>
+                </div>
+            </div>
+            <div class="diagnostico-step" data-step="5a">
+                <div class="diagnostico-icon">🔊</div>
+                <h4>Verifica el audio</h4>
+                <ul>
+                    <li>✅ Revisa que el volumen no esté en silencio o al mínimo.</li>
+                    <li>✅ Actualiza o reinstala el driver de audio (Realtek, etc.).</li>
+                    <li>✅ Prueba en el Panel de Control → Sonido → Configurar altavoces.</li>
+                </ul>
+                <button class="btn btn-primary diagnostico-restart">🔄 Reiniciar diagnóstico</button>
+            </div>
+            <div class="diagnostico-step" data-step="5b">
+                <div class="diagnostico-icon">🔌</div>
+                <h4>Conecta los dispositivos</h4>
+                <p>Asegúrate de que los altavoces o auriculares estén conectados al puerto correcto (verde para audio, rosa para micrófono).</p>
+                <button class="btn btn-primary diagnostico-restart">🔄 Reiniciar diagnóstico</button>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 2. CHECKLIST DE MANTENIMIENTO PREVENTIVO                     -->
+        <!-- ============================================================ -->
+        <h3 class="soporte-section-title">✅ Checklist de Mantenimiento Preventivo</h3>
+        <p class="soporte-section-desc">Marca los items que ya has realizado para mantener tu PC en óptimas condiciones.</p>
+
+        <div class="checklist-container">
+            <div class="checklist-item">
+                <input type="checkbox" id="check1" class="checklist-checkbox" />
+                <label for="check1">🧹 Limpieza de ventiladores y disipadores de polvo</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check2" class="checklist-checkbox" />
+                <label for="check2">💾 Desfragmentación de disco duro (HDD) / Optimización de SSD</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check3" class="checklist-checkbox" />
+                <label for="check3">🔄 Actualización de drivers y sistema operativo</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check4" class="checklist-checkbox" />
+                <label for="check4">🔒 Escaneo completo de malware y virus</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check5" class="checklist-checkbox" />
+                <label for="check5">📂 Liberación de espacio en disco (archivos temporales, caché)</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check6" class="checklist-checkbox" />
+                <label for="check6">🔌 Revisión de conexiones internas (cables, RAM, tarjetas)</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check7" class="checklist-checkbox" />
+                <label for="check7">💾 Backup de archivos importantes</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check8" class="checklist-checkbox" />
+                <label for="check8">🌐 Verificación de configuración de red y DNS</label>
+            </div>
+            <div class="checklist-progress">
+                <span>Progreso: <span id="checklistProgress">0%</span></span>
+                <div class="progress-bar"><div id="checklistFill" style="width:0%;"></div></div>
+                <button id="resetChecklist" class="btn btn-small">Reiniciar checklist</button>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 3. CÓDIGOS POST Y PITIDOS                                     -->
+        <!-- ============================================================ -->
+        <h3 class="soporte-section-title">🔔 Códigos de Pitido (POST)</h3>
+        <p class="soporte-section-desc">Identifica fallos de hardware según los pitidos que emite la placa madre al encender.</p>
+
+        <div class="post-codes">
+            <div class="post-card">
+                <h4>🔴 1 pitido corto</h4>
+                <p><strong>Significado:</strong> POST exitoso, todo funciona correctamente.</p>
+                <span class="post-status ok">✅ OK</span>
+            </div>
+            <div class="post-card">
+                <h4>🔴 2 pitidos cortos</h4>
+                <p><strong>Significado:</strong> Error de paridad en la memoria RAM.</p>
+                <span class="post-status error">⚠️ Error</span>
+            </div>
+            <div class="post-card">
+                <h4>🔴 1 pitido largo + 1 corto</h4>
+                <p><strong>Significado:</strong> Problema con la tarjeta gráfica o monitor.</p>
+                <span class="post-status error">⚠️ Error</span>
+            </div>
+            <div class="post-card">
+                <h4>🔴 1 pitido largo + 2 cortos</h4>
+                <p><strong>Significado:</strong> Error en la tarjeta gráfica (GPU) o en la memoria de video.</p>
+                <span class="post-status error">⚠️ Error</span>
+            </div>
+            <div class="post-card">
+                <h4>🔴 1 pitido largo + 3 cortos</h4>
+                <p><strong>Significado:</strong> Error en el teclado o controlador de teclado.</p>
+                <span class="post-status error">⚠️ Error</span>
+            </div>
+            <div class="post-card">
+                <h4>🔴 Pitidos continuos (largos)</h4>
+                <p><strong>Significado:</strong> Problema con la fuente de poder o la placa madre.</p>
+                <span class="post-status error">⚠️ Error crítico</span>
+            </div>
+            <div class="post-card">
+                <h4>🔴 Sin pitidos</h4>
+                <p><strong>Significado:</strong> La placa madre no recibe energía o está dañada.</p>
+                <span class="post-status error">⚠️ Error crítico</span>
+            </div>
+            <div class="post-card">
+                <h4>🔴 3 pitidos cortos</h4>
+                <p><strong>Significado:</strong> Error en la memoria RAM (no detectada o falla).</p>
+                <span class="post-status error">⚠️ Error</span>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 4. RECURSOS DE SOPORTE                                        -->
+        <!-- ============================================================ -->
+        <h3 class="soporte-section-title">🛠️ Recursos y Herramientas</h3>
+        <p class="soporte-section-desc">Herramientas recomendadas para diagnóstico y reparación.</p>
+
+        <div class="recursos-grid">
+            <div class="recurso-card">
+                <div class="recurso-icon">💿</div>
+                <h4>Hiren's BootCD PE</h4>
+                <p>Entorno preinstalado con herramientas de diagnóstico, recuperación de datos y antivirus.</p>
+                <a href="#" class="btn btn-small">Más información</a>
+            </div>
+            <div class="recurso-card">
+                <div class="recurso-icon">🧪</div>
+                <h4>MemTest86</h4>
+                <p>Herramienta de diagnóstico de memoria RAM para detectar fallos en los módulos.</p>
+                <a href="#" class="btn btn-small">Más información</a>
+            </div>
+            <div class="recurso-card">
+                <div class="recurso-icon">💾</div>
+                <h4>CrystalDiskInfo</h4>
+                <p>Monitoriza el estado de salud de discos duros y SSD (SMART).</p>
+                <a href="#" class="btn btn-small">Más información</a>
+            </div>
+            <div class="recurso-card">
+                <div class="recurso-icon">🔒</div>
+                <h4>Malwarebytes</h4>
+                <p>Antivirus especializado en eliminar malware, ransomware y amenazas avanzadas.</p>
+                <a href="#" class="btn btn-small">Más información</a>
+            </div>
+        </div>
+    </div>
+</section>

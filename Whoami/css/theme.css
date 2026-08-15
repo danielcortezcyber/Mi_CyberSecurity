@@ -1,0 +1,200 @@
+/* ============================================================
+   THEME - MODO OSCURO / CLARO (para todo el sitio)
+   ============================================================ */
+
+/* ---------- MODO CLARO (por defecto) ---------- */
+:root {
+    /* Fondos */
+    --bg-primary: #f4f4f9;
+    --bg-secondary: #ffffff;
+    --bg-card: #ffffff;
+    --bg-input: #f8f8fa;
+    
+    /* Textos */
+    --text-primary: #1e1e2a;
+    --text-secondary: #555555;
+    --text-muted: #888888;
+    
+    /* Bordes y sombras */
+    --border-color: #e0e0e0;
+    --shadow-color: rgba(0, 0, 0, 0.06);
+    
+    /* Acentos */
+    --accent: #6c63ff;
+    --accent-hover: #5a52d5;
+    --accent-light: rgba(108, 99, 255, 0.12);
+    
+    /* Colores específicos para el navbar (sobreescriben las variables globales) */
+    --nav-bg: #f0f8f5;
+    --nav-bg-gradient: linear-gradient(135deg, #e8f5f0 0%, #d0ebe0 100%);
+    --nav-border: #b8d5c8;
+    --nav-text: #1a3a2e;
+    --nav-text-hover: #00885a;
+    --nav-accent: #00a86b;
+    --nav-dropdown-bg: #f5faf8;
+    --nav-dropdown-border: #b8d5c8;
+    --nav-shadow: 0 8px 32px rgba(0, 168, 107, 0.15);
+    --nav-bg-scrolled: rgba(240, 248, 245, 0.95);
+    
+    /* Transiciones */
+    --transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ---------- MODO OSCURO ---------- */
+[data-theme="dark"] {
+    /* Fondos */
+    --bg-primary: #0d1117;
+    --bg-secondary: #161b22;
+    --bg-card: #1c2333;
+    --bg-input: #0d1117;
+    
+    /* Textos */
+    --text-primary: #e6edf3;
+    --text-secondary: #8b949e;
+    --text-muted: #6e7681;
+    
+    /* Bordes y sombras */
+    --border-color: #30363d;
+    --shadow-color: rgba(0, 0, 0, 0.4);
+    
+    /* Acentos */
+    --accent: #58a6ff;
+    --accent-hover: #79c0ff;
+    --accent-light: rgba(88, 166, 255, 0.15);
+    
+    /* Colores específicos para el navbar (modo oscuro) */
+    --nav-bg: #081412;
+    --nav-bg-gradient: linear-gradient(135deg, #081412 0%, #0f2a1f 100%);
+    --nav-border: #1a4a3a;
+    --nav-text: #b8e6d0;
+    --nav-text-hover: #66ffaa;
+    --nav-accent: #00ff88;
+    --nav-dropdown-bg: #0f1f1a;
+    --nav-dropdown-border: #1a4a3a;
+    --nav-shadow: 0 8px 32px rgba(0, 255, 136, 0.15);
+    --nav-bg-scrolled: rgba(8, 20, 18, 0.95);
+}
+
+/* ============================================================
+   APLICACIÓN GLOBAL DE VARIABLES
+   ============================================================ */
+
+/* ----- Body ----- */
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding-top: 70px;
+    overflow-x: hidden;
+    min-height: 100vh;
+    transition: var(--transition);
+}
+
+/* ----- Secciones ----- */
+.section {
+    background: transparent; /* Hereda el fondo del body */
+    transition: var(--transition);
+}
+
+/* ----- Tarjetas y contenedores ----- */
+.card, .cmd-card, .ps-category, .pnp-card, .level-card, .ruta-nivel-group, .descarga-card, .gear-item, .cmd-case, .ps-intro-card, .ps-trouble-card, .ps-script-card, .academia-card, .recurso-card, .post-card, .trouble-card {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px var(--shadow-color);
+    transition: var(--transition);
+}
+
+/* ----- Inputs y formularios ----- */
+input, textarea, select {
+    background: var(--bg-input);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+input:focus, textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+/* ----- Enlaces ----- */
+a {
+    color: var(--accent);
+    transition: color 0.3s ease;
+}
+a:hover {
+    color: var(--accent-hover);
+}
+
+/* ----- Títulos ----- */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+    transition: var(--transition);
+}
+
+/* ----- Párrafos y textos ----- */
+p, li, span, .text-muted {
+    color: var(--text-secondary);
+    transition: var(--transition);
+}
+
+/* ----- Líneas divisorias ----- */
+hr, .separator {
+    border-color: var(--border-color);
+    transition: var(--transition);
+}
+
+/* ----- Scrollbar personalizada ----- */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+
+/* ============================================================
+   MEJORAS PARA EL NAVBAR (ya están en navbar.css, pero aseguramos)
+   ============================================================ */
+.navbar {
+    background: var(--nav-bg-gradient);
+    border-bottom-color: var(--nav-border);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+.navbar.scrolled {
+    box-shadow: 0 4px 30px var(--nav-shadow);
+    background: var(--nav-bg-scrolled);
+}
+[data-theme="dark"] .navbar {
+    background: var(--nav-bg-gradient);
+    border-bottom-color: var(--nav-border);
+}
+[data-theme="dark"] .navbar.scrolled {
+    background: var(--nav-bg-scrolled);
+}
+
+/* ============================================================
+   BUSCADOR GLOBAL (corrección de colores)
+   ============================================================ */
+.global-search-input {
+    color: var(--text-primary) !important;
+    background: var(--bg-secondary) !important;
+    border: 1px solid var(--border-color) !important;
+    transition: border-color 0.3s, box-shadow 0.3s !important;
+}
+.global-search-input::placeholder {
+    color: var(--text-muted) !important;
+    opacity: 0.8 !important;
+}
+.global-search-input:focus {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 3px var(--accent-light) !important;
+}

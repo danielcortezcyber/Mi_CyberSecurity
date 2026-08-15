@@ -1,0 +1,972 @@
+/* ============================================================
+   ANIMATIONS.CSS - Librería de animaciones del sitio
+   ============================================================
+
+   ÍNDICE
+   ------
+   1.  Fuente única de verdad (keyframes ya centralizados aquí)
+   2.  Entradas (fade / slide / zoom / flip / rotate / silk / cortina)
+   3.  Salidas (fade / slide / zoom)
+   4.  Llamadas de atención (pulse, shake, wobble, tada, ring, heart burst)
+   5.  Animaciones de ambiente (float, glow, shimmer, latido, aurora)
+   6.  Efectos de texto (máquina de escribir, glow, gradiente, letra a letra)
+   7.  Carga / skeleton / spinners
+   8.  Micro-interacciones (botones, ripple, tarjetas, spotlight, tilt, sheen)
+   9.  Clases utilitarias: duración
+   10. Clases utilitarias: delay / stagger (incluye stagger dinámico)
+   11. Clases utilitarias: easing
+   12. Clases utilitarias: iteración, dirección, fill-mode, pausa
+   13. Ayudas para "reveal on scroll" (IntersectionObserver)
+   14. Accesibilidad (reduced motion, forced-colors, print)
+   15. Interacciones avanzadas (mouse-tracking: magnetismo, tilt 3D, spotlight)
+   16. Notas de uso y convenciones
+
+   REGLAS DE ESTE ARCHIVO (para evitar el bug que ya tuvimos):
+   - Un @keyframes se declara UNA sola vez en todo el proyecto.
+     Si necesitas una variante, dale un nombre nuevo, no reutilices
+     el mismo nombre en otro archivo.
+   - `gradientShift` sigue viviendo en romantic.css (la usan
+     .intro-section y .final-section) — NO se redeclara aquí a
+     propósito, para no repetir el problema de duplicados.
+   - `confettiFall` NO se declara aquí: confetti.js la inyecta en
+     tiempo de ejecución con variables por partícula (--ty, --rot).
+     Una versión estática aquí competiría con esa y le quitaría
+     variedad a las partículas.
+   - Todas las animaciones "infinitas" (float, pulse, glow) deben
+     poder detenerse con prefers-reduced-motion; ver sección 14.
+   - Los efectos nuevos con seguimiento de cursor (magnetismo, tilt,
+     spotlight; ver sección 15) leen variables CSS (--mx, --rx, --x,
+     etc.). Sin JS que las actualice, quedan en su estado neutro:
+     no rompen nada si se aplican sin el JS todavía conectado.
+   ============================================================ */
+
+
+/* ============================================================
+   1. FUENTE ÚNICA DE VERDAD
+   Estos cuatro keyframes eran los que estaban duplicados entre
+   romantic.css y este archivo. Quedan solo aquí. Si tocas sus
+   valores, hazlo únicamente en este bloque.
+   ============================================================ */
+
+@keyframes floatHeart {
+    0%, 100% { transform: translateY(0) scale(1); opacity: 1; }
+    50% { transform: translateY(-25px) scale(1.15); opacity: 0.85; }
+}
+
+@keyframes heartPulse {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.25); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.15); }
+    60% { transform: scale(1); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+
+/* ============================================================
+   2. ENTRADAS — familia fade
+   ============================================================ */
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-40px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* ----- Entradas — familia slide (sin cambiar opacidad) ----- */
+
+@keyframes slideInUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+@keyframes slideInDown {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+/* ----- Entradas — familia zoom ----- */
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes zoomInSoft {
+    from { opacity: 0; transform: scale(0.94); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* ----- Entradas — flip / rotate ----- */
+
+@keyframes flipInX {
+    from { opacity: 0; transform: perspective(600px) rotateX(60deg); }
+    to { opacity: 1; transform: perspective(600px) rotateX(0); }
+}
+
+@keyframes flipInY {
+    from { opacity: 0; transform: perspective(600px) rotateY(60deg); }
+    to { opacity: 1; transform: perspective(600px) rotateY(0); }
+}
+
+@keyframes rotateIn {
+    from { opacity: 0; transform: rotate(-15deg) scale(0.9); }
+    to { opacity: 1; transform: rotate(0) scale(1); }
+}
+
+/* ----- Entradas — con rebote ----- */
+
+@keyframes bounceIn {
+    0% { opacity: 0; transform: scale(0.3); }
+    40% { opacity: 1; transform: scale(1.08); }
+    65% { transform: scale(0.94); }
+    80% { transform: scale(1.03); }
+    100% { transform: scale(1); }
+}
+
+@keyframes bounceInUp {
+    0% { opacity: 0; transform: translateY(60px); }
+    50% { opacity: 1; transform: translateY(-10px); }
+    75% { transform: translateY(4px); }
+    100% { transform: translateY(0); }
+}
+
+/* ----- Entradas — elegantes (blur / cortina) -----
+   Más suaves que un fade normal: pensadas para el hero, una carta
+   o una foto principal, donde un fade brusco se siente barato. */
+
+@keyframes silkReveal {
+    from { opacity: 0; filter: blur(10px); transform: translateY(18px); }
+    to { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
+
+@keyframes curtainReveal {
+    from { clip-path: inset(0 0 0 100%); }
+    to { clip-path: inset(0 0 0 0%); }
+}
+
+
+/* ============================================================
+   3. SALIDAS — para elementos que se ocultan/eliminan con JS
+   Útiles cuando quieres una transición al cerrar un modal, un
+   toast o una tarjeta en vez de que desaparezca de golpe.
+   ============================================================ */
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes fadeOutDown {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(30px); }
+}
+
+@keyframes fadeOutUp {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-30px); }
+}
+
+@keyframes zoomOut {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(0.7); }
+}
+
+@keyframes slideOutDown {
+    from { transform: translateY(0); }
+    to { transform: translateY(100%); }
+}
+
+
+/* ============================================================
+   4. LLAMADAS DE ATENCIÓN
+   Pensadas para un solo disparo (agregar/quitar la clase con JS),
+   no para dejarlas en loop infinito.
+   ============================================================ */
+
+@keyframes pulseOnce {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+@keyframes shake {
+    10%, 90% { transform: translateX(-1px); }
+    20%, 80% { transform: translateX(2px); }
+    30%, 50%, 70% { transform: translateX(-4px); }
+    40%, 60% { transform: translateX(4px); }
+}
+
+@keyframes wobble {
+    0% { transform: translateX(0); }
+    15% { transform: translateX(-15px) rotate(-5deg); }
+    30% { transform: translateX(10px) rotate(3deg); }
+    45% { transform: translateX(-8px) rotate(-3deg); }
+    60% { transform: translateX(5px) rotate(2deg); }
+    75% { transform: translateX(-3px) rotate(-1deg); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes tada {
+    0% { transform: scale(1); }
+    10%, 20% { transform: scale(0.92) rotate(-3deg); }
+    30%, 50%, 70%, 90% { transform: scale(1.08) rotate(3deg); }
+    40%, 60%, 80% { transform: scale(1.08) rotate(-3deg); }
+    100% { transform: scale(1) rotate(0); }
+}
+
+@keyframes jello {
+    0%, 100% { transform: skewX(0) skewY(0); }
+    22% { transform: skewX(-6deg) skewY(-6deg); }
+    33% { transform: skewX(4deg) skewY(4deg); }
+    44% { transform: skewX(-2.5deg) skewY(-2.5deg); }
+    55% { transform: skewX(1.5deg) skewY(1.5deg); }
+    66% { transform: skewX(-0.8deg) skewY(-0.8deg); }
+    77% { transform: skewX(0.4deg) skewY(0.4deg); }
+}
+
+@keyframes headShake {
+    0% { transform: translateX(0); }
+    12.5% { transform: translateX(-6px) rotateY(-9deg); }
+    25% { transform: translateX(5px) rotateY(7deg); }
+    37.5% { transform: translateX(-3px) rotateY(-5deg); }
+    50% { transform: translateX(2px) rotateY(3deg); }
+    62.5% { transform: translateX(-1px) rotateY(-1deg); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    14% { transform: scale(1.3); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.3); }
+    70% { transform: scale(1); }
+}
+
+/* ----- Nuevas: anillo de foco y estallido de corazón -----
+   `ringPulse` se deja pensada para loop (como un "ping" de
+   notificación en un botón). `heartBurstOnce` es de un solo
+   disparo: para un corazón que aparece, crece y se eleva al
+   dar like/click, sin competir con el confetti de confetti.js. */
+
+@keyframes ringPulse {
+    0% { box-shadow: 0 0 0 0 var(--romantic-shadow); }
+    100% { box-shadow: 0 0 0 18px transparent; }
+}
+
+@keyframes heartBurstOnce {
+    0% { transform: scale(0) translateY(0); opacity: 1; }
+    55% { transform: scale(1.4) translateY(-18px); opacity: 1; }
+    100% { transform: scale(0.85) translateY(-46px); opacity: 0; }
+}
+
+
+/* ============================================================
+   5. ANIMACIONES DE AMBIENTE (loop infinito)
+   ============================================================ */
+
+@keyframes floatParticle {
+    0% { transform: translateY(100vh) scale(0.5); opacity: 0.1; }
+    100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+}
+
+@keyframes floatGentle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 20px var(--romantic-shadow); }
+    50% { box-shadow: 0 0 40px var(--romantic-shadow), 0 0 60px var(--romantic-accent-light); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+@keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.03); opacity: 0.9; }
+}
+
+@keyframes rotateSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* `auroraDrift` es un keyframe nuevo y distinto de `gradientShift`
+   (ese sigue solo en romantic.css). Pensado para fondos grandes
+   con un gradiente de 2-3 colores en background-size: 200% 200%. */
+@keyframes auroraDrift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+
+/* ============================================================
+   6. EFECTOS DE TEXTO
+   ============================================================ */
+
+@keyframes typing {
+    from { max-width: 0; }
+    to { max-width: 100%; }
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+@keyframes textGlow {
+    0%, 100% { text-shadow: 0 0 10px var(--romantic-accent); }
+    50% { text-shadow: 0 0 25px var(--romantic-accent), 0 0 50px var(--romantic-accent-light); }
+}
+
+@keyframes textReveal {
+    from { clip-path: inset(0 100% 0 0); }
+    to { clip-path: inset(0 0 0 0); }
+}
+
+/* Texto con gradiente en movimiento (para un título elegante, no
+   confundir con `textGlow`: aquí es el color el que fluye). */
+@keyframes textGradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Para revelar un titular letra por letra. Requiere envolver cada
+   carácter en un <span style="--i:0">, <span style="--i:1">...
+   (ver uso en sección 6 de las clases completas y sección 15). */
+@keyframes letterReveal {
+    from { opacity: 0; transform: translateY(0.6em) rotate(6deg); }
+    to { opacity: 1; transform: translateY(0) rotate(0); }
+}
+
+
+/* ============================================================
+   7. CARGA / SKELETON / SPINNERS
+   ============================================================ */
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes skeletonPulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+.anim-spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--border-color, rgba(0,0,0,0.1));
+    border-top-color: var(--romantic-accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+.anim-skeleton {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(
+        90deg,
+        var(--glass-bg) 0%,
+        var(--romantic-accent-light) 50%,
+        var(--glass-bg) 100%
+    );
+    background-size: 200% 100%;
+    border-radius: 8px;
+    animation: shimmer 1.6s ease-in-out infinite;
+}
+
+
+/* ============================================================
+   8. MICRO-INTERACCIONES
+   Pensadas para botones, tarjetas y links; complementan (no
+   reemplazan) los estilos propios de cada componente.
+   ============================================================ */
+
+/* Botón que se "hunde" levemente al presionar (feedback táctil) */
+.anim-press {
+    transition: transform 0.15s ease;
+}
+.anim-press:active {
+    transform: scale(0.96);
+}
+
+/* Efecto ripple simple con pseudo-elemento; requiere que el
+   contenedor tenga position: relative y overflow: hidden.
+   Actívalo agregando/quitando la clase .is-rippling con JS en el
+   click, o usando :active directamente como aquí. */
+.anim-ripple {
+    position: relative;
+    overflow: hidden;
+}
+.anim-ripple::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, rgba(255,255,255,0.5) 10%, transparent 60%);
+    opacity: 0;
+    transform: scale(0);
+    transition: transform 0.5s ease, opacity 0.6s ease;
+    pointer-events: none;
+}
+.anim-ripple:active::after {
+    transform: scale(2.5);
+    opacity: 1;
+    transition: 0s;
+}
+
+/* Subrayado animado para links de texto */
+.anim-underline {
+    position: relative;
+    text-decoration: none;
+}
+.anim-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+.anim-underline:hover::after,
+.anim-underline:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Elevación suave para tarjetas al pasar el cursor/enfocar */
+.anim-lift {
+    transition: transform var(--ease-fast, 0.3s ease), box-shadow var(--ease-fast, 0.3s ease);
+}
+.anim-lift:hover,
+.anim-lift:focus-visible {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px var(--romantic-shadow);
+}
+
+/* Barrido de brillo tipo "seda" al pasar el cursor sobre una
+   tarjeta o botón de vidrio. Requiere overflow: hidden (ya lo
+   trae la propia clase). */
+.anim-sheen {
+    position: relative;
+    overflow: hidden;
+}
+.anim-sheen::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent);
+    transform: translateX(-150%) skewX(-20deg);
+    pointer-events: none;
+}
+@keyframes sheenSweep {
+    from { transform: translateX(-150%) skewX(-20deg); }
+    to { transform: translateX(250%) skewX(-20deg); }
+}
+.anim-sheen:hover::after,
+.anim-sheen:focus-visible::after {
+    animation: sheenSweep 1s ease;
+}
+
+/* Halo de luz que sigue al cursor sobre una tarjeta de vidrio.
+   Sin JS se queda centrado (--x/--y en 50%), así que es seguro
+   aplicarla ya mismo; ver sección 15 para conectar el cursor real. */
+.anim-spotlight {
+    position: relative;
+    overflow: hidden;
+}
+.anim-spotlight::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.28), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+}
+.anim-spotlight:hover::before,
+.anim-spotlight:focus-visible::before {
+    opacity: 1;
+}
+
+/* Borde con degradado giratorio, para destacar una tarjeta o
+   botón principal (ej. "Abrir mi carta"). Se degrada con
+   elegancia en navegadores sin soporte para @property: el borde
+   queda estático en vez de girar, nada se rompe. */
+@property --border-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+@keyframes borderGlowRotate {
+    to { --border-angle: 360deg; }
+}
+.anim-border-glow {
+    position: relative;
+    isolation: isolate;
+}
+.anim-border-glow::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    z-index: -1;
+    border-radius: inherit;
+    padding: 2px;
+
+    background: conic-gradient(
+        from var(--border-angle),
+        transparent,
+        var(--romantic-accent),
+        transparent 30%
+    );
+
+    /* Compatibilidad WebKit */
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+
+    /* Propiedad estándar */
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+
+    /* Composición de máscaras */
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+
+    animation: borderGlowRotate 3s linear infinite;
+}
+
+/* Botón "magnético": se desplaza levemente hacia el cursor.
+   Lee --mx/--my (px); sin JS se queda quieto en su sitio. */
+.anim-magnetic {
+    display: inline-block;
+    transform: translate(var(--mx, 0), var(--my, 0));
+    transition: transform 0.2s var(--ease-overshoot-fn, cubic-bezier(0.34, 1.56, 0.64, 1));
+}
+
+/* Tarjeta con inclinación 3D según la posición del cursor.
+   Lee --rx/--ry (deg); sin JS se queda plana. */
+.anim-tilt {
+    transform: perspective(800px) rotateX(var(--ry, 0)) rotateY(var(--rx, 0));
+    transition: transform 0.15s ease-out;
+    transform-style: preserve-3d;
+}
+
+/* Revelado de titulares letra por letra: envuelve cada carácter
+   en un <span style="--i:N"> (N = posición, 0, 1, 2...). */
+.anim-letters span {
+    display: inline-block;
+    opacity: 0;
+    animation: letterReveal 0.6s var(--ease-overshoot-fn, cubic-bezier(0.34, 1.56, 0.64, 1)) forwards;
+    animation-delay: calc(var(--i, 0) * 0.04s);
+}
+
+
+/* ============================================================
+   9. CLASES UTILITARIAS: DURACIÓN
+   Combínalas con cualquier .anim-* que use `animation-duration`
+   heredable, o inclúyelas directamente en tu propia regla.
+   ============================================================ */
+
+.dur-fast    { animation-duration: 0.3s !important; }
+.dur-normal  { animation-duration: 0.6s !important; }
+.dur-slow    { animation-duration: 1s !important; }
+.dur-slower  { animation-duration: 1.6s !important; }
+.dur-slowest { animation-duration: 2.4s !important; }
+
+
+/* ============================================================
+   10. CLASES UTILITARIAS: DELAY / STAGGER
+   Útiles para animar listas de tarjetas en cascada: aplica la
+   animación base (ej. .anim-fade-up) a cada tarjeta y súmale un
+   .stagger-delay-N según su posición en la lista.
+   ============================================================ */
+
+.stagger-delay-1  { animation-delay: 0.05s; }
+.stagger-delay-2  { animation-delay: 0.10s; }
+.stagger-delay-3  { animation-delay: 0.15s; }
+.stagger-delay-4  { animation-delay: 0.20s; }
+.stagger-delay-5  { animation-delay: 0.25s; }
+.stagger-delay-6  { animation-delay: 0.30s; }
+.stagger-delay-7  { animation-delay: 0.35s; }
+.stagger-delay-8  { animation-delay: 0.40s; }
+.stagger-delay-9  { animation-delay: 0.45s; }
+.stagger-delay-10 { animation-delay: 0.50s; }
+.stagger-delay-11 { animation-delay: 0.55s; }
+.stagger-delay-12 { animation-delay: 0.60s; }
+
+/* Stagger dinámico para listas de largo variable (13+ ítems, o
+   generadas por JS): en vez de agregar más clases fijas, pon
+   style="--stagger-index: 7" en cada elemento. El paso de 0.06s
+   por índice es ajustable con --stagger-step. */
+.stagger-auto {
+    animation-delay: calc(var(--stagger-index, 0) * var(--stagger-step, 0.06s));
+}
+
+
+/* ============================================================
+   11. CLASES UTILITARIAS: EASING
+   ============================================================ */
+
+.ease-linear     { animation-timing-function: linear; }
+.ease-smooth     { animation-timing-function: ease; }
+.ease-in-out     { animation-timing-function: ease-in-out; }
+.ease-bounce     { animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.ease-overshoot  { animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1); }
+.ease-sharp      { animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+.ease-silk       { animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
+.ease-elegant    { animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
+
+
+/* ============================================================
+   12. ITERACIÓN, DIRECCIÓN, FILL-MODE, PAUSA
+   ============================================================ */
+
+.anim-once     { animation-iteration-count: 1; }
+.anim-infinite { animation-iteration-count: infinite; }
+.anim-twice    { animation-iteration-count: 2; }
+
+.anim-alternate { animation-direction: alternate; }
+.anim-reverse   { animation-direction: reverse; }
+
+.anim-fill-forwards  { animation-fill-mode: forwards; }
+.anim-fill-backwards { animation-fill-mode: backwards; }
+.anim-fill-both      { animation-fill-mode: both; }
+
+/* Pausa cualquier animación activa al pasar el cursor: útil para
+   que el usuario pueda "congelar" un elemento y leerlo con calma
+   (por ejemplo, texto con glow o partículas flotantes). */
+.anim-pause-on-hover:hover {
+    animation-play-state: paused;
+}
+
+
+/* ============================================================
+   CLASES DE ANIMACIÓN COMPLETAS (keyframe + duración + fill-mode)
+   Listas para usar directamente en el HTML.
+   ============================================================ */
+
+/* ----- Entradas ----- */
+.anim-fade-in        { animation: fadeIn 0.6s ease forwards; }
+.anim-fade-up        { animation: fadeInUp 0.8s ease forwards; }
+.anim-fade-down       { animation: fadeInDown 0.8s ease forwards; }
+.anim-fade-left       { animation: fadeInLeft 0.8s ease forwards; }
+.anim-fade-right      { animation: fadeInRight 0.8s ease forwards; }
+.anim-fade-scale      { animation: fadeInScale 0.6s ease forwards; }
+.anim-zoom-in         { animation: zoomIn 0.5s var(--ease-med, cubic-bezier(0.175, 0.885, 0.32, 1.275)) forwards; }
+.anim-zoom-in-soft    { animation: zoomInSoft 0.5s ease forwards; }
+.anim-slide-up        { animation: slideInUp 0.5s ease forwards; }
+.anim-slide-down      { animation: slideInDown 0.5s ease forwards; }
+.anim-slide-left      { animation: slideInLeft 0.5s ease forwards; }
+.anim-slide-right     { animation: slideInRight 0.5s ease forwards; }
+.anim-flip-x          { animation: flipInX 0.6s ease forwards; }
+.anim-flip-y          { animation: flipInY 0.6s ease forwards; }
+.anim-rotate-in       { animation: rotateIn 0.5s ease forwards; }
+.anim-scale-in        { animation: scaleIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+.anim-bounce-in       { animation: bounceIn 0.7s ease forwards; }
+.anim-bounce-in-up    { animation: bounceInUp 0.7s ease forwards; }
+.anim-silk            { animation: silkReveal 1s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.anim-curtain         { animation: curtainReveal 1s cubic-bezier(0.65, 0, 0.35, 1) forwards; }
+
+/* ----- Salidas (agrégalas por JS justo antes de remover el nodo) ----- */
+.anim-fade-out        { animation: fadeOut 0.4s ease forwards; }
+.anim-fade-out-down   { animation: fadeOutDown 0.4s ease forwards; }
+.anim-fade-out-up     { animation: fadeOutUp 0.4s ease forwards; }
+.anim-zoom-out        { animation: zoomOut 0.4s ease forwards; }
+.anim-slide-out-down  { animation: slideOutDown 0.4s ease forwards; }
+
+/* ----- Atención (un solo disparo; quita la clase al terminar si
+   piensas volver a dispararla, con un `animationend` listener) ----- */
+.anim-pulse-once  { animation: pulseOnce 0.5s ease; }
+.anim-shake       { animation: shake 0.5s ease; }
+.anim-wobble      { animation: wobble 0.7s ease; }
+.anim-tada        { animation: tada 0.8s ease; }
+.anim-jello       { animation: jello 0.8s ease; }
+.anim-head-shake  { animation: headShake 0.8s ease; }
+.anim-heartbeat   { animation: heartBeat 1.2s ease-in-out infinite; }
+.anim-heart-burst { animation: heartBurstOnce 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.anim-ring-pulse  { animation: ringPulse 1.6s ease-out infinite; }
+
+/* ----- Ambiente (loop infinito) ----- */
+.anim-float        { animation: floatHeart 2.5s ease-in-out infinite; }
+.anim-float-gentle { animation: floatGentle 3s ease-in-out infinite; }
+.anim-pulse        { animation: heartPulse 2s ease-in-out infinite; }
+.anim-glow         { animation: glowPulse 2s ease-in-out infinite; }
+.anim-breathe      { animation: breathe 3s ease-in-out infinite; }
+.anim-spin-slow    { animation: rotateSlow 8s linear infinite; }
+.anim-aurora {
+    background-size: 200% 200%;
+    animation: auroraDrift 12s ease-in-out infinite;
+}
+
+/* ----- Texto ----- */
+.anim-text-glow    { animation: textGlow 2s ease-in-out infinite; }
+.anim-text-reveal  { animation: textReveal 1s ease forwards; }
+.anim-text-gradient {
+    background: linear-gradient(90deg, var(--romantic-accent), var(--romantic-accent-light), var(--romantic-accent));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: textGradientFlow 3s ease infinite;
+}
+
+/* Punto de partida recomendado para clases .anim-fade-*, .anim-zoom-*,
+   .anim-slide-* y .anim-flip-*: agrega `opacity: 0` (o la clase
+   ".pre-anim { opacity: 0; }") en el elemento antes de que se dispare
+   la animación "forwards", para que no haya parpadeo del contenido en
+   su estado final antes de empezar. */
+.pre-anim { opacity: 0; }
+
+
+/* ============================================================
+   13. AYUDAS PARA "REVEAL ON SCROLL"
+   Pensado para usarse junto a un IntersectionObserver en JS:
+
+     const observer = new IntersectionObserver((entries) => {
+         entries.forEach(entry => {
+             if (entry.isIntersecting) {
+                 entry.target.classList.add('is-visible');
+                 observer.unobserve(entry.target);
+             }
+         });
+     }, { threshold: 0.15 });
+
+     document.querySelectorAll('.reveal-on-scroll')
+         .forEach(el => observer.observe(el));
+   ============================================================ */
+
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-on-scroll.reveal-left {
+    transform: translateX(-40px);
+}
+.reveal-on-scroll.reveal-left.is-visible {
+    transform: translateX(0);
+}
+
+.reveal-on-scroll.reveal-right {
+    transform: translateX(40px);
+}
+.reveal-on-scroll.reveal-right.is-visible {
+    transform: translateX(0);
+}
+
+.reveal-on-scroll.reveal-scale {
+    transform: scale(0.9);
+}
+.reveal-on-scroll.reveal-scale.is-visible {
+    transform: scale(1);
+}
+
+.reveal-on-scroll.reveal-blur {
+    filter: blur(8px);
+    transition: opacity 0.7s ease, transform 0.7s ease, filter 0.7s ease;
+}
+.reveal-on-scroll.reveal-blur.is-visible {
+    filter: blur(0);
+}
+
+
+/* ============================================================
+   14. ACCESIBILIDAD
+   ============================================================ */
+
+/* Movimiento reducido: cubre animation Y transition (un hover con
+   transition, como el de las tarjetas, también debe respetar la
+   preferencia). Usa el mismo umbral (0.01ms) en todo el proyecto
+   para no tener dos valores distintos conviviendo en el sitio. */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    /* Con reveal-on-scroll no queremos que el contenido quede
+       invisible para siempre si el navegador no llega a disparar
+       el estado final: lo mostramos directamente. */
+    .reveal-on-scroll {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+/* Modo de alto contraste / colores forzados (Windows High Contrast,
+   forced-colors): los brillos y sombras decorativas no tienen
+   sentido y pueden reducir la legibilidad, así que se desactivan. */
+@media (forced-colors: active) {
+    .anim-glow,
+    .anim-text-glow,
+    .anim-skeleton,
+    .anim-aurora,
+    .anim-text-gradient,
+    .anim-border-glow::before,
+    .anim-spotlight::before,
+    .anim-sheen::after {
+        animation: none !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+        background: Canvas !important;
+    }
+    .anim-text-gradient {
+        -webkit-background-clip: initial !important;
+        background-clip: initial !important;
+        color: CanvasText !important;
+    }
+}
+
+/* Impresión: ninguna animación tiene sentido en papel, y algunas
+   (opacity: 0 de estados iniciales) podrían dejar contenido
+   invisible en el PDF/impreso si el usuario imprime antes de que
+   el JS dispare la animación. */
+@media print {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+    .reveal-on-scroll,
+    .pre-anim {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+
+/* ============================================================
+   15. INTERACCIONES AVANZADAS (mouse-tracking opcional)
+   Las clases de abajo ya están declaradas en la sección 8. Todas
+   leen variables CSS personalizadas que tú actualizas por JS en
+   'mousemove'; sin ese JS se quedan en su estado neutro (no
+   reaccionan al cursor, pero tampoco rompen nada), así que son
+   seguras de dejar puestas en el HTML desde ya.
+
+     .anim-magnetic  → --mx / --my   (desplazamiento, en px)
+     .anim-tilt      → --rx / --ry   (rotación, en deg)
+     .anim-spotlight → --x  / --y    (posición del brillo, % o px)
+
+   Ejemplo mínimo para un botón magnético con leve tilt:
+
+     const el = document.querySelector('.anim-magnetic');
+     el.addEventListener('mousemove', (e) => {
+         const r = el.getBoundingClientRect();
+         const relX = e.clientX - r.left - r.width / 2;
+         const relY = e.clientY - r.top - r.height / 2;
+         el.style.setProperty('--mx', `${relX * 0.3}px`);
+         el.style.setProperty('--my', `${relY * 0.3}px`);
+     });
+     el.addEventListener('mouseleave', () => {
+         el.style.setProperty('--mx', '0px');
+         el.style.setProperty('--my', '0px');
+     });
+
+   El mismo patrón aplica a --rx/--ry (tilt 3D) y --x/--y
+   (spotlight): solo cambia qué propiedad actualizas en el
+   listener y, en el caso del tilt, el rango del multiplicador
+   (usa grados en vez de px, algo como * 0.05 suele bastar).
+
+   Para el corazón que "estalla" al dar like, dispáralo con JS
+   agregando la clase y quitándola al terminar:
+
+     corazon.classList.add('anim-heart-burst');
+     corazon.addEventListener('animationend', () => {
+         corazon.classList.remove('anim-heart-burst');
+     }, { once: true });
+   ============================================================ */
+
+
+/* ============================================================
+   16. NOTAS DE USO Y CONVENCIONES
+   ------------------------------------------------------------
+   - Prefijo .anim-*      → dispara una animación por sí sola.
+   - Prefijo .dur-*        → sobreescribe solo la duración.
+   - Prefijo .stagger-*    → suma un retraso (para listas en cascada).
+   - Prefijo .ease-*       → sobreescribe solo el timing-function.
+   - Prefijo .reveal-*     → pensado para IntersectionObserver, no
+                             se dispara solo con CSS.
+
+   - Para "animar una sola vez al cargar": usa las clases .anim-*
+     de la sección de clases completas directamente en el HTML.
+   - Para "animar cuando entra en pantalla": usa .reveal-on-scroll
+     + JS (ver sección 13).
+   - Para "animar en loop mientras esté visible": usa las clases
+     de ambiente (.anim-float, .anim-pulse, .anim-glow, etc.) y
+     opcionalmente .anim-pause-on-hover para poder pausarlas.
+   - Evita animar `width`, `height`, `top` o `left` en bucles
+     infinitos: son propiedades costosas para el navegador.
+     Prefiere `transform` y `opacity` (por eso casi todos los
+     keyframes de este archivo solo tocan esas dos propiedades).
+   - Si necesitas una animación que no está aquí, agrégala en la
+     sección que le corresponda por tipo (entrada, salida,
+     atención, ambiente, texto, carga) y documenta brevemente qué
+     hace, igual que el resto del archivo.
+   - Para "algo más elegante que un fade": usa .anim-silk (blur +
+     subida suave) o .anim-curtain (cortina lateral) en vez de
+     .anim-fade-in.
+   - Para "que reaccione al cursor": usa .anim-magnetic, .anim-tilt
+     o .anim-spotlight (sección 8) y conecta el JS de la sección 15.
+     Son opcionales y no rompen nada si el JS aún no está listo.
+   - Para listas largas o generadas dinámicamente: usa .stagger-auto
+     con style="--stagger-index: N" en vez de encadenar muchas
+     .stagger-delay-N fijas.
+   ============================================================ */

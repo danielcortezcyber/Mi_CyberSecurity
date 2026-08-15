@@ -1,0 +1,162 @@
+<!-- ============================================================
+     SECCIÓN: CANCIONES (ÁLBUM INTERACTIVO CON REPRODUCTOR)
+     ============================================================
+
+     🎯 CÓMO AGREGAR O CAMBIAR UNA CANCIÓN (léelo, es fácil):
+
+     1. Copia el bloque completo de una "CANCIÓN" (desde
+        <div class="cancion-album" ... hasta el </div> que la cierra).
+
+     2. En data-video=""  pega la URL COMPLETA que copias de YouTube.
+        Funciona con cualquiera de estos formatos, tal cual los copias
+        de la barra de direcciones o del botón "Compartir":
+          - https://www.youtube.com/watch?v=dQw4w9WgXcQ
+          - https://youtu.be/dQw4w9WgXcQ
+          - https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=ALGO&index=3
+        (También puedes pegar solo el ID de 11 caracteres si lo prefieres,
+        como "dQw4w9WgXcQ" — ambas formas funcionan.)
+
+     3. En data-titulo="" escribe "Título - Artista" (se muestra arriba
+        del reproductor cuando la seleccionas).
+
+     4. Cambia el texto dentro de <h4> (título) y <p> (artista).
+
+     5. Opcional: cambia el emoji (cancion-album-emoji), el color del
+        degradado (background: linear-gradient(...)) y el texto del
+        badge (cancion-album-badge) para darle su propio estilo.
+
+     6. Para AGREGAR una canción nueva (más de 6), copia cualquiera de
+        los bloques de abajo, pégalo antes del comentario
+        "Puedes añadir más canciones aquí" y edítalo con los pasos 1-5.
+
+     ⚠️ Si dejas data-video="PEGA_AQUI_LA_URL_DE_YOUTUBE" tal cual,
+        esa canción va a mostrar "⚠️ Canción no configurada" en vez
+        de reproducirse — así sabes cuáles te faltan por completar.
+
+     ⚠️ NO uses como "Ver playlist completa" un enlace que empiece con
+        list=RD... — esas son "Mezclas" autogeneradas por YouTube y NO
+        se pueden incrustar (por eso veías el cuadro blanco). Si quieres
+        un link de playlist ahí abajo, crea una playlist normal tuya en
+        YouTube (esas empiezan con list=PL...) y usa esa URL.
+     ============================================================ -->
+<section id="romantic-canciones" class="romantic-section canciones-section">
+    <h2 class="romantic-title">🎵 Nuestras canciones</h2>
+    <p class="romantic-subtitle">Elige una canción y escúchala aquí mismo. 💕</p>
+
+    <!-- ===== REPRODUCTOR PRINCIPAL ===== -->
+    <div class="reproductor-container glass-card">
+        <div class="reproductor-header">
+            <span class="reproductor-icon">🎧</span>
+            <span id="cancionActual" class="reproductor-titulo">Selecciona una canción</span>
+        </div>
+        <div class="reproductor-iframe-wrapper">
+            <!-- Mensaje que se ve MIENTRAS no hay ninguna canción elegida.
+                 album.js lo oculta automáticamente al hacer clic en una canción. -->
+            <div id="reproductorPlaceholder" class="reproductor-placeholder">
+                <span class="reproductor-placeholder-icon">🎵</span>
+                <span class="reproductor-placeholder-text">Elige una canción del catálogo para empezar a escuchar</span>
+            </div>
+            <iframe id="reproductorYouTube"
+                    width="100%" height="315"
+                    src=""
+                    title="Reproductor de música"
+                    frameborder="0"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    allowfullscreen>
+            </iframe>
+        </div>
+        <p class="reproductor-sub">💡 Haz clic en una canción del catálogo para reproducirla aquí.</p>
+    </div>
+
+    <!-- ===== CATÁLOGO DE CANCIONES (tipo álbum) ===== -->
+    <div class="catalogo-grid">
+
+        <!-- ===== CANCIÓN 1 ===== -->
+        <div class="cancion-album" data-video="https://www.youtube.com/watch?v=KuY1JGYYXCw" data-titulo="Enamorados - Tercer Cielo">
+            <div class="cancion-album-cover" style="background: linear-gradient(135deg, #ff6b6b, #ff9f43);">
+                <span class="cancion-album-emoji">🎧</span>
+                <span class="cancion-album-play">▶</span>
+            </div>
+            <div class="cancion-album-info">
+                <h4>Enamorados</h4>
+                <p>Tercer Cielo</p>
+                <span class="cancion-album-badge">❤️ Favorita</span>
+            </div>
+        </div>
+
+        <!-- ===== CANCIÓN 2 ===== -->
+        <div class="cancion-album" data-video="https://www.youtube.com/watch?v=eNz8vcn4RUA" data-titulo="Lindo Viaje - Tercer Cielo">
+            <div class="cancion-album-cover" style="background: linear-gradient(135deg, #a29bfe, #6c5ce7);">
+                <span class="cancion-album-emoji">🎶</span>
+                <span class="cancion-album-play">▶</span>
+            </div>
+            <div class="cancion-album-info">
+                <h4>Lindo Viaje (Audio)</h4>
+                <p>Tercer Cielo</p>
+                <span class="cancion-album-badge">💕 Especial</span>
+            </div>
+        </div>
+
+        <!-- ===== CANCIÓN 3 ===== -->
+        <div class="cancion-album" data-video="https://youtu.be/RwNeS3-fmPg?si=plxzEPEun7oFRAbX" data-titulo="Toma Mi Mano - Tercer Cielo">
+            <div class="cancion-album-cover" style="background: linear-gradient(135deg, #fd79a8, #e84393);">
+                <span class="cancion-album-emoji">🎵</span>
+                <span class="cancion-album-play">▶</span>
+            </div>
+            <div class="cancion-album-info">
+                <h4>Toma Mi Mano (Letras)</h4>
+                <p>Tercer Cielo</p>
+                <span class="cancion-album-badge">🌟 Inolvidable</span>
+            </div>
+        </div>
+
+        <!-- ===== CANCIÓN 4 ===== -->
+        <div class="cancion-album" data-video="PEGA_AQUI_LA_URL_DE_YOUTUBE" data-titulo="Canción 4 - Artista">
+            <div class="cancion-album-cover" style="background: linear-gradient(135deg, #55efc4, #00b894);">
+                <span class="cancion-album-emoji">💝</span>
+                <span class="cancion-album-play">▶</span>
+            </div>
+            <div class="cancion-album-info">
+                <h4>Canción 4</h4>
+                <p>Artista</p>
+                <span class="cancion-album-badge">✨ Nuestra</span>
+            </div>
+        </div>
+
+        <!-- ===== CANCIÓN 5 ===== -->
+        <div class="cancion-album" data-video="PEGA_AQUI_LA_URL_DE_YOUTUBE" data-titulo="Canción 5 - Artista">
+            <div class="cancion-album-cover" style="background: linear-gradient(135deg, #fdcb6e, #f39c12);">
+                <span class="cancion-album-emoji">🌙</span>
+                <span class="cancion-album-play">▶</span>
+            </div>
+            <div class="cancion-album-info">
+                <h4>Canción 5</h4>
+                <p>Artista</p>
+                <span class="cancion-album-badge">🌙 Para soñar</span>
+            </div>
+        </div>
+
+        <!-- ===== CANCIÓN 6 ===== -->
+        <div class="cancion-album" data-video="PEGA_AQUI_LA_URL_DE_YOUTUBE" data-titulo="Canción 6 - Artista">
+            <div class="cancion-album-cover" style="background: linear-gradient(135deg, #74b9ff, #0984e3);">
+                <span class="cancion-album-emoji">☀️</span>
+                <span class="cancion-album-play">▶</span>
+            </div>
+            <div class="cancion-album-info">
+                <h4>Canción 6</h4>
+                <p>Artista</p>
+                <span class="cancion-album-badge">☀️ Para empezar el día</span>
+            </div>
+        </div>
+
+        <!-- Puedes añadir más canciones aquí, solo copia un bloque completo y cambia los datos -->
+
+    </div>
+
+    <!-- ===== PLAYLIST COMPLETA (opcional) ===== -->
+    <div class="playlist-extra">
+        <a href="https://www.youtube.com/playlist?list=RDKuY1JGYYXCw" target="_blank" class="btn playlist-btn">
+            <i class="fab fa-youtube"></i> Ver playlist completa en YouTube
+        </a>
+    </div>
+</section>

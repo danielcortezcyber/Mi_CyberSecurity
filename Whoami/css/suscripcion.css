@@ -1,0 +1,84 @@
+/* ===== SUSCRIPCION ===== */
+.suscripcion-intro {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+    color: var(--text-secondary);
+}
+
+.suscripcion-form {
+    display: flex;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 0 auto 2rem auto;
+}
+.suscripcion-form input {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+.suscripcion-form input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.suscripcion-form button {
+    flex-shrink: 0;
+}
+
+.suscripcion-links {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.suscripcion-links p {
+    margin: 0.3rem 0;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+.suscripcion-links i {
+    width: 24px;
+    color: var(--accent);
+}
+
+.suscripcion-stats {
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 12px var(--shadow-color);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    align-items: center;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+.suscripcion-stats span {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+.suscripcion-stats .stat-dc {
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 1.2rem;
+}
+.suscripcion-stats .stat-name {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.suscripcion-stats .stat-role {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+.suscripcion-stats .btn {
+    margin-top: 0.5rem;
+}
+
+@media (max-width: 600px) {
+    .suscripcion-form {
+        flex-direction: column;
+    }
+}

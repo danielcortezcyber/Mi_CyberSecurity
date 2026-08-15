@@ -1,0 +1,49 @@
+<section id="ip-consult" class="section ip-consult">
+    <div class="container">
+        <h2 class="section-title">🕵️ Consulta de IPs Maliciosas</h2>
+        <p class="ip-consult-sub">
+            Verifica la reputación de una dirección IP utilizando la API de VirusTotal.
+            Introduce una IP y obtén información sobre su estado y actividad.
+        </p>
+
+        <div class="ip-consult-form">
+            <div class="ip-input-group">
+                <input type="text" id="ipInput" placeholder="Ej: 8.8.8.8" class="ip-input" />
+                <button id="ipCheckBtn" class="btn btn-primary">Consultar</button>
+            </div>
+            <div class="ip-options">
+                <label>
+                    <input type="checkbox" id="ipUseVirusTotal" checked />
+                    VirusTotal <span style="font-size:0.8rem;color:var(--text-muted);">(requiere API Key)</span>
+                </label>
+                <span class="ip-api-key-hint">
+                    <a href="#" id="ipConfigKey">🔑 Configurar API Key</a>
+                    <span style="font-size:0.8rem;color:var(--text-muted);">(opcional)</span>
+                </span>
+            </div>
+        </div>
+
+        <div id="ipResult" class="ip-result" hidden>
+            <div class="ip-result-header">
+                <span id="ipResultIcon">✅</span>
+                <span id="ipResultTitle">Resultado</span>
+            </div>
+            <div id="ipResultContent"></div>
+        </div>
+
+        <!-- ===== MODAL (IDs CORRECTOS) ===== -->
+        <div id="ipKeyModal" class="ip-modal" hidden>
+            <div class="ip-modal-content">
+                <span class="ip-modal-close" id="ipKeyModalClose">&times;</span>
+                <h3>🔑 Configurar API Key de VirusTotal</h3>
+                <p>Obtén tu API key gratuita en <a href="https://www.virustotal.com/gui/join-us" target="_blank">VirusTotal</a>.</p>
+                <input type="text" id="ipApiKeyInput" placeholder="Pega tu API key aquí" class="ip-input" />
+                <div style="display:flex; gap:0.5rem; margin-top:0.5rem; flex-wrap:wrap;">
+                    <button id="ipSaveKeyBtn" class="btn btn-primary">Guardar</button>
+                    <button id="ipCancelKeyBtn" class="btn" style="background:transparent;border:1px solid var(--border-color); color:var(--text-primary);">Cancelar</button>
+                </div>
+                <p id="ipKeyStatus" style="margin-top:0.5rem;font-size:0.9rem;"></p>
+            </div>
+        </div>
+    </div>
+</section>

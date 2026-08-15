@@ -1,0 +1,912 @@
+<section id="powershell" class="section powershell">
+    <div class="container">
+        <!-- ===== ENCABEZADO ===== -->
+        <h2 class="section-title">🪟 PowerShell · Guía de Referencia</h2>
+        <p class="powershell-sub">
+            Más de <strong>100 cmdlets</strong> organizados por categorías. Domina la administración de Windows con PowerShell.
+            Desde archivos hasta Active Directory, pasando por red, registro y scripting avanzado.
+        </p>
+
+        <div class="ps-stats">
+            <span class="stat"><span class="stat-num">100+</span> Cmdlets</span>
+            <span class="stat"><span class="stat-num">12</span> Categorías</span>
+            <span class="stat"><span class="stat-num">150+</span> Ejemplos</span>
+        </div>
+
+        <!-- ===== BUSCADOR ===== -->
+        <div class="ps-search-container">
+            <div class="ps-search-wrapper">
+                <span class="ps-search-icon">🔍</span>
+                <input type="text" id="psSearch" placeholder="Buscar cmdlet por nombre, descripción o categoría..." class="ps-search-input" />
+                <button id="psSearchClear" class="ps-search-clear" hidden>✕</button>
+            </div>
+            <div class="ps-search-stats">
+                <span id="psSearchCount">0</span> cmdlets encontrados
+            </div>
+        </div>
+
+        <!-- ===== INTRODUCCIÓN ===== -->
+        <div class="ps-intro">
+            <div class="ps-intro-card">
+                <h3>⚡ ¿Qué es PowerShell?</h3>
+                <p>PowerShell es un <strong>shell de línea de comandos</strong> y un <strong>lenguaje de scripting</strong> diseñado para la administración de sistemas y la automatización. A diferencia de CMD, PowerShell trabaja con <strong>objetos estructurados</strong>, lo que permite un control mucho más preciso.</p>
+                <div class="tip">
+                    <strong>💡 Tip:</strong> Usa <code>Get-Help</code> para obtener ayuda de cualquier cmdlet.
+                </div>
+            </div>
+            <div class="ps-intro-card">
+                <h3>🔑 Estructura Verbo-Sustantivo</h3>
+                <p>Los comandos (<strong>cmdlets</strong>) siguen el patrón <code>Verbo-Sustantivo</code>:</p>
+                <ul>
+                    <li><strong>Get</strong> → Recupera datos (<code>Get-Process</code>)</li>
+                    <li><strong>Set</strong> → Modifica propiedades (<code>Set-Item</code>)</li>
+                    <li><strong>Add</strong> → Agrega elementos (<code>Add-Content</code>)</li>
+                    <li><strong>Stop</strong> → Detiene (<code>Stop-Service</code>)</li>
+                    <li><strong>Start</strong> → Inicia (<code>Start-Service</code>)</li>
+                    <li><strong>Clear</strong> → Elimina elementos (<code>Clear-Host</code>)</li>
+                </ul>
+                <p><strong>Ejemplo:</strong> <code>Get-Process</code> → Obtiene procesos en ejecución.</p>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 1. GESTIÓN DE ARCHIVOS Y CARPETAS                            -->
+        <!-- ============================================================ -->
+        <h3 class="ps-section-title">📁 Gestión de Archivos y Carpetas</h3>
+        <div class="ps-grid">
+
+            <div class="ps-category">
+                <h4>📂 Comandos básicos</h4>
+                <div class="ps-command">
+                    <code>Get-ChildItem</code>
+                    <p>Lista archivos y carpetas (similar a <code>dir</code> / <code>ls</code>).</p>
+                    <pre>Get-ChildItem -Path C:\Logs -Recurse -Filter *.log</pre>
+                    <span class="ps-badge basic">Básico</span>
+                </div>
+                <div class="ps-command">
+                    <code>Copy-Item</code>
+                    <p>Copia archivos/carpetas.</p>
+                    <pre>Copy-Item -Path C:\src\* -Destination D:\backup\ -Recurse -Force</pre>
+                    <span class="ps-badge basic">Básico</span>
+                </div>
+                <div class="ps-command">
+                    <code>Move-Item</code>
+                    <p>Mueve o renombra elementos.</p>
+                    <pre>Move-Item -Path C:\temp\*.pdf -Destination D:\PDFs\</pre>
+                    <span class="ps-badge basic">Básico</span>
+                </div>
+                <div class="ps-command">
+                    <code>Remove-Item</code>
+                    <p>Elimina archivos/carpetas.</p>
+                    <pre>Remove-Item -Path C:\temp\* -Recurse -Force</pre>
+                    <span class="ps-badge basic">Básico</span>
+                </div>
+                <div class="ps-command">
+                    <code>New-Item</code>
+                    <p>Crea archivos o directorios.</p>
+                    <pre>New-Item -Path C:\backup -ItemType Directory</pre>
+                    <span class="ps-badge basic">Básico</span>
+                </div>
+                <div class="ps-command">
+                    <code>Rename-Item</code>
+                    <p>Renombra un elemento.</p>
+                    <pre>Rename-Item -Path C:\temp\old.txt -NewName new.txt</pre>
+                    <span class="ps-badge basic">Básico</span>
+                </div>
+            </div>
+
+            <div class="ps-category">
+                <h4>📄 Lectura y escritura</h4>
+                <div class="ps-command">
+                    <code>Get-Content</code>
+                    <p>Lee contenido de archivos.</p>
+                    <pre>Get-Content -Path C:\logs\app.log -Tail 50 -Wait</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+                <div class="ps-command">
+                    <code>Set-Content</code>
+                    <p>Escribe contenido en un archivo (sobrescribe).</p>
+                    <pre>Set-Content -Path C:\temp\report.txt -Value "Informe generado $(Get-Date)"</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+                <div class="ps-command">
+                    <code>Add-Content</code>
+                    <p>Añade contenido al final de un archivo.</p>
+                    <pre>Add-Content -Path C:\logs\access.log -Value "$(Get-Date) - Acceso permitido"</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+                <div class="ps-command">
+                    <code>Clear-Content</code>
+                    <p>Borra el contenido de un archivo sin eliminarlo.</p>
+                    <pre>Clear-Content -Path C:\temp\cache.txt</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+                <div class="ps-command">
+                    <code>Test-Path</code>
+                    <p>Verifica si una ruta existe.</p>
+                    <pre>if (Test-Path C:\temp) { Write-Host "Existe" }</pre>
+                    <span class="ps-badge basic">Básico</span>
+                </div>
+            </div>
+
+            <div class="ps-category">
+                <h4>🔄 Exportación e importación</h4>
+                <div class="ps-command">
+                    <code>Export-Csv</code>
+                    <p>Exporta objetos a archivo CSV.</p>
+                    <pre>Get-Process | Export-Csv -Path procesos.csv -NoTypeInformation</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+                <div class="ps-command">
+                    <code>Import-Csv</code>
+                    <p>Importa datos desde CSV.</p>
+                    <pre>$usuarios = Import-Csv -Path usuarios.csv</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+                <div class="ps-command">
+                    <code>ConvertTo-Json / ConvertFrom-Json</code>
+                    <p>Convierte objetos a/desde JSON.</p>
+                    <pre>Get-Process | ConvertTo-Json | Out-File procesos.json</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                </div>
+                <div class="ps-command">
+                    <code>Out-File</code>
+                    <p>Envía salida a un archivo (similar a <code>&gt;</code> en CMD).</p>
+                    <pre>Get-Service | Out-File -FilePath servicios.txt</pre>
+                    <span class="ps-badge basic">Básico</span>
+                </div>
+            </div>
+
+            <div class="ps-category">
+                <h4>🔍 Búsqueda y utilidades</h4>
+                <div class="ps-command">
+                    <code>Select-String</code>
+                    <p>Busca texto en archivos (grep).</p>
+                    <pre>Select-String -Path *.log -Pattern "ERROR"</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+                <div class="ps-command">
+                    <code>Get-Item</code>
+                    <p>Obtiene el elemento en una ruta (metadatos).</p>
+                    <pre>Get-Item C:\temp\file.txt</pre>
+                    <span class="ps-badge basic">Básico</span>
+                </div>
+                <div class="ps-command">
+                    <code>Get-ItemProperty</code>
+                    <p>Lee propiedades extendidas.</p>
+                    <pre>Get-ItemProperty C:\temp\file.txt -Name CreationTime</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+                <div class="ps-command">
+                    <code>Set-ItemProperty</code>
+                    <p>Establece propiedades de un elemento.</p>
+                    <pre>Set-ItemProperty -Path C:\temp -Name IsReadOnly -Value $true</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                </div>
+                <div class="ps-command">
+                    <code>Resolve-Path</code>
+                    <p>Convierte una ruta relativa en absoluta.</p>
+                    <pre>Resolve-Path .\docs\*.txt</pre>
+                    <span class="ps-badge basic">Básico</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 2. GESTIÓN DE PROCESOS Y SERVICIOS                           -->
+        <!-- ============================================================ -->
+        <h3 class="ps-section-title">⚙️ Gestión de Procesos y Servicios</h3>
+        <div class="ps-grid">
+
+            <div class="ps-category">
+                <h4>🔧 Procesos</h4>
+                <div class="ps-command">
+                    <code>Get-Process</code>
+                    <p>Lista procesos en ejecución.</p>
+                    <pre>Get-Process -Name explorer</pre>
+                    <span class="ps-badge basic">Básico</span>
+                </div>
+                <div class="ps-command">
+                    <code>Stop-Process</code>
+                    <p>Finaliza uno o varios procesos.</p>
+                    <pre>Stop-Process -Name notepad -Force</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>Start-Process</code>
+                    <p>Inicia un proceso (archivo o aplicación).</p>
+                    <pre>Start-Process -FilePath "C:\tools\script.bat" -ArgumentList "/quiet" -Wait</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+            </div>
+
+            <div class="ps-category">
+                <h4>🛠️ Servicios</h4>
+                <div class="ps-command">
+                    <code>Get-Service</code>
+                    <p>Lista servicios del sistema.</p>
+                    <pre>Get-Service -Name Spooler</pre>
+                    <span class="ps-badge basic">Básico</span>
+                </div>
+                <div class="ps-command">
+                    <code>Start-Service</code>
+                    <p>Inicia un servicio detenido.</p>
+                    <pre>Start-Service -Name WinRM</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>Stop-Service</code>
+                    <p>Detiene un servicio.</p>
+                    <pre>Stop-Service -Name Spooler -Force</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>Restart-Service</code>
+                    <p>Reinicia un servicio.</p>
+                    <pre>Restart-Service -Name Spooler</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>Set-Service</code>
+                    <p>Cambia la configuración de un servicio.</p>
+                    <pre>Set-Service -Name Spooler -StartupType Disabled</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+            </div>
+
+            <div class="ps-category">
+                <h4>📋 Tareas programadas</h4>
+                <div class="ps-command">
+                    <code>Get-ScheduledTask</code>
+                    <p>Lista tareas programadas.</p>
+                    <pre>Get-ScheduledTask -TaskName "Backup*"</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+                <div class="ps-command">
+                    <code>Start-ScheduledTask</code>
+                    <p>Inicia una tarea programada.</p>
+                    <pre>Start-ScheduledTask -TaskName "Backup"</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>Register-ScheduledTask</code>
+                    <p>Registra una nueva tarea programada.</p>
+                    <pre>$trigger = New-ScheduledTaskTrigger -Daily -At 3am; $action = New-ScheduledTaskAction -Execute "C:\backup.bat"; Register-ScheduledTask -TaskName "Backup" -Trigger $trigger -Action $action</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+            </div>
+
+            <div class="ps-category">
+                <h4>🌐 Remoto</h4>
+                <div class="ps-command">
+                    <code>Invoke-Command</code>
+                    <p>Ejecuta comandos en equipos remotos.</p>
+                    <pre>Invoke-Command -ComputerName SRV01 -ScriptBlock { Get-Service }</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                </div>
+                <div class="ps-command">
+                    <code>Enter-PSSession / Exit-PSSession</code>
+                    <p>Abre/cierra sesión remota interactiva.</p>
+                    <pre>Enter-PSSession SRV01</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                </div>
+                <div class="ps-command">
+                    <code>Get-Job / Receive-Job</code>
+                    <p>Administra trabajos en segundo plano.</p>
+                    <pre>$job = Start-Job -ScriptBlock { Get-Service }; Receive-Job $job</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 3. RED Y CONECTIVIDAD                                        -->
+        <!-- ============================================================ -->
+        <h3 class="ps-section-title">🌐 Red y Conectividad</h3>
+        <div class="ps-grid">
+
+            <div class="ps-category">
+                <h4>📡 Diagnóstico</h4>
+                <div class="ps-command">
+                    <code>Test-Connection</code>
+                    <p>Ping a un host.</p>
+                    <pre>Test-Connection google.com -Count 4</pre>
+                    <span class="ps-badge basic">Básico</span>
+                </div>
+                <div class="ps-command">
+                    <code>Test-NetConnection</code>
+                    <p>Diagnóstico avanzado (puerto, ruta).</p>
+                    <pre>Test-NetConnection google.com -Port 443</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+                <div class="ps-command">
+                    <code>Resolve-DnsName</code>
+                    <p>Resolución DNS.</p>
+                    <pre>Resolve-DnsName microsoft.com -Type MX</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+            </div>
+
+            <div class="ps-category">
+                <h4>🔌 Configuración de red</h4>
+                <div class="ps-command">
+                    <code>Get-NetIPAddress</code>
+                    <p>Muestra direcciones IP.</p>
+                    <pre>Get-NetIPAddress -AddressFamily IPv4</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+                <div class="ps-command">
+                    <code>Get-NetRoute</code>
+                    <p>Tabla de enrutamiento.</p>
+                    <pre>Get-NetRoute -DestinationPrefix 0.0.0.0/0</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+                <div class="ps-command">
+                    <code>Get-NetAdapter</code>
+                    <p>Lista adaptadores de red.</p>
+                    <pre>Get-NetAdapter | Select-Object Name, Status, LinkSpeed</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+                <div class="ps-command">
+                    <code>Restart-NetAdapter</code>
+                    <p>Reinicia un adaptador de red.</p>
+                    <pre>Restart-NetAdapter -Name "Ethernet"</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>Set-NetIPAddress</code>
+                    <p>Cambia IP estática.</p>
+                    <pre>Set-NetIPAddress -InterfaceAlias Ethernet -IPAddress 192.168.1.100 -PrefixLength 24</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>Set-DnsClientServerAddress</code>
+                    <p>Cambia servidores DNS.</p>
+                    <pre>Set-DnsClientServerAddress -InterfaceAlias Ethernet -ServerAddresses 8.8.8.8,1.1.1.1</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+            </div>
+
+            <div class="ps-category">
+                <h4>🛡️ Firewall y conexiones</h4>
+                <div class="ps-command">
+                    <code>Get-NetTCPConnection</code>
+                    <p>Conexiones TCP actuales.</p>
+                    <pre>Get-NetTCPConnection -State Established</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+                <div class="ps-command">
+                    <code>Get-NetFirewallRule</code>
+                    <p>Lista reglas de firewall.</p>
+                    <pre>Get-NetFirewallRule -Direction Inbound -Action Allow</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>New-NetFirewallRule</code>
+                    <p>Crea una regla de firewall.</p>
+                    <pre>New-NetFirewallRule -DisplayName "Allow HTTP" -Direction Inbound -LocalPort 80 -Protocol TCP -Action Allow</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>Remove-NetFirewallRule</code>
+                    <p>Elimina una regla.</p>
+                    <pre>Remove-NetFirewallRule -DisplayName "Allow HTTP"</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>Invoke-WebRequest</code>
+                    <p>Hace peticiones HTTP desde PowerShell.</p>
+                    <pre>(Invoke-WebRequest -Uri https://api.ipify.org).Content</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 4. USUARIOS Y PERMISOS                                       -->
+        <!-- ============================================================ -->
+        <h3 class="ps-section-title">👥 Usuarios y Permisos</h3>
+        <div class="ps-grid">
+
+            <div class="ps-category">
+                <h4>👤 Usuarios locales</h4>
+                <div class="ps-command">
+                    <code>Get-LocalUser</code>
+                    <p>Lista usuarios locales.</p>
+                    <pre>Get-LocalUser | Where-Object Enabled -eq $true</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>New-LocalUser</code>
+                    <p>Crea un usuario local.</p>
+                    <pre>$secure = ConvertTo-SecureString "pass" -AsPlainText -Force; New-LocalUser -Name jperez -Password $secure</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>Set-LocalUser</code>
+                    <p>Modifica un usuario local.</p>
+                    <pre>Set-LocalUser -Name jperez -AccountNeverExpires</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>Remove-LocalUser</code>
+                    <p>Elimina usuario local.</p>
+                    <pre>Remove-LocalUser -Name jperez</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+            </div>
+
+            <div class="ps-category">
+                <h4>👥 Grupos locales</h4>
+                <div class="ps-command">
+                    <code>Get-LocalGroup</code>
+                    <p>Lista grupos locales.</p>
+                    <pre>Get-LocalGroup</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>Add-LocalGroupMember</code>
+                    <p>Añade usuario a un grupo local.</p>
+                    <pre>Add-LocalGroupMember -Group Administradores -Member jperez</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>Remove-LocalGroupMember</code>
+                    <p>Quita usuario de grupo.</p>
+                    <pre>Remove-LocalGroupMember -Group Administradores -Member jperez</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+            </div>
+
+            <div class="ps-category">
+                <h4>🔐 Permisos NTFS</h4>
+                <div class="ps-command">
+                    <code>Get-Acl</code>
+                    <p>Obtiene permisos NTFS.</p>
+                    <pre>Get-Acl C:\carpeta</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>Set-Acl</code>
+                    <p>Aplica permisos NTFS.</p>
+                    <pre>$acl = Get-Acl C:\carpeta; $rule = New-Object System.Security.AccessControl.FileSystemAccessRule("Usuario","FullControl","Allow"); $acl.AddAccessRule($rule); Set-Acl C:\carpeta $acl</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+            </div>
+
+            <div class="ps-category">
+                <h4>📊 Active Directory</h4>
+                <div class="ps-command">
+                    <code>Get-ADUser</code>
+                    <p>Obtiene usuarios de AD.</p>
+                    <pre>Get-ADUser -Identity jperez -Properties *</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>New-ADUser</code>
+                    <p>Crea un usuario en AD.</p>
+                    <pre>New-ADUser -Name "Jose Perez" -GivenName Jose -Surname Perez -SamAccountName jperez</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>Get-ADGroup</code>
+                    <p>Lista grupos de AD.</p>
+                    <pre>Get-ADGroup -Filter * | Select-Object Name</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 5. SISTEMA Y HARDWARE                                        -->
+        <!-- ============================================================ -->
+        <h3 class="ps-section-title">🖥️ Sistema y Hardware</h3>
+        <div class="ps-grid">
+
+            <div class="ps-category">
+                <h4>📊 Información del sistema</h4>
+                <div class="ps-command">
+                    <code>Get-ComputerInfo</code>
+                    <p>Información completa del sistema.</p>
+                    <pre>Get-ComputerInfo | Select-Object WindowsProductName, OsName, OsVersion</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+                <div class="ps-command">
+                    <code>Get-CimInstance Win32_OperatingSystem</code>
+                    <p>Información del SO.</p>
+                    <pre>Get-CimInstance Win32_OperatingSystem | Select-Object Caption, Version, LastBootUpTime</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+                <div class="ps-command">
+                    <code>Get-CimInstance Win32_Processor</code>
+                    <p>Datos del procesador.</p>
+                    <pre>Get-CimInstance Win32_Processor | Select-Object Name, MaxClockSpeed, NumberOfCores</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+                <div class="ps-command">
+                    <code>Get-CimInstance Win32_PhysicalMemory</code>
+                    <p>Datos de la RAM.</p>
+                    <pre>Get-CimInstance Win32_PhysicalMemory | Measure-Object Capacity -Sum</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+                <div class="ps-command">
+                    <code>Get-CimInstance Win32_BIOS</code>
+                    <p>Información de la BIOS.</p>
+                    <pre>Get-CimInstance Win32_BIOS | Select-Object Manufacturer, SerialNumber</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+                <div class="ps-command">
+                    <code>Get-CimInstance Win32_ComputerSystem</code>
+                    <p>Resumen del equipo (modelo, RAM total).</p>
+                    <pre>Get-CimInstance Win32_ComputerSystem | Select-Object Manufacturer, Model, TotalPhysicalMemory</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+                <div class="ps-command">
+                    <code>Get-HotFix</code>
+                    <p>Lista actualizaciones instaladas.</p>
+                    <pre>Get-HotFix | Sort-Object InstalledOn -Descending</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+            </div>
+
+            <div class="ps-category">
+                <h4>⏰ Fecha y control</h4>
+                <div class="ps-command">
+                    <code>Get-Date</code>
+                    <p>Fecha/hora actual.</p>
+                    <pre>Get-Date -Format "yyyy-MM-dd HH:mm:ss"</pre>
+                    <span class="ps-badge basic">Básico</span>
+                </div>
+                <div class="ps-command">
+                    <code>Set-Date</code>
+                    <p>Cambia la fecha/hora del sistema.</p>
+                    <pre>Set-Date -Date "2025-12-31 23:59:59"</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>Restart-Computer</code>
+                    <p>Reinicia el equipo.</p>
+                    <pre>Restart-Computer -Force</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>Stop-Computer</code>
+                    <p>Apaga el equipo.</p>
+                    <pre>Stop-Computer</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 6. REGISTRO DE WINDOWS                                       -->
+        <!-- ============================================================ -->
+        <h3 class="ps-section-title">📝 Registro de Windows</h3>
+        <div class="ps-grid">
+
+            <div class="ps-category">
+                <h4>📖 Lectura</h4>
+                <div class="ps-command">
+                    <code>Get-ItemProperty</code>
+                    <p>Lee valores del registro.</p>
+                    <pre>Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion"</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>Get-ChildItem -Path</code>
+                    <p>Lista claves/subclaves del registro.</p>
+                    <pre>Get-ChildItem -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+            </div>
+
+            <div class="ps-category">
+                <h4>✏️ Escritura</h4>
+                <div class="ps-command">
+                    <code>Set-ItemProperty</code>
+                    <p>Modifica un valor del registro.</p>
+                    <pre>Set-ItemProperty -Path "HKCU:\Software\MyApp" -Name "Version" -Value "2.0"</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>New-ItemProperty</code>
+                    <p>Crea una nueva entrada en el registro.</p>
+                    <pre>New-ItemProperty -Path "HKCU:\Software\MyApp" -Name "Config" -Value "Default" -PropertyType String</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>Remove-ItemProperty</code>
+                    <p>Elimina una entrada del registro.</p>
+                    <pre>Remove-ItemProperty -Path "HKCU:\Software\MyApp" -Name "Config"</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>New-Item -Path</code>
+                    <p>Crea una nueva clave en el registro.</p>
+                    <pre>New-Item -Path "HKCU:\Software\NuevaClave"</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 7. DISCOS Y ALMACENAMIENTO                                   -->
+        <!-- ============================================================ -->
+        <h3 class="ps-section-title">💾 Discos y Almacenamiento</h3>
+        <div class="ps-grid">
+
+            <div class="ps-category">
+                <h4>📊 Información de discos</h4>
+                <div class="ps-command">
+                    <code>Get-Volume</code>
+                    <p>Lista volúmenes y espacio.</p>
+                    <pre>Get-Volume | Select-Object DriveLetter, FileSystem, SizeRemaining, Size</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>Get-PSDrive -PSProvider FileSystem</code>
+                    <p>Espacio en discos.</p>
+                    <pre>Get-PSDrive -PSProvider FileSystem | Select-Object Name, Used, Free</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+                <div class="ps-command">
+                    <code>Get-CimInstance Win32_LogicalDisk</code>
+                    <p>Información detallada de discos.</p>
+                    <pre>Get-CimInstance Win32_LogicalDisk -Filter "DriveType=3"</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>Get-Disk</code>
+                    <p>Lista discos físicos.</p>
+                    <pre>Get-Disk | Select-Object Number, Size, FriendlyName</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+            </div>
+
+            <div class="ps-category">
+                <h4>🔧 Mantenimiento</h4>
+                <div class="ps-command">
+                    <code>Optimize-Volume</code>
+                    <p>Desfragmenta/optimiza volumen.</p>
+                    <pre>Optimize-Volume -DriveLetter C -ReTrim -Verbose</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>Repair-Volume</code>
+                    <p>Repara errores en un volumen.</p>
+                    <pre>Repair-Volume -DriveLetter C -OfflineScanAndFix</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>Format-Volume</code>
+                    <p>Formatea un volumen.</p>
+                    <pre>Format-Volume -DriveLetter D -FileSystem NTFS -NewFileSystemLabel "DATA"</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 8. VARIABLES DE ENTORNO                                      -->
+        <!-- ============================================================ -->
+        <h3 class="ps-section-title">🔧 Variables de Entorno</h3>
+        <div class="ps-grid">
+
+            <div class="ps-category">
+                <h4>📋 Lectura</h4>
+                <div class="ps-command">
+                    <code>Get-ChildItem Env:</code>
+                    <p>Lista todas las variables de entorno.</p>
+                    <pre>Get-ChildItem Env:</pre>
+                    <span class="ps-badge basic">Básico</span>
+                </div>
+                <div class="ps-command">
+                    <code>Get-Item Env:NOMBRE</code>
+                    <p>Lee una variable de entorno.</p>
+                    <pre>Get-Item Env:PATH</pre>
+                    <span class="ps-badge basic">Básico</span>
+                </div>
+                <div class="ps-command">
+                    <code>[Environment]::GetEnvironmentVariable()</code>
+                    <p>Lee variable persistente.</p>
+                    <pre>[Environment]::GetEnvironmentVariable("PATH", "Machine")</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+            </div>
+
+            <div class="ps-category">
+                <h4>✏️ Escritura</h4>
+                <div class="ps-command">
+                    <code>Set-Item Env:NOMBRE -Value valor</code>
+                    <p>Establece variable de entorno (solo sesión actual).</p>
+                    <pre>Set-Item Env:MYVAR -Value "Hola"</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+                <div class="ps-command">
+                    <code>[Environment]::SetEnvironmentVariable()</code>
+                    <p>Establece variable persistente (máquina/usuario).</p>
+                    <pre>[Environment]::SetEnvironmentVariable("NOMBRE", "valor", "Machine")</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>$env:VARIABLE</code>
+                    <p>Atajo para leer variables de entorno en la sesión.</p>
+                    <pre>$env:USERNAME</pre>
+                    <span class="ps-badge basic">Básico</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 9. DIAGNÓSTICO Y SOLUCIÓN DE PROBLEMAS                       -->
+        <!-- ============================================================ -->
+        <h3 class="ps-section-title">🩺 Diagnóstico y Solución de Problemas</h3>
+        <div class="ps-grid">
+
+            <div class="ps-category">
+                <h4>📊 Rendimiento</h4>
+                <div class="ps-command">
+                    <code>Get-EventLog</code>
+                    <p>Lee registros de eventos (antiguo).</p>
+                    <pre>Get-EventLog -LogName Aplicación -Newest 20</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>Get-WinEvent</code>
+                    <p>Consulta eventos (moderno).</p>
+                    <pre>Get-WinEvent -FilterHashtable @{LogName='Security'; ID=4624; StartTime=(Get-Date).AddHours(-24)}</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                    <span class="ps-requires">⚡ Admin</span>
+                </div>
+                <div class="ps-command">
+                    <code>Get-Counter</code>
+                    <p>Lee contadores de rendimiento.</p>
+                    <pre>Get-Counter -Counter "\Processor(_Total)\% Processor Time"</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                </div>
+                <div class="ps-command">
+                    <code>Measure-Command</code>
+                    <p>Mide tiempo de ejecución.</p>
+                    <pre>Measure-Command { Get-ChildItem -Recurse }</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+            </div>
+
+            <div class="ps-category">
+                <h4>🔍 Análisis</h4>
+                <div class="ps-command">
+                    <code>Test-Connection</code>
+                    <p>Diagnóstico de red (ping).</p>
+                    <pre>Test-Connection google.com -Count 4</pre>
+                    <span class="ps-badge basic">Básico</span>
+                </div>
+                <div class="ps-command">
+                    <code>Test-NetConnection</code>
+                    <p>Diagnóstico avanzado.</p>
+                    <pre>Test-NetConnection 8.8.8.8 -Port 443 -TraceRoute</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+                <div class="ps-command">
+                    <code>Get-NetTCPConnection</code>
+                    <p>Ver conexiones activas.</p>
+                    <pre>Get-NetTCPConnection -State Established</pre>
+                    <span class="ps-badge intermediate">Intermedio</span>
+                </div>
+                <div class="ps-command">
+                    <code>Get-Process | Sort-Object CPU -Descending</code>
+                    <p>Identificar procesos con alto consumo.</p>
+                    <pre>Get-Process | Sort-Object CPU -Descending | Select-Object -First 10</pre>
+                    <span class="ps-badge basic">Básico</span>
+                </div>
+                <div class="ps-command">
+                    <code>Trace-Command</code>
+                    <p>Traza la ejecución de comandos.</p>
+                    <pre>Trace-Command -Name * -PSHost -Expression { Get-Process }</pre>
+                    <span class="ps-badge advanced">Avanzado</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 10. ALIAS ÚTILES                                             -->
+        <!-- ============================================================ -->
+        <h3 class="ps-section-title">⚡ Alias Útiles</h3>
+        <div class="ps-aliases">
+            <table class="ps-table">
+                <thead><tr><th>Alias</th><th>Cmdlet</th><th>Descripción</th></tr></thead>
+                <tbody>
+                    <tr><td><code>ls</code></td><td>Get-ChildItem</td><td>Lista archivos y carpetas</td></tr>
+                    <tr><td><code>cd</code></td><td>Set-Location</td><td>Cambia de directorio</td></tr>
+                    <tr><td><code>cls</code></td><td>Clear-Host</td><td>Limpia la pantalla</td></tr>
+                    <tr><td><code>dir</code></td><td>Get-ChildItem</td><td>Lista archivos y carpetas</td></tr>
+                    <tr><td><code>gc</code></td><td>Get-Content</td><td>Lee contenido de archivos</td></tr>
+                    <tr><td><code>rm</code></td><td>Remove-Item</td><td>Elimina archivos/carpetas</td></tr>
+                    <tr><td><code>echo</code></td><td>Write-Output</td><td>Muestra texto en pantalla</td></tr>
+                    <tr><td><code>ps</code></td><td>Get-Process</td><td>Lista procesos en ejecución</td></tr>
+                    <tr><td><code>kill</code></td><td>Stop-Process</td><td>Finaliza un proceso</td></tr>
+                    <tr><td><code>ipconfig</code></td><td>Get-NetIPConfiguration</td><td>Información IP</td></tr>
+                    <tr><td><code>sort</code></td><td>Sort-Object</td><td>Ordena objetos</td></tr>
+                    <tr><td><code>where</code></td><td>Where-Object</td><td>Filtra objetos</td></tr>
+                    <tr><td><code>history</code></td><td>Get-History</td><td>Historial de comandos</td></tr>
+                    <tr><td><code>r</code></td><td>Invoke-History</td><td>Repite el último comando</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 11. RECURSOS ADICIONALES                                     -->
+        <!-- ============================================================ -->
+        <div class="ps-resources">
+            <h3>📚 Recursos para Seguir Aprendiendo</h3>
+            <ul>
+                <li><strong>Get-Help</strong> → El mejor recurso integrado: <code>Get-Help Get-Process -Detailed</code></li>
+                <li><strong>Get-Command</strong> → Descubre comandos disponibles: <code>Get-Command *service*</code></li>
+                <li><strong>Get-Module -All</strong> → Lista módulos cargados</li>
+                <li><strong>Microsoft Learn</strong> → Cursos oficiales de PowerShell</li>
+                <li><strong>PowerShell Gallery</strong> → Repositorio de módulos: <code>Install-Module -Name ModuleName</code></li>
+                <li><strong>Start-Transcript</strong> → Registra toda la sesión en un archivo: <code>Start-Transcript -Path C:\log.txt</code></li>
+            </ul>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 12. EQUIVALENCIAS CMD → PowerShell                          -->
+        <!-- ============================================================ -->
+        <div class="ps-equivalencias">
+            <h3>🔁 Equivalencias Rápidas CMD → PowerShell</h3>
+            <div class="equiv-grid">
+                <div class="equiv-item"><code>dir</code> → <code>Get-ChildItem</code></div>
+                <div class="equiv-item"><code>copy</code> → <code>Copy-Item</code></div>
+                <div class="equiv-item"><code>del</code> → <code>Remove-Item</code></div>
+                <div class="equiv-item"><code>type</code> → <code>Get-Content</code></div>
+                <div class="equiv-item"><code>ping</code> → <code>Test-Connection</code></div>
+                <div class="equiv-item"><code>tasklist</code> → <code>Get-Process</code></div>
+                <div class="equiv-item"><code>taskkill</code> → <code>Stop-Process</code></div>
+                <div class="equiv-item"><code>sc</code> → <code>Get-Service / Start-Service / Stop-Service</code></div>
+                <div class="equiv-item"><code>ipconfig</code> → <code>Get-NetIPConfiguration</code></div>
+                <div class="equiv-item"><code>shutdown</code> → <code>Stop-Computer / Restart-Computer</code></div>
+            </div>
+        </div>
+    </div>
+</section>

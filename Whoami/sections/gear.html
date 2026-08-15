@@ -1,0 +1,20 @@
+<section id="gear" class="section gear">
+    <div class="container">
+        <h2 class="section-title">¿Qué comprar con $1200?</h2>
+        <p class="gear-intro">Builds de home lab, routers y kits de reparación. Mueve el slider y los componentes se reordenan en tiempo real según tu presupuesto.</p>
+        
+        <div class="gear-controls">
+            <div id="recoTabs" class="reco-tabs" role="tablist"></div>
+            <div class="gear-slider-container">
+                <label>Presupuesto: <span id="recoBudget">$1200</span></label>
+                <input type="range" id="budgetSlider" min="50" max="2000" value="1200" step="50" />
+                <span id="rangeVal">$1200</span>
+            </div>
+            <div class="gear-total">
+                Total build: <span id="buildTotal">$0</span>
+            </div>
+        </div>
+
+        <div id="gearGrid" class="gear-grid"></div>
+    </div>
+</section>
